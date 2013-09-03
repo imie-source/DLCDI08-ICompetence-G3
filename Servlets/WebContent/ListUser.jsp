@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<!-- Bouton de confirmation
+
 	<script>
 		jQuery(document).ready(function() {
 			// Du code en jQuery va pouvoir être tapé ici !
@@ -27,7 +29,7 @@
                  resizable: false,
                  buttons: {
                      "Oui": function() {
-                    	 $(this).document.submit();         
+                    	 submit();   
                      },
                      "Non": function() {
                          $(this).dialog("close");
@@ -48,6 +50,7 @@
 			
 		});
 	</script>
+-->
 
 <div id="jq-dialog">
 	<p class="alert alert-error">Voulez-vous supprimer :
