@@ -10,7 +10,7 @@
 <body>
 <h1>GESTION DES COMPETENCES</h1>
 
-	<a href="http://localhost:8080/Servlets/ListUserView"> 
+	<a href="./ListUserView"> 
 	Liste Des Utilisateurs
 	</a>
 
