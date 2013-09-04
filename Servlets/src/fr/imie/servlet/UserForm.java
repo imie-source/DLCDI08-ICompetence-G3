@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.imie.formation.DAO.exceptions.DAOException;
+import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
@@ -60,7 +61,9 @@ public class UserForm extends HttpServlet {
 							.createUtilisateurService(null)
 							.readUtilisateur(utilisateur);
 					request.setAttribute("utilisateur", utilisateurDTO);
-
+					List<NiveauDTO> listCompNiv = DAOFactory1.getInstance().createCompetenceNiveauService(null).readCompetenceNiveauUtilisateur(utilisateurDTO);
+					request.setAttribute("ListeCompNiv", listCompNiv);
+					
 					// Dans le cas de la suppression
 					if ((request.getParameter("delete") != null) 
 							&& (request.getParameter("delete").equals("supprimer"))) {

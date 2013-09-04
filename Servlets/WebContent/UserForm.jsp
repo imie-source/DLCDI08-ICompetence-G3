@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page import="fr.imie.formation.DTO.UtilisateurDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,9 +11,6 @@
 <link rel=stylesheet type=text/css href=css/style.css />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <title>Utilisateur</title>
-</head>
-<body>
-
 <script>
 	jQuery(document).ready(function(){
     // Du code en jQuery va pouvoir être tapé ici !
@@ -65,68 +64,83 @@
 		
 	});
 </script> 
-
-	<%
-		if (request.getAttribute("action").equals("read")) {
-
-			UtilisateurDTO utilisateurDTO = (UtilisateurDTO) request
-					.getAttribute("utilisateur");
-			if (utilisateurDTO != null) {
-	%>
-	NOM =
-	<%=utilisateurDTO.getNom()%>
-	<br />
-	PRENOM =
-	<%=utilisateurDTO.getPrenom()%>
-	<br />
-	<br />
+</head>
+<body>
+<c:choose>
+<c:when test="${action == 'read'}">
+<div id="lecture_utilisateur">
+<c:if test="${! empty utilisateur.num}">
+	<div id="fiche_utilisateur">
+	
+	<div id="nom_util">
+	Nom : <c:out value="${utilisateur.nom}"></c:out>
+	</div>
+	<div id ="prenom_util">
+	Prénom : <c:out value="${utilisateur.prenom}"></c:out>
+	</div>
+	<div id="date_nais_util">
+	Date de naissance : <c:out value="${utilisateur.dateNaissance}"></c:out>
+	</div>
+	<div id ="adresse_util">
+	Adresse : <c:out value="${utilisateur.adresse}"></c:out>
+	</div>
+	<div id="tel_util">
+	Téléphone : TODO!!!!
+	</div>
+	<div id="mail_util">
+	Adresse mail : TODO!!
+	</div>
+	<div id="promotion_util">
+	Promotion : <c:out value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></c:out>
+	</div>
+	<div id="login_util">
+	Login : <c:out value="${utilisateur.login}"></c:out>
+	</div>
+	<div id="password_util">
+	Password : <c:out value="${utilisateur.password}"></c:out>
+	</div>
+	</div>
+	<div id="comp_util">
+	Compétences :
+	<div > 
+	<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
+	<div><c:out value="${comp.competence} ${comp.nom }"></c:out>
+	</div>
+	</c:forEach>
+	</div>
+	</div>
 	<form action="./UserForm">
-			<input type="hidden" name="numUtilisateur" value=<%=utilisateurDTO.getNum()%>></input> 
+			<input type="hidden" name="numUtilisateur" value="${utilisateur.num}"></input> 
 			<input type="submit" name="update" value="modifier"></input>
 	</form>
 	<form action="./ListUserView"> 
 			<input type="submit" value="retour"></input>
 	</form>
-
-	<%
-		} else {
-	%>
-	<%
-		response.sendRedirect("/ListUserView");
-	%>
-	<%
-		}
-		} else if (request.getAttribute("action").equals("update")) {
-	%>
+	</c:if>
+</div>
+	<c:if test="${empty utilisateur.num}">
+	<c:redirect url="/ListUserView" />
+	</c:if>
+	</c:when>
+	<c:when test="${action == 'update'}">
 	<form method="post" action="./UserForm">
 
-		<%
-			UtilisateurDTO utilisateurDTO = (UtilisateurDTO) request
-						.getAttribute("utilisateur");
-				if (utilisateurDTO != null) {
-		%>
-		<input type="hidden" name="numUtilisateur" value="<%=utilisateurDTO.getNum()%>"></input>
-		<input type="text" name="nom" value="<%=utilisateurDTO.getNom()%>"></input>
-		<br />
-		<input type="text" name="prenom" value="<%=utilisateurDTO.getPrenom()%>"></input> 
-		<br />
-		<br />
-		<input type="submit" name="updateAction" value="modifier"></input>
-		<br />
-		<%
-			} else {
-		%>
-		<%
-			response.sendRedirect("./ListUserView");
-		%>
-		<%
-			}
-		%>
+			<c:if test="${! empty utilisateur.num}">
+			<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
+			<input type="text" name="nom" value="${utilisateur.nom}"></input>
+			<br />
+			<input type="text" name="prenom" value="${utilisateur.prenom}"></input> 
+			<br />
+			<br />
+			<input type="submit" name="updateAction" value="modifier"></input>
+			<br />
+			</c:if>
+		<c:if test="${empty utilisateur.num}">
+			<c:redirect url="/ListUserView" />
+		</c:if>
 	</form>
-	<%
-		} else if (request.getAttribute("action").equals("add")) {
-	%>
-
+	</c:when>
+	<c:when test="${action == 'add'}">
 	<form method="post" action="./UserForm">
 		<input type="text" id=nom name="nom" class="champ"></input> 
 		<br />
@@ -137,43 +151,32 @@
 		<input type="reset" id="rafraichir" value="rafraichir" />
 		<br />
 	</form>
-	<%
-		} else if (request.getAttribute("action").equals("delete")) {
-
-			UtilisateurDTO utilisateurDTO = (UtilisateurDTO) request
-					.getAttribute("utilisateur");
-			if (utilisateurDTO != null) {
-	%>
-	
+	</c:when>
+	<c:when test="${action == 'delete'}">
+	<c:if test="${! empty utilisateur.num}">
 	Etes-vous sûr de vouloir supprimer cet utilisateur ?
 	<br />
 	<br />
-	NOM =
-	<%=utilisateurDTO.getNom()%>
+	NOM = <c:out value="${utilisateur.nom}"></c:out>
 	<br />
-	PRENOM =
-	<%=utilisateurDTO.getPrenom()%>
+	PRENOM = <c:out value="${utilisateur.prenom}"></c:out>
 	<br />
 	<br />
 	<form action="./UserForm">
-			<input type="hidden" name="numUtilisateur" value=<%=utilisateurDTO.getNum()%>></input> 
+			<input type="hidden" name="numUtilisateur" value="${utilisateur.num}"></input> 
 			<input type="submit" name="deleteAction" value="supprimer"></input>
 	</form>
 	<form action="./ListUserView"> 
 			<input type="submit" value="retour"></input>
 	</form>
-
-	<%
-		}
-	}
-		else if ((request.getAttribute("action").equals("updateAction"))
-				|| (request.getAttribute("action").equals("createAction"))
-				|| (request.getAttribute("action").equals("deleteAction"))) {
-
-			response.sendRedirect("./ListUserView");
-
-		}
-	%>
-
+	</c:if>
+	<c:if test="${empty utilisateur.num}">
+		<c:redirect url="/ListUserView" />
+	</c:if>
+	</c:when>
+	<c:when test="${action == 'updateAction' || action == 'createAction' || action == 'deleteAction'}">
+			<c:redirect url="/ListUserView"/>
+	</c:when>
+</c:choose>
 </body>
 </html>
