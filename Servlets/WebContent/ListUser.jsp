@@ -15,6 +15,8 @@
 <title>Liste des Utilisateurs</title>
 </head>
 <body>
+<!--
+ Bouton de confirmation
 
 	<script>
 		jQuery(document).ready(function() {
@@ -27,7 +29,7 @@
                  resizable: false,
                  buttons: {
                      "Oui": function() {
-                    	 $(this).document.submit();         
+                    	 submit();   
                      },
                      "Non": function() {
                          $(this).dialog("close");
@@ -49,36 +51,27 @@
 		});
 	</script>
 
+
 <div id="jq-dialog">
 	<p class="alert alert-error">Voulez-vous supprimer :
     <span id="dialog-nomUtilisateur"><strong></strong></span></p>
 </div>
-
+-->
 	<div class="tableauContainer">
 		<div class="tableau">
 
 			<div class="ligneTableauLine ligneTableauHeader">
 				<div id=Nom
 					class="celluleTableauInTable celluleTableau celluleTableau200">Nom</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Prenom</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Age</div>
+				<div class="celluleTableauInTable celluleTableau celluleTableau100">Prénom</div>
+				<div class="celluleTableauInTable celluleTableau celluleTableau100">Promotion</div>
+				<div class="celluleTableauInTable celluleTableau celluleTableau100">Année</div>
 				<div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div>
 			</div>
-
-			<%
-				int ligne = 0;
-			%>
 			<c:forEach var="utilisateurDTO" items="${listeUtilisateur}"
 				varStatus="numLigne">
-
-				<%
-					Boolean isAlternativLigne = ligne % 2 > 0;
-						String ligneAlternative = isAlternativLigne ? "ligneTableauAlternativLine"
-								: "ligneTableauNormalLine";
-						ligne++;
-				%>
-
-				<div class="ligneTableauLine <%=ligneAlternative%>">
+				<c:set var="isAlternativeLigne" value="${numLigne.index%2>0}" />
+					<div class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
 					<div class="celluleTableauInTable celluleTableau celluleTableau200">
 						<c:out value="${utilisateurDTO.nom}" />
 					</div>
@@ -86,7 +79,10 @@
 						<c:out value="${utilisateurDTO.prenom}" />
 					</div>
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-						<c:out value="${utilisateurDTO.age}" />
+						<c:out value="${utilisateurDTO.promotion.intitule}"/>
+					</div>
+					<div class="celluleTableauInTable celluleTableau celluleTableau100">
+						<c:out value="${utilisateurDTO.promotion.annee}"/>
 					</div>
 
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">

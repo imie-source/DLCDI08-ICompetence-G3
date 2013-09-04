@@ -5,6 +5,7 @@ import java.util.List;
 import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -13,6 +14,7 @@ public interface IUtilisateurDAO extends ITransactional {
 	public List<UtilisateurDTO> readAllUtilisateur()
 			throws TransactionalConnectionException, DAOException;
 
+	//ServiceException car appel d'un service dans UtilisateurDAO
 	public UtilisateurDTO readUtilisateur(UtilisateurDTO utilisateur)
 			throws TransactionalConnectionException, DAOException;
 

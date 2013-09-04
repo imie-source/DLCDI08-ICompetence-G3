@@ -1,7 +1,6 @@
 package fr.imie.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,24 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.imie.formation.DTO.UtilisateurDTO;
+import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
-import fr.imie.formation.services.interfaces.IUtilisateurService;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/ListUserView")
-public class ListUserView extends HttpServlet {
+@WebServlet("/ListCompView")
+public class ListCompView extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListUserView() {
+	public ListCompView() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -42,29 +40,22 @@ public class ListUserView extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (request.getParameter("ligne") == null) {
+		if (request.getParameter("ligneComp") == null) {
 
-			IUtilisateurService utilisateurService = DAOFactory1.getInstance()
-					.createUtilisateurService(null);
-			List<UtilisateurDTO> listeUtilisateur = new ArrayList<UtilisateurDTO>();
-
+			List<CompetenceDTO> listeCompetence;
 			try {
-				listeUtilisateur = utilisateurService.readAllUtilisateur();
-				session.setAttribute("listeUtilisateur", listeUtilisateur);
-				
-				request.getRequestDispatcher("ListUser.jsp")//remplace ancien redirect
-				.forward(request, response);
-
-			} catch (TransactionalConnectionException e) {
-				e.printStackTrace();
+				listeCompetence = DAOFactory1.getInstance()
+						.createCompetenceNiveauService(null).readAllCompetence();
+				session.setAttribute("listeCompetence", listeCompetence);
+				response.sendRedirect("ListUser.jsp");
+			} catch (TransactionalConnectionException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-		} 
-
-		response.setContentType("text/html");
-
+		}
 	}
 
 	/**
