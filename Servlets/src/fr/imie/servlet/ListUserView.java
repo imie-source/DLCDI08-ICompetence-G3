@@ -51,7 +51,9 @@ public class ListUserView extends HttpServlet {
 			try {
 				listeUtilisateur = utilisateurService.readAllUtilisateur();
 				session.setAttribute("listeUtilisateur", listeUtilisateur);
-				response.sendRedirect("ListUser.jsp");
+				
+				request.getRequestDispatcher("ListUser.jsp")//remplace ancien redirect
+				.forward(request, response);
 
 			} catch (TransactionalConnectionException e) {
 				e.printStackTrace();

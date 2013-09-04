@@ -9,9 +9,12 @@
 </head>
 <body>
 <h1>GESTION DES COMPETENCES</h1>
-
 	<a href="./ListUserView"> 
-	Liste Des Utilisateurs
+	<h2>MEMBRES</h2>
+	</a>
+	
+	<a href="./ListProjetView"> 
+	<h2>PROJETS</h2>
 	</a>
 
 	<a href="./ListCompView"> 
