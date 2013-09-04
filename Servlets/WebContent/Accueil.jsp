@@ -14,5 +14,9 @@
 	Liste Des Utilisateurs
 	</a>
 
+	<a href="./ListCompView"> 
+	Liste Des Compétence
+	</a>
+	
 </body>
 </html>
