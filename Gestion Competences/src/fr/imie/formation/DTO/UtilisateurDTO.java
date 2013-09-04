@@ -15,6 +15,24 @@ public class UtilisateurDTO {
 	private PromotionDTO promotion;
 	private String login;
 	private String password;
+	private String mail;
+	private  int tel;
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public int getTel() {
+		return tel;
+	}
+
+	public void setTel(int tel) {
+		this.tel = tel;
+	}
 
 	public UtilisateurDTO() {
 
