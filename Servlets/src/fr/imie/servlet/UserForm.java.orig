@@ -49,7 +49,10 @@ public class UserForm extends HttpServlet {
 
 				int ligne = Integer.valueOf(request.getParameter("ligne"));
 				Object listObj = session.getAttribute("listeUtilisateur");
+<<<<<<< HEAD
+=======
 				@SuppressWarnings("unchecked")
+>>>>>>> dda63565c19ae9d7fae0d787684fdaf0d9a69efc
 				List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
 				UtilisateurDTO utilisateur = listUtil.get(ligne);
 

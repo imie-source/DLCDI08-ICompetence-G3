@@ -50,7 +50,11 @@ public class LoginFilter implements Filter {
 		// http://onjava.com/pub/a/onjava/2002/06/12/form.html
 
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
+<<<<<<< HEAD
+		String contextPath = httpRequest.getContextPath();
+=======
 		//String contextPath = httpRequest.getContextPath();
+>>>>>>> dda63565c19ae9d7fae0d787684fdaf0d9a69efc
 		String resource = httpRequest.getRequestURI();
 
 		HttpSession session = httpRequest.getSession(true);
@@ -92,8 +96,13 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			if (!resource.contains("Deconnexion")) {
+<<<<<<< HEAD
+				String redirectionURL = (String) session
+						.getAttribute("redirectUrlLogin");
+=======
 				//String redirectionURL = (String) session
 					//	.getAttribute("redirectUrlLogin");
+>>>>>>> dda63565c19ae9d7fae0d787684fdaf0d9a69efc
 
 				session.setAttribute("redirectUrlLogin", resource);
 			}

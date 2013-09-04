@@ -16,8 +16,11 @@
 </head>
 <body>
 
+<<<<<<< HEAD
+=======
 <!-- Bouton de confirmation
 
+>>>>>>> dda63565c19ae9d7fae0d787684fdaf0d9a69efc
 	<script>
 		jQuery(document).ready(function() {
 			// Du code en jQuery va pouvoir être tapé ici !
@@ -29,7 +32,11 @@
                  resizable: false,
                  buttons: {
                      "Oui": function() {
+<<<<<<< HEAD
+                    	 $(this).document.submit();         
+=======
                     	 submit();   
+>>>>>>> dda63565c19ae9d7fae0d787684fdaf0d9a69efc
                      },
                      "Non": function() {
                          $(this).dialog("close");
@@ -50,7 +57,10 @@
 			
 		});
 	</script>
+<<<<<<< HEAD
+=======
 -->
+>>>>>>> dda63565c19ae9d7fae0d787684fdaf0d9a69efc
 
 <div id="jq-dialog">
 	<p class="alert alert-error">Voulez-vous supprimer :
