@@ -15,6 +15,7 @@ import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 import fr.imie.formation.utils.AgeUtil;
@@ -157,7 +158,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 	// Affiche un utilisateur avec ses compétences et sa promotion
 	private UtilisateurDTO readUtilisateur(UtilisateurDTO utilisateur,
 			Connection cn) throws TransactionalConnectionException,
-			DAOException {
+			DAOException{
 
 		PreparedStatement pstmt = null;
 		ResultSet rst = null;
@@ -189,6 +190,9 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {

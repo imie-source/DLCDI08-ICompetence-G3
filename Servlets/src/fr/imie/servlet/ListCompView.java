@@ -1,7 +1,6 @@
 package fr.imie.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,11 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.imie.formation.DTO.CompetenceDTO;
-import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
-import fr.imie.formation.services.interfaces.ICompetenceNiveauService;
-import fr.imie.formation.services.interfaces.IUtilisateurService;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
 /**
@@ -44,28 +40,22 @@ public class ListCompView extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (request.getParameter("ligne") == null) {
+		if (request.getParameter("ligneComp") == null) {
 
-			ICompetenceNiveauService compNivService = DAOFactory1.getInstance()
-					.createCompetenceNiveauService(null);
-			List<CompetenceDTO> listeCompetence = new ArrayList<CompetenceDTO>();
-
+			List<CompetenceDTO> listeCompetence;
 			try {
-				listeCompetence = compNivService.readAllCompetence();
-				session.setAttribute("listeCompetence", compNivService);
+				listeCompetence = DAOFactory1.getInstance()
+						.createCompetenceNiveauService(null).readAllCompetence();
+				session.setAttribute("listeCompetence", listeCompetence);
 				response.sendRedirect("ListUser.jsp");
-				
-
-			} catch (TransactionalConnectionException e) {
-				e.printStackTrace();
+			} catch (TransactionalConnectionException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-		} 
-
-		response.setContentType("text/html");
-
+		}
 	}
 
 	/**
