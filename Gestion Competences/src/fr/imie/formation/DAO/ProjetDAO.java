@@ -30,11 +30,12 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		return listProjet;
 	}
 
-	public List<ProjetDTO> readProjetByUtilisateur()
+	public List<ProjetDTO> readProjetByUtilisateur(UtilisateurDTO utilisateur)
 			throws TransactionalConnectionException, DAOException{
 
 		List<ProjetDTO> listeProjetUtilisateur= null;
-		listeProjetUtilisateur= readProjetByUtilisateur(getConnection());
+		
+		listeProjetUtilisateur= readProjetByUtilisateur(utilisateur,getConnection());
 		return listeProjetUtilisateur;
 
 	}
@@ -146,19 +147,19 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		return listProjet;
 	}
 	// liste des projets pour un utilisateur
-	private List<ProjetDTO> readProjetByUtilisateur(Connection cn) 
+	private List<ProjetDTO> readProjetByUtilisateur(UtilisateurDTO utilisateur,Connection cn) 
 			throws TransactionalConnectionException, DAOException{
 
 		List<ProjetDTO>listeProjetUtilisateur=new ArrayList<ProjetDTO>();
 
-		Statement stmt= null;
+		PreparedStatement pstmt= null;
 		ResultSet rst= null;
 
 		try {
-			String query="select projet. num as projet,utilisateur.num as identifiant,utilisateur.prenom,utilisateur.nom from projet inner join utilisateur on utilisateur.num=projet.num_util inner join projet_util on projet_util.num_projet=projet.num";
+			String query="select projet.num as projet,projet.intitule ,utilisateur.num from projet  inner join projet_util on projet_util.num_projet=projet.num inner join utilisateur on utilisateur.num=projet_util.num_util where utilisateur.num=?";
 
-			stmt=cn.createStatement();
-			rst=stmt.executeQuery(query);
+			pstmt=cn.prepareStatement(query);
+			rst=pstmt.executeQuery();
 
 			while(rst.next()){
 				ProjetDTO project = new ProjetDTO();
@@ -182,8 +183,8 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 				if (rst != null) {
 					rst.close();
 				}
-				if (stmt != null) {
-					stmt.close();
+				if (pstmt != null) {
+					pstmt.close();
 				}
 
 			} catch (SQLException e) {
@@ -386,6 +387,9 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 
 		return deleteNum;
 	}
+
+
+	
 
 	
 	
