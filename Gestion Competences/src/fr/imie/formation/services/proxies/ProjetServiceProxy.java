@@ -13,11 +13,11 @@ import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
 public class ProjetServiceProxy implements IProjetService{
-	
+
 	private ProjetService projetService;
-	
+
 	ITransactional caller = null;
-	
+
 	public ProjetServiceProxy (ProjetService projetService, ITransactional caller){
 		super();
 		this.projetService = projetService;
@@ -26,40 +26,40 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public Connection getConnection() {
-	
+
 		return projetService.getConnection();
 	}
 
 	@Override
 	public void setConnection(Connection connection) {
 		projetService.setConnection(connection);
-		
+
 	}
 
 	@Override
 	public void putInTransaction(ITransactional transactional)
 			throws TransactionalConnectionException {
 		projetService.putInTransaction(caller);
-		
+
 	}
 
 	@Override
 	public void putOffTransaction() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void endTransactionalConnexion() {
 		projetService.endTransactionalConnexion();
-		
+
 	}
 
 	@Override
 	public void beginTransactionalConnexion()
 			throws TransactionalConnectionException {
 		projetService.beginTransactionalConnexion();
-		
+
 	}
 
 	@Override
@@ -80,7 +80,30 @@ public class ProjetServiceProxy implements IProjetService{
 		return listProjet;
 	}
 
+
 	@Override
+	public List<ProjetDTO> readProjetByUtilisateur()
+			throws TransactionalConnectionException, DAOException {
+
+		List<ProjetDTO> listeProjetUtilisateur= new ArrayList<ProjetDTO>();
+
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		listeProjetUtilisateur = projetService.readProjetByUtilisateur();
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return listeProjetUtilisateur;
+	}
+
+
+
+
 	public ProjetDTO readProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
 		ProjetDTO proj = new ProjetDTO();
@@ -187,6 +210,7 @@ public class ProjetServiceProxy implements IProjetService{
 		}
 		return listStatutProjet;
 	}
-	
+
+
 
 }

@@ -18,18 +18,28 @@ import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
 public class ProjetDAO extends ATransactional implements IProjetDAO{
-	
+
 	/* (non-Javadoc)
 	 * @see fr.imie.formation.DAO.IProjetDAO#readAllProjets()
 	 */
 	public List<ProjetDTO> readAllProjets()
-		throws TransactionalConnectionException, DAOException{
-		
+			throws TransactionalConnectionException, DAOException{
+
 		List<ProjetDTO> listProjet = null;
 		listProjet = readAllProjets(getConnection());
 		return listProjet;
 	}
-	
+
+	public List<ProjetDTO> readProjetByUtilisateur()
+			throws TransactionalConnectionException, DAOException{
+
+		List<ProjetDTO> listeProjetUtilisateur= null;
+		listeProjetUtilisateur= readProjetByUtilisateur(getConnection());
+		return listeProjetUtilisateur;
+
+	}
+
+
 	/* (non-Javadoc)
 	 * @see fr.imie.formation.DAO.IProjetDAO#readProjet(fr.imie.formation.DTO.ProjetDTO)
 	 */
@@ -39,7 +49,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		proj = readProjet(projet, getConnection());
 		return proj;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.imie.formation.DAO.IProjetDAO#ajoutChefDeProjet(fr.imie.formation.DTO.ProjetDTO)
 	 */
@@ -49,7 +59,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		updateCDPnum = ajoutChefDeProjet(projet, getConnection());
 		return updateCDPnum;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.imie.formation.DAO.IProjetDAO#createProjet(fr.imie.formation.DTO.ProjetDTO)
 	 */
@@ -59,7 +69,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		createNum = createProjet(projet, getConnection());
 		return createNum;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.imie.formation.DAO.IProjetDAO#updateProjet(fr.imie.formation.DTO.ProjetDTO)
 	 */
@@ -69,7 +79,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		updateNum = updateProjet(projet, getConnection());
 		return updateNum;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.imie.formation.DAO.IProjetDAO#deleteProjet(fr.imie.formation.DTO.ProjetDTO)
 	 */
@@ -79,11 +89,11 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		deleteNum = deleteProjet(projet, getConnection());
 		return deleteNum;
 	}
-	
-	
+
+
 	// Liste des projets et de leur statut
 	private List<ProjetDTO> readAllProjets(Connection cn)
-		throws TransactionalConnectionException, DAOException{
+			throws TransactionalConnectionException, DAOException{
 
 		Statement stmt = null;
 		ResultSet rst = null;
@@ -106,11 +116,11 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 				StatutProjetDTO statutProjet = new StatutProjetDTO();
 				statutProjet.setValeurStatut(rst.getString(4));
 				projet.setStatutProjet(statutProjet);
-				
+
 				chefProjet.setNom(rst.getString(5));
 				chefProjet.setPrenom(rst.getString(6));
 				projet.setChefDeProjet(chefProjet);
-				
+
 
 				listProjet.add(projet);
 			}
@@ -135,8 +145,59 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 
 		return listProjet;
 	}
+	// liste des projets pour un utilisateur
+	private List<ProjetDTO> readProjetByUtilisateur(Connection cn) 
+			throws TransactionalConnectionException, DAOException{
 
-		
+		List<ProjetDTO>listeProjetUtilisateur=new ArrayList<ProjetDTO>();
+
+		Statement stmt= null;
+		ResultSet rst= null;
+
+		try {
+			String query="select projet. num as projet,utilisateur.num as identifiant,utilisateur.prenom,utilisateur.nom from projet inner join utilisateur on utilisateur.num=projet.num_util inner join projet_util on projet_util.num_projet=projet.num";
+
+			stmt=cn.createStatement();
+			rst=stmt.executeQuery(query);
+
+			while(rst.next()){
+				ProjetDTO project = new ProjetDTO();
+				project.setNum(rst.getInt(1));
+				project.setNum(rst.getInt(2));
+
+				UtilisateurDTO user= new UtilisateurDTO();
+				user.setNom(rst.getString(3));
+				user.setPrenom(rst.getString(4));
+				listeProjetUtilisateur.add(project);
+
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rst != null) {
+					rst.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return listeProjetUtilisateur;
+
+
+	}
+
+
+
 	// Affiche la fiche d'un projet avec la liste de ses volontaires
 	private ProjetDTO readProjet(ProjetDTO projet, Connection cn) throws TransactionalConnectionException, DAOException {
 
@@ -147,7 +208,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		StatutProjetDTO statutProjet = new StatutProjetDTO();
 		UtilisateurDTO chefDeProjet = new UtilisateurDTO();
 		UtilisateurDAO utilisateur = new UtilisateurDAO();
-	
+
 		try {
 			String query = "SELECT projet.num, projet.intitule as projet, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom FROM projet Inner join statut on statut.num=projet.num_statut inner join utilisateur on projet.num_util=utilisateur.num where projet.num =?";
 
@@ -185,8 +246,8 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			}
 		}
 
-			return projet;
-		}
+		return projet;
+	}
 
 
 
@@ -325,5 +386,8 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 
 		return deleteNum;
 	}
+
+	
+	
 
 }

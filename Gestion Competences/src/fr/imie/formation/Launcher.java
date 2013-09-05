@@ -20,11 +20,11 @@ public class Launcher {
 		try {
 			listUtil= DAOFactory1.getInstance().createUtilisateurService(null).readAllUtilisateur();
 		} catch (TransactionalConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+			
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			
 		}
 
 

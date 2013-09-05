@@ -18,12 +18,21 @@ public class ProjetService extends ATransactional implements IProjetService{
 	@Override
 	public List<ProjetDTO> readAllProjets()
 			throws TransactionalConnectionException, DAOException {
-		
+
 		List<ProjetDTO> listProjet = new ArrayList<ProjetDTO>();
-		
+
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
 		listProjet = iDaoFactory.createIProjetDAO(this).readAllProjets();
 		return listProjet;
+	}
+
+	public List<ProjetDTO> readProjetByUtilisateur()
+			throws TransactionalConnectionException, DAOException {
+
+		List<ProjetDTO> listeProjetUtilisateur = new ArrayList<ProjetDTO>();
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		listeProjetUtilisateur= iDaoFactory.createIProjetDAO(this).readProjetByUtilisateur();
+		return listeProjetUtilisateur;
 	}
 
 	@Override
@@ -60,8 +69,8 @@ public class ProjetService extends ATransactional implements IProjetService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
+
 	//STATUT PROJET
 	@Override
 	public List<StatutProjetDTO> readAllStatutProjet()
@@ -69,5 +78,7 @@ public class ProjetService extends ATransactional implements IProjetService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }
