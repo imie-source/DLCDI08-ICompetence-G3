@@ -42,7 +42,7 @@ public class ListUserView extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (request.getParameter("ligne") == null) {
+		if (request.getParameter("numligne") == null) {
 
 			IUtilisateurService utilisateurService = DAOFactory1.getInstance()
 					.createUtilisateurService(null);
@@ -62,6 +62,7 @@ public class ListUserView extends HttpServlet {
 			}
 
 		} 
+
 
 		response.setContentType("text/html");
 

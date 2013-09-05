@@ -64,8 +64,8 @@
 </script>
 </head>
 <body>
-	<c:choose>
-		<c:when test="${action == 'read'}">
+<%--  	<c:choose>
+		<c:when test="${action == 'read'}">--%>
 			<div id="lecture_utilisateur">
 				<c:if test="${! empty utilisateur.num}">
 					<div id="fiche_utilisateur">
@@ -82,11 +82,10 @@
 							Adresse : <c:out value="${utilisateur.adresse}"></c:out>
 						</div>
 						<div id="tel_util">
-							Téléphone : TODO !!!
-							<!--<c:out value="${utilisateur.telephone}"></c:out>
+							Téléphone : <c:out value="${utilisateur.tel}"></c:out>
 	</div>
 	<div id="mail_util">
-	Adresse mail : <c:out value="${utilisateur }"></c:out>-->
+	Adresse mail : <c:out value="${utilisateur.mail}"></c:out>
 						</div>
 						<div id="promotion_util">
 							Promotion : <c:out value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></c:out>
@@ -123,7 +122,7 @@
 					<c:redirect url="/ListUserView" />
 				</c:if>
 			</div>
-		</c:when>
+	<%--  	</c:when>
 
 		<c:when test="${action == 'update'}">
 			<div id="modif_utilisateur">
@@ -144,11 +143,10 @@
 								Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
 						</div>
 						<div id="tel_util">
-							Téléphone : TODO !!!
-							<!--<c:out value="${utilisateur.telephone}"></c:out>
+							Téléphone :<c:out value="${utilisateur.tel}"></c:out>
 	</div>
 	<div id="mail_util">
-	Adresse mail : <c:out value="${utilisateur }"></c:out>-->
+	Adresse mail : <c:out value="${utilisateur.mail}"></c:out>
 						</div>
 						<div id="promotion_util">
 							Promotion : <c:out value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></c:out>
@@ -209,6 +207,6 @@
 			test="${action == 'updateAction' || action == 'createAction' || action == 'deleteAction'}">
 			<c:redirect url="/ListUserView" />
 		</c:when>
-	</c:choose>
+	</c:choose> --%>
 </body>
 </html>
