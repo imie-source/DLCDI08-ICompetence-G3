@@ -25,7 +25,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 	public List<UtilisateurDTO> readAllUtilisateur()
 			throws TransactionalConnectionException, DAOException {
 
-		// initialisation de la liste qui servira au retour
+		// initial;isation de la liste qui servira au retour
 		List<UtilisateurDTO> listUtil = null;
 
 		// obtention des DTO avec une nouvelle connection
@@ -94,14 +94,14 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 	}
 
 	public List<UtilisateurDTO> readUtilisateurProjet(ProjetDTO projet)
-		throws TransactionalConnectionException, DAOException{
-		
+			throws TransactionalConnectionException, DAOException{
+
 		List<UtilisateurDTO> listUtilProjet = null;
 		listUtilProjet = readUtilisateurProjet(projet, getConnection());
 		return listUtilProjet;
-		
+
 	}
-	
+
 	// Liste de tous les utilisateurs avec leurs promotions
 	private List<UtilisateurDTO> readAllUtilisateur(Connection cn)
 			throws TransactionalConnectionException, DAOException {
@@ -112,7 +112,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 		List<UtilisateurDTO> listUtil = new ArrayList<UtilisateurDTO>();
 
 		try {
-			String query = "select utilisateur.num, utilisateur.nom, prenom, adresse, date_naissance, promotion.intitule, promotion.annee, login from utilisateur left join promotion on promotion.num=utilisateur.num_promotion;";
+			String query = "select utilisateur.num, utilisateur.nom, prenom, adresse, date_naissance, promotion.intitule, promotion.annee, login , mail,tel from utilisateur left join promotion on promotion.num=utilisateur.num_promotion";
 
 			stmt = cn.createStatement();
 			rst = stmt.executeQuery(query);
@@ -124,6 +124,8 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 				util.setPrenom(rst.getString(3));
 				util.setAdresse(rst.getString(4));
 				util.setAge(AgeUtil.getInstance().getAge(rst.getDate(5)));
+				util.setMail(rst.getString(9));
+				util.setTel(rst.getInt(10));
 
 				PromotionDTO promotion = new PromotionDTO();
 				promotion.setIntitule(rst.getString(6));
@@ -322,7 +324,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 			if (rst.next()) {
 				logExist = true;
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -341,10 +343,10 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 		}
 		return logExist;
 	}
-	
+
 	// Liste des utilisateurs pour un projet
 	private List<UtilisateurDTO> readUtilisateurProjet(ProjetDTO projet, Connection cn)
-		throws TransactionalConnectionException, DAOException{
+			throws TransactionalConnectionException, DAOException{
 
 		PreparedStatement pstmt = null;
 		ResultSet rst = null;
@@ -363,7 +365,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 				utilisateur.setNum(rst.getInt(1));
 				utilisateur.setNom(rst.getString(2));
 				utilisateur.setPrenom(rst.getString(3));
-				
+
 				listUtilProjet.add(utilisateur);
 
 			}
