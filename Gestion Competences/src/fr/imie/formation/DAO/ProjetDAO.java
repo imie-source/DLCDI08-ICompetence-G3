@@ -16,6 +16,7 @@ import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.factory.interfaces.IDAOFactory;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -233,6 +234,9 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
