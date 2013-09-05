@@ -43,6 +43,25 @@
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">
 					<c:out value="${projetDTO.statutProjet.valeurStatut}" />
 					</div>
+					<%--Boutons AFFICHER MODIFIER SUPPRIMER --%>
+					<div class="celluleTableauInTable celluleTableau celluleTableau100">
+						<form action="./Projet">
+							<input type="hidden" name="ligneProjet" value="${numLigne.index}"></input>
+							<input type="submit" name="read" value="afficher"></input>
+						</form>
+
+						<form action="./Projet">
+							<input type="hidden" name="numProjet" value=<c:out value="${projetDTO.num}"/>> </input> 
+								<input type="submit" name="update" value="modifier"></input>
+						</form>
+						
+						<form id="sup" action="./Projet">
+							<input type="hidden" name="ligneProjet" value="${numLigne.index}"></input>
+							<input type="hidden" id="intituleProjet" value="${projetDTO.intitule}"></input>
+							<input type="submit" name="delete" value="supprimer"></input>
+						</form>						
+					</div>
+					
 				</div>
 			
 			</c:forEach>

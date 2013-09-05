@@ -41,10 +41,8 @@ public class ListProjetView extends HttpServlet {
 		
 		if (request.getParameter("ligneProjet") == null) {
 		
-			IProjetService projetService = DAOFactory1.getInstance().createProjetService(null);
-			List<ProjetDTO> listeProjet= new ArrayList<ProjetDTO>();
 			try {
-				listeProjet=projetService.readAllProjets();
+				List<ProjetDTO> listeProjet = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
 				session.setAttribute("listeProjet", listeProjet);
 				
 				request.getRequestDispatcher("ListProjet.jsp")//remplace ancien redirect
