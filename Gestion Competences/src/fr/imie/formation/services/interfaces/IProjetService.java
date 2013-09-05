@@ -18,7 +18,7 @@ public interface IProjetService extends ITransactional{
 			throws TransactionalConnectionException, ServiceException;
 	
 	public List<ProjetDTO> readProjetByUtilisateur()
-	throws TransactionalConnectionException, DAOException;
+	throws TransactionalConnectionException, ServiceException;
 
 	public int ajoutChefDeProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, ServiceException;

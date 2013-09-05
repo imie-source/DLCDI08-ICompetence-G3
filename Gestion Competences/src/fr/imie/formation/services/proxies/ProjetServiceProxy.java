@@ -83,7 +83,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public List<ProjetDTO> readProjetByUtilisateur()
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		List<ProjetDTO> listeProjetUtilisateur= new ArrayList<ProjetDTO>();
 

@@ -32,11 +32,16 @@ public class ProjetService extends ATransactional implements IProjetService {
 	}
 
 	public List<ProjetDTO> readProjetByUtilisateur()
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		List<ProjetDTO> listeProjetUtilisateur = new ArrayList<ProjetDTO>();
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
-		listeProjetUtilisateur= iDaoFactory.createIProjetDAO(this).readProjetByUtilisateur();
+		try {
+			listeProjetUtilisateur= iDaoFactory.createIProjetDAO(this).readProjetByUtilisateur();
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return listeProjetUtilisateur;
 	}
 
