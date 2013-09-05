@@ -12,62 +12,62 @@ import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
 public class ProjetProxy implements IProjetDAO {
-	
+
 	ProjetDAO projetDAO;
 	ITransactional caller = null;
-	
+
 	public ProjetProxy(ProjetDAO projetDAO, ITransactional caller){
 		super();
 		this.caller = caller;
 		this.projetDAO = projetDAO;
 	}
-	
+
 	public ProjetProxy(ProjetDAO projetDAO){
 		this.projetDAO = projetDAO;
 	}
-	
+
 	@Override
 	public Connection getConnection() {
-	
+
 		return projetDAO.getConnection();
 	}
 
 	@Override
 	public void setConnection(Connection connection) {
 		projetDAO.setConnection(connection);
-		
+
 	}
 
 	@Override
 	public void putInTransaction(ITransactional transactional)
 			throws TransactionalConnectionException {
 		projetDAO.putInTransaction(transactional);
-		
+
 	}
 
 	@Override
 	public void putOffTransaction() {
 		projetDAO.putOffTransaction();
-		
+
 	}
 
 	@Override
 	public void endTransactionalConnexion() {
 		projetDAO.endTransactionalConnexion();
-		
+
 	}
 
 	@Override
 	public void beginTransactionalConnexion()
 			throws TransactionalConnectionException {
 		projetDAO.beginTransactionalConnexion();
-		
+
 	}
 
 	@Override
 	public List<ProjetDTO> readAllProjets()
 			throws TransactionalConnectionException, DAOException {
-		
+
 		List<ProjetDTO> listProjet = new ArrayList<ProjetDTO>();
 		if (caller == null){
 			beginTransactionalConnexion();
@@ -84,9 +84,30 @@ public class ProjetProxy implements IProjetDAO {
 	}
 
 	@Override
+	public List<ProjetDTO> readProjetByUtilisateur()
+			throws TransactionalConnectionException, DAOException {
+
+		List<ProjetDTO>listeProjetUtilisateur=new ArrayList<ProjetDTO>();
+
+		if (caller == null){
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		listeProjetUtilisateur=projetDAO.readProjetByUtilisateur();
+		if (caller == null){
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return listeProjetUtilisateur;
+	}
+
+
+	@Override
 	public ProjetDTO readProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		ProjetDTO proj = new ProjetDTO();
 		if (caller == null){
 			beginTransactionalConnexion();
@@ -105,7 +126,7 @@ public class ProjetProxy implements IProjetDAO {
 	@Override
 	public int ajoutChefDeProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		int updateCDPNum = 0;
 		if (caller == null){
 			beginTransactionalConnexion();
@@ -124,7 +145,7 @@ public class ProjetProxy implements IProjetDAO {
 	@Override
 	public int createProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		int createNum = 0;
 		if (caller == null){
 			beginTransactionalConnexion();
@@ -143,7 +164,7 @@ public class ProjetProxy implements IProjetDAO {
 	@Override
 	public int updateProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		int updateNum = 0;
 		if (caller == null){
 			beginTransactionalConnexion();
@@ -162,7 +183,7 @@ public class ProjetProxy implements IProjetDAO {
 	@Override
 	public int deleteProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		int deleteNum = 0;
 		if (caller == null){
 			beginTransactionalConnexion();
@@ -177,5 +198,9 @@ public class ProjetProxy implements IProjetDAO {
 		}
 		return deleteNum;
 	}
+
+
+
+
 
 }
