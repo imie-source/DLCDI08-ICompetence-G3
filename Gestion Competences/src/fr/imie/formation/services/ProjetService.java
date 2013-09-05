@@ -29,10 +29,11 @@ public class ProjetService extends ATransactional implements IProjetService{
 	@Override
 	public ProjetDTO readProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ProjetDTO projetDTO= DAOFactory1.getInstance().createIProjetDAO(this).readProjet(projet);		
+		return projetDTO;
 	}
-
+//implémenter le méthodes !!!!!
 	@Override
 	public int ajoutChefDeProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException {
