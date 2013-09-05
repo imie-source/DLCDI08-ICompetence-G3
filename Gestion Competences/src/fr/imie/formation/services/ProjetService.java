@@ -44,10 +44,8 @@ public class ProjetService extends ATransactional implements IProjetService {
 		}
 		return listeProjetUtilisateur;
 		
-		ProjetDTO projetDTO= DAOFactory1.getInstance().createIProjetDAO(this).readProjet(projet);		
-		return projetDTO;
 	}
-//implémenter le méthodes !!!!!
+
 	@Override
 	public ProjetDTO readProjet(ProjetDTO projetDTO)
 			throws TransactionalConnectionException, ServiceException {
