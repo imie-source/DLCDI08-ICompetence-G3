@@ -1,13 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+
+				<form method="post" action="./UserForm">
+					<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
+						<div id="nom_util">
+							Nom : <input type="text" name="nom" value="${utilisateur.nom}"></input>
+						</div>
+						<div id="prenom_util">
+							Prénom : <input type="text" name="prenom" value="${utilisateur.prenom}"></input>
+						</div>
+						<div id="date_nais_util">
+							Date de naissance :<input type="text" name="dateNaissance" value="${utilisateur.dateNaissance}"></input>
+						</div>
+						<div id="adresse_util">
+							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
+						</div>
+						<div id="tel_util">
+							Téléphone :<c:out value="${utilisateur.tel}"></c:out>
+						</div>
+						<div id="mail_util">
+							Adresse mail : <c:out value="${utilisateur.mail}"></c:out>
+						</div>
+						<div id="promotion_util">
+							Promotion : <c:out value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></c:out>
+						</div>
+						<div id="login_util">
+							Login : <c:out value="${utilisateur.login}"></c:out>
+						</div>
+						<div id="password_util">
+							Password :
+							<c:out value="${utilisateur.password}"></c:out>
+						</div>
+					</form>

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
@@ -64,6 +63,7 @@ public class UserForm extends HttpServlet {
 					request.setAttribute("utilisateur", utilisateurDTO);
 					List<NiveauDTO> listCompNiv = DAOFactory1.getInstance().createCompetenceNiveauService(null).readCompetenceNiveauUtilisateur(utilisateurDTO);
 					request.setAttribute("ListeCompNiv", listCompNiv);
+					//List<UtilisateurDTO> listUtilProjet = DAOFactory1.getInstance().createProjetService(null).readProjetByUtilisateur(); en stand by manque paramètre utilisateur
 					
 					// Dans le cas de la suppression
 				//	if ((request.getParameter("delete") != null) 
@@ -76,10 +76,6 @@ public class UserForm extends HttpServlet {
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (DAOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -97,16 +93,17 @@ public class UserForm extends HttpServlet {
 			request.setAttribute("utilisateur",
 					getUser(request.getParameter("numUtilisateur")));
 
-		}
+		}*/
 
 		// Passage vers l'écran de modification pour créer un utilisateur
-		if (request.getParameter("create") != null
+			else if (request.getParameter("numligne") == null && request.getParameter("create") != null
 				&& request.getParameter("create").equals("creer")) {
 
-			request.setAttribute("action", "add");
+			//request.setAttribute("action", "add");
+			request.getRequestDispatcher("./UserCreate.jsp").forward(request, response);
 		}
 			
-		//supprimer un utilisateur
+		/*//supprimer un utilisateur
 				if (request.getParameter("deleteAction") != null
 						&& request.getParameter("deleteAction").equals("supprimer")) {
 
@@ -155,7 +152,7 @@ public class UserForm extends HttpServlet {
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (DAOException e) {
+			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -180,7 +177,7 @@ public class UserForm extends HttpServlet {
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (DAOException e) {
+			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -207,7 +204,7 @@ public class UserForm extends HttpServlet {
 		} catch (TransactionalConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (DAOException e) {
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

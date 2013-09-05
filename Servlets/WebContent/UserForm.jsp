@@ -83,9 +83,9 @@
 						</div>
 						<div id="tel_util">
 							Téléphone : <c:out value="${utilisateur.tel}"></c:out>
-	</div>
-	<div id="mail_util">
-	Adresse mail : <c:out value="${utilisateur.mail}"></c:out>
+						</div>
+						<div id="mail_util">
+							Adresse mail : <c:out value="${utilisateur.mail}"></c:out>
 						</div>
 						<div id="promotion_util">
 							Promotion : <c:out value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></c:out>
@@ -109,10 +109,24 @@
 							</c:forEach>
 						</div>
 					</div>
+					<div>
+						Projet :
+						<div>
+							<c:forEach var="projet" items="${ListeUtilProjet}">
+								<div>
+									<c:out value="${projet.intitule}"></c:out>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
 					<form action="./UserForm">
 						<input type="hidden" name="numUtilisateur"
 							value="${utilisateur.num}"></input> <input type="submit"
 							name="update" value="modifier"></input>
+					</form>
+					<form action="./UserForm">
+						<input type="hidden" name="numUtilisateur" value="${utilisateur.num}"></input>
+						<input type="submit" name="delete" value="supprimer"/>
 					</form>
 					<form action="./ListUserView">
 						<input type="submit" value="retour"></input>
@@ -124,53 +138,6 @@
 			</div>
 	<%--  	</c:when>
 
-		<c:when test="${action == 'update'}">
-			<div id="modif_utilisateur">
-				<c:if test="${! empty utilisateur.num}">
-					<div id="fiche_utilisateur">
-						<form method="post" action="./UserForm">
-							<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
-							<div id="nom_util">
-								Nom : <input type="text" name="nom" value="${utilisateur.nom}"></input>
-							</div>
-							<div id="prenom_util">
-								Prénom : <input type="text" name="prenom" value="${utilisateur.prenom}"></input>
-							</div>
-							<div id="date_nais_util">
-								Date de naissance :<input type="text" name="dateNaissance" value="${utilisateur.dateNaissance}"></input>
-							</div>
-							<div id="adresse_util">
-								Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
-						</div>
-						<div id="tel_util">
-							Téléphone :<c:out value="${utilisateur.tel}"></c:out>
-	</div>
-	<div id="mail_util">
-	Adresse mail : <c:out value="${utilisateur.mail}"></c:out>
-						</div>
-						<div id="promotion_util">
-							Promotion : <c:out value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></c:out>
-						</div>
-						<div id="login_util">
-							Login : <c:out value="${utilisateur.login}"></c:out>
-						</div>
-						<div id="password_util">
-							Password :
-							<c:out value="${utilisateur.password}"></c:out>
-						</div>
-							<input type="submit" name="updateAction"
-								value="modifier"></input> <br />
-						</form>
-
-					</div>
-				</c:if>
-				<c:if test="${empty utilisateur.num}">
-					<c:redirect url="/ListUserView" />
-				</c:if>
-
-			</div>
-		</c:when>
-
 		<c:when test="${action == 'add'}">
 			<form method="post" action="./UserForm">
 				<input type="text" id=nom name="nom" class="champ"></input> <br />
@@ -180,16 +147,13 @@
 					value="rafraichir" /> <br />
 			</form>
 		</c:when>
+		
+		
 		<c:when test="${action == 'delete'}">
 			<c:if test="${! empty utilisateur.num}">
 	Etes-vous sûr de vouloir supprimer cet utilisateur ?
 	<br />
-				<br />
-	NOM = <c:out value="${utilisateur.nom}"></c:out>
-				<br />
-	PRENOM = <c:out value="${utilisateur.prenom}"></c:out>
-				<br />
-				<br />
+		<br />
 				<form action="./UserForm">
 					<input type="hidden" name="numUtilisateur"
 						value="${utilisateur.num}"></input> <input type="submit"
