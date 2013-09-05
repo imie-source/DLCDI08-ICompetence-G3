@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.services.UtilisateurService;
@@ -90,7 +89,7 @@ public class UtilisateurServiceProxy implements IUtilisateurService {
 
 	@Override
 	public UtilisateurDTO readUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		UtilisateurDTO utilisateur = new UtilisateurDTO();
 		if (caller == null) {
@@ -109,7 +108,7 @@ public class UtilisateurServiceProxy implements IUtilisateurService {
 
 	@Override
 	public int createUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		int createNum = 0;
 		if (caller == null) {
@@ -128,7 +127,7 @@ public class UtilisateurServiceProxy implements IUtilisateurService {
 
 	@Override
 	public int updateUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		int updateNum = 0;
 		if (caller == null) {
@@ -148,7 +147,7 @@ public class UtilisateurServiceProxy implements IUtilisateurService {
 
 	@Override
 	public int deleteUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		int deleteNum = 0;
 		if (caller == null) {
@@ -168,7 +167,7 @@ public class UtilisateurServiceProxy implements IUtilisateurService {
 
 	@Override
 	public boolean logUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		
 		boolean logExist = false;
 		if (caller == null) {
@@ -187,7 +186,7 @@ public class UtilisateurServiceProxy implements IUtilisateurService {
 
 	@Override
 	public List<UtilisateurDTO> readUtilisateurProjet(ProjetDTO projet)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		List<UtilisateurDTO> listUtilProjet = new ArrayList<UtilisateurDTO>();
 		if (caller == null) {
 			beginTransactionalConnexion();

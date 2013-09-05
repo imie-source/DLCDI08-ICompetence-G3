@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.services.PromotionService1;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.services.interfaces.IPromotionService;
 import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
@@ -69,7 +69,7 @@ public class PromotionService1Proxy implements IPromotionService {
 
 	@Override
 	public List<PromotionDTO> readAllPromotion()
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		List<PromotionDTO> listePromotion = new ArrayList<PromotionDTO>();
 		if (caller == null) {
