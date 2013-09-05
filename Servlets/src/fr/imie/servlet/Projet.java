@@ -55,6 +55,8 @@ public class Projet extends HttpServlet {
 				try {
 					ProjetDTO projetDTO = DAOFactory1.getInstance().createProjetService(null).readProjet(projet);
 					request.setAttribute("projetDTO", projetDTO);
+					List<UtilisateurDTO> listeUtil = DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateurProjet(projetDTO);
+					request.setAttribute("listeUtil", listeUtil);
 
 					// Dans le cas de la suppression
 					if ((request.getParameter("delete") != null) 

@@ -11,26 +11,29 @@
 </head>
 <body>
 <h1>ID PROJECT</h1>
+Intitulé
 <div>
 <c:out value="${projetDTO.intitule}" />
 </div>
-<div>
-<c:out value="${projetDTO.chefDeProjet.nom}" />
-</div>
-<div>
-<c:out value="${projetDTO.chefDeProjet.prenom}" />
-</div>
-<div>
-<c:out value="${projetDTO.statutProjet.valeurStatut}" />
-</div>
+Contenu
 <div>
 <c:out value="${projetDTO.description}" />
+</div>
+Chef de projet
+<div>
+<c:out value="${projetDTO.chefDeProjet.nom} ${projetDTO.chefDeProjet.prenom}" />
+</div>
+Avancement
+<div>
+<c:out value="${projetDTO.statutProjet.valeurStatut}" />
 </div>
 
 
 <h1>PARTICIPANTS</h1>
+<c:forEach var="util" items="${listeUtil}">
 <div>
-<c:out value="${projetDTO.listUtilProjet}" />
+<c:out value="${util.nom} ${util.prenom}" />
 </div>
+</c:forEach>
 </body>
 </html>
