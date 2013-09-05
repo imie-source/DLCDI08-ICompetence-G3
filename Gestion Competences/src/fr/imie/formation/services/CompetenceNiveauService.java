@@ -19,6 +19,24 @@ public class CompetenceNiveauService extends ATransactional implements
 
 	// COMPETENCE
 
+	public CompetenceDTO readCompetence(CompetenceDTO competenceDTO)
+			throws TransactionalConnectionException, ServiceException {
+
+		CompetenceDTO competence = new CompetenceDTO();
+
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			competence = iDaoFactory.createICompetenceDAO(this)
+					.readCompetence(competenceDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return competence;
+
+	}
+	
 	public List<CompetenceDTO> readAllCompetence()
 			throws TransactionalConnectionException, ServiceException {
 

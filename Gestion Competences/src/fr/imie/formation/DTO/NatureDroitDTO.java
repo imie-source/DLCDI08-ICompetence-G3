@@ -1,6 +1,6 @@
 package fr.imie.formation.DTO;
 
-public class NatureDroit {
+public class NatureDroitDTO {
 	
 	private int num;
 	private String nom;

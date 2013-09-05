@@ -14,6 +14,9 @@ import fr.imie.formation.DAO.interfaces.IProjetDAO;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
+import fr.imie.formation.factory.DAOFactory1;
+import fr.imie.formation.factory.interfaces.IDAOFactory;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -208,14 +211,13 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		ProjetDTO proj = new ProjetDTO();
 		StatutProjetDTO statutProjet = new StatutProjetDTO();
 		UtilisateurDTO chefDeProjet = new UtilisateurDTO();
-		UtilisateurDAO utilisateur = new UtilisateurDAO();
 
 		try {
 			String query = "SELECT projet.num, projet.intitule as projet, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom FROM projet Inner join statut on statut.num=projet.num_statut inner join utilisateur on projet.num_util=utilisateur.num where projet.num =?";
 
 			pstmt = cn.prepareStatement(query);
 
-			pstmt.setInt(1, proj.getNum());
+			pstmt.setInt(1, projet.getNum());
 			rst = pstmt.executeQuery();
 
 			while (rst.next()) {
@@ -227,10 +229,15 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 				chefDeProjet.setNom(rst.getString(5));
 				chefDeProjet.setPrenom(rst.getString(6));
 				proj.setChefDeProjet(chefDeProjet);
-				proj.setListUtilProjet(utilisateur.readUtilisateurProjet(projet));
+				proj.setListUtilProjet(DAOFactory1.getInstance().
+						createUtilisateurService(this).
+						readUtilisateurProjet(projet));
 
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -247,7 +254,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			}
 		}
 
-		return projet;
+			return proj;
 	}
 
 

@@ -84,4 +84,23 @@ public class CompetenceProxy implements ICompetenceDAO {
 		return listeCompetenceDTO;
 	}
 
+	@Override
+	public CompetenceDTO readCompetence(CompetenceDTO competenceDTO)
+			throws TransactionalConnectionException, DAOException {
+		
+		CompetenceDTO competence = new CompetenceDTO();
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		competence = competenceDAO.readCompetence(competenceDTO);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return competence;
+	}
+
 }
