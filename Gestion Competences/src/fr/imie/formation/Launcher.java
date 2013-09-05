@@ -2,10 +2,6 @@ package fr.imie.formation;
 
 import java.util.List;
 
-import fr.imie.formation.DAO.PromotionDAO;
-import fr.imie.formation.DAO.UtilisateurDAO;
-import fr.imie.formation.DAO.exceptions.DAOException;
-import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
