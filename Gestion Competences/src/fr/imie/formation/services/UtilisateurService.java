@@ -41,59 +41,105 @@ UtilisateurService extends ATransactional implements
 	}
 
 	public UtilisateurDTO readUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		UtilisateurDTO util = new UtilisateurDTO();
 
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
-		util = iDaoFactory.createIUtilisateurDAO(this).readUtilisateur(
-				utilisateurDTO);
+		try {
+			util = iDaoFactory.createIUtilisateurDAO(this).readUtilisateur(
+					utilisateurDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return util;
 
 	}
 
 	public int createUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
+		int numCreate = 0;
+		
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
-		return iDaoFactory.createIUtilisateurDAO(this).createUtilisateur(
-				utilisateurDTO);
+		try {
+			numCreate = iDaoFactory.createIUtilisateurDAO(this).createUtilisateur(
+					utilisateurDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return numCreate;
 
 	}
 
 	public int updateUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
+		int numUpdate = 0;
+		
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
-		return iDaoFactory.createIUtilisateurDAO(this).updateUtilisateur(
-				utilisateurDTO);
+		try {
+			numUpdate = iDaoFactory.createIUtilisateurDAO(this).updateUtilisateur(
+					utilisateurDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return numUpdate;
 
 	}
 
 	public int deleteUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
+		int numDelete = 0;
+		
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
-		return iDaoFactory.createIUtilisateurDAO(this).deleteUtilisateur(
-				utilisateurDTO);
+		try {
+			numDelete = iDaoFactory.createIUtilisateurDAO(this).deleteUtilisateur(
+					utilisateurDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return numDelete;
 
 	}
 
 	public boolean logUtilisateur(UtilisateurDTO utilisateurDTO)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
+		boolean boolLog = false;
+		
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
-		return iDaoFactory.createIUtilisateurDAO(this).logUtilisateur(
-				utilisateurDTO);
+		try {
+			boolLog = iDaoFactory.createIUtilisateurDAO(this).logUtilisateur(
+					utilisateurDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return boolLog;
 
 	}
 
 	@Override
 	public List<UtilisateurDTO> readUtilisateurProjet(ProjetDTO projet)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
+		
+		List<UtilisateurDTO> listUtilisateur = new ArrayList<UtilisateurDTO>();
+		
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
-		return iDaoFactory.createIUtilisateurDAO(this).readUtilisateurProjet(projet);
+		try {
+			return iDaoFactory.createIUtilisateurDAO(this).readUtilisateurProjet(projet);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listUtilisateur;
 	}
 
 }

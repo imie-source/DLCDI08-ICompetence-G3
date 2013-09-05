@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.services.ProjetService;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.services.interfaces.IProjetService;
 import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
@@ -64,7 +64,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public List<ProjetDTO> readAllProjets()
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		List<ProjetDTO> listProjet = new ArrayList<ProjetDTO>();
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -82,7 +82,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public ProjetDTO readProjet(ProjetDTO projet)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		ProjetDTO proj = new ProjetDTO();
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -100,7 +100,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public int ajoutChefDeProjet(ProjetDTO projet)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		int updateCDPnum = 0;
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -118,7 +118,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public int createProjet(ProjetDTO projet)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		int createNum = 0;
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -136,7 +136,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public int updateProjet(ProjetDTO projet)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		int updateNum = 0;
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -154,7 +154,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public int deleteProjet(ProjetDTO projet)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		int deleteNum = 0;
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -172,7 +172,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 	@Override
 	public List<StatutProjetDTO> readAllStatutProjet()
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 		List<StatutProjetDTO> listStatutProjet = new ArrayList<StatutProjetDTO>();
 		if (caller == null) {
 			beginTransactionalConnexion();
