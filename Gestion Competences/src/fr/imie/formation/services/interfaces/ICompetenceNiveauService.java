@@ -13,6 +13,9 @@ public interface ICompetenceNiveauService extends ITransactional {
 
 	// COMPETENCE
 
+	public CompetenceDTO readCompetence(CompetenceDTO competenceDTO)
+			throws TransactionalConnectionException, ServiceException;
+	
 	public List<CompetenceDTO> readAllCompetence()
 			throws TransactionalConnectionException, ServiceException;
 

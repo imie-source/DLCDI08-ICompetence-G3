@@ -44,12 +44,10 @@ public class ListUserView extends HttpServlet {
 
 		if (request.getParameter("numligne") == null && request.getParameter("create") == null) {
 
-			IUtilisateurService utilisateurService = DAOFactory1.getInstance()
-					.createUtilisateurService(null);
-			List<UtilisateurDTO> listeUtilisateur = new ArrayList<UtilisateurDTO>();
 
 			try {
-				listeUtilisateur = utilisateurService.readAllUtilisateur();
+				List<UtilisateurDTO> listeUtilisateur = DAOFactory1.getInstance()
+						.createUtilisateurService(null).readAllUtilisateur();
 				session.setAttribute("listeUtilisateur", listeUtilisateur);
 				
 				request.getRequestDispatcher("ListUser.jsp")//remplace ancien redirect

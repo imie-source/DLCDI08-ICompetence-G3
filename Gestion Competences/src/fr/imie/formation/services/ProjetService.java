@@ -43,6 +43,7 @@ public class ProjetService extends ATransactional implements IProjetService {
 			e.printStackTrace();
 		}
 		return listeProjetUtilisateur;
+		
 	}
 
 	@Override
