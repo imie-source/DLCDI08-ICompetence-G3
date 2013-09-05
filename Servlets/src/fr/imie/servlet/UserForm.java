@@ -15,6 +15,7 @@ import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
 /**
@@ -79,6 +80,9 @@ public class UserForm extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
