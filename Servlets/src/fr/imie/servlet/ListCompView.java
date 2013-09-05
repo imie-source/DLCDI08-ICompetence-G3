@@ -47,7 +47,9 @@ public class ListCompView extends HttpServlet {
 				listeCompetence = DAOFactory1.getInstance()
 						.createCompetenceNiveauService(null).readAllCompetence();
 				session.setAttribute("listeCompetence", listeCompetence);
-				response.sendRedirect("ListUser.jsp");
+				
+				request.getRequestDispatcher("ListComp.jsp")
+				.forward(request, response);
 			} catch (TransactionalConnectionException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

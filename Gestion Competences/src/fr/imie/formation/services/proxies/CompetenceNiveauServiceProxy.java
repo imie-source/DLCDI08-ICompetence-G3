@@ -131,4 +131,24 @@ public class CompetenceNiveauServiceProxy implements ICompetenceNiveauService {
 		return listeNiveau;
 	}
 
+	@Override
+	public CompetenceDTO readCompetence(CompetenceDTO competenceDTO)
+			throws TransactionalConnectionException, ServiceException {
+		
+		CompetenceDTO competence = new CompetenceDTO();
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		competence = competenceNiveauService
+				.readCompetence(competenceDTO);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return competence;
+	}
+
 }
