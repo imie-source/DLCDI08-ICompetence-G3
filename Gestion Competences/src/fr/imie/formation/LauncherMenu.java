@@ -495,7 +495,12 @@ public class LauncherMenu {
 
 			currentUtilisateur = listUtil.get(choix - 1);
 
-			utilisateur = utilisateurService.readUtilisateur(currentUtilisateur);
+			try {
+				utilisateur = utilisateurService.readUtilisateur(currentUtilisateur);
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			String nom = utilisateur.getNom();
 			String prenom = utilisateur.getPrenom();
