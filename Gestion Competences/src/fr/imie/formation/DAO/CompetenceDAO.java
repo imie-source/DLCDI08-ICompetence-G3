@@ -36,7 +36,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		List<CompetenceDTO> listCompetence = new ArrayList<CompetenceDTO>();
 
-		String query = "select num, nom from competence";
+		String query = "select num, nom from competence fille left join competence pere on pere.num = fille.competence_domaine";
 		try {
 			stmt = cn.createStatement();
 			rst = stmt.executeQuery(query);

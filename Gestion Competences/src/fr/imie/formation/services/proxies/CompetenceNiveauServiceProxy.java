@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.services.CompetenceNiveauService;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.services.interfaces.ICompetenceNiveauService;
 import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
@@ -72,7 +72,7 @@ public class CompetenceNiveauServiceProxy implements ICompetenceNiveauService {
 
 	@Override
 	public List<CompetenceDTO> readAllCompetence()
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		List<CompetenceDTO> listeCompetence = new ArrayList<CompetenceDTO>();
 		if (caller == null) {
@@ -92,7 +92,7 @@ public class CompetenceNiveauServiceProxy implements ICompetenceNiveauService {
 	@Override
 	public List<NiveauDTO> readCompetenceNiveauUtilisateur(
 			UtilisateurDTO utilisateur)
-			throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, ServiceException {
 
 		List<NiveauDTO> listeNiveau = new ArrayList<NiveauDTO>();
 		if (caller == null) {
@@ -113,7 +113,7 @@ public class CompetenceNiveauServiceProxy implements ICompetenceNiveauService {
 	@Override
 	public List<NiveauDTO> readNiveauUtilisateurCompetence(
 			CompetenceDTO competence) throws TransactionalConnectionException,
-			DAOException {
+			ServiceException {
 
 		List<NiveauDTO> listeNiveau = new ArrayList<NiveauDTO>();
 		if (caller == null) {

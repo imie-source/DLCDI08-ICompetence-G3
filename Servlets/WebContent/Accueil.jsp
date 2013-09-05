@@ -17,5 +17,9 @@
 	<h2>PROJETS</h2>
 	</a>
 
+	<a href="./ListCompView"> 
+	Liste Des Compétence
+	</a>
+	
 </body>
 </html>
