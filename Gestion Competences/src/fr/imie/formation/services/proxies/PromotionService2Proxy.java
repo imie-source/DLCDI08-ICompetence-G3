@@ -86,4 +86,25 @@ public class PromotionService2Proxy implements IPromotionService {
 		return listePromotion;
 	}
 
+	@Override
+	public int createPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deletePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

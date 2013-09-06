@@ -85,4 +85,64 @@ public class PromotionProxy implements IPromotionDAO {
 
 	}
 
+	@Override
+	public int createPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, DAOException {
+		
+		int createNum = 0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		createNum = promotionDAO.createPromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return createNum;
+	
+		
+	}
+
+	@Override
+	public int updatePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, DAOException {
+		int updateNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		updateNum = promotionDAO.createPromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return updateNum;
+	}
+
+	@Override
+	public int deletePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, DAOException {
+		int deleteNum=0;
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		deleteNum = promotionDAO.createPromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		
+		return deleteNum;
+	}
+
 }

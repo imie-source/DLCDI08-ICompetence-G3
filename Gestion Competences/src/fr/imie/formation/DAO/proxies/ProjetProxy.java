@@ -8,6 +8,7 @@ import fr.imie.formation.DAO.ProjetDAO;
 import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DAO.interfaces.IProjetDAO;
 import fr.imie.formation.DTO.ProjetDTO;
+import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -84,7 +85,7 @@ public class ProjetProxy implements IProjetDAO {
 	}
 
 	@Override
-	public List<ProjetDTO> readProjetByUtilisateur()
+	public List<ProjetDTO> readProjetByUtilisateur(UtilisateurDTO utilisateur)
 			throws TransactionalConnectionException, DAOException {
 
 		List<ProjetDTO>listeProjetUtilisateur=new ArrayList<ProjetDTO>();
@@ -94,7 +95,7 @@ public class ProjetProxy implements IProjetDAO {
 		} else {
 			putInTransaction(caller);
 		}
-		listeProjetUtilisateur=projetDAO.readProjetByUtilisateur();
+		listeProjetUtilisateur=projetDAO.readProjetByUtilisateur( utilisateur);
 		if (caller == null){
 			endTransactionalConnexion();
 		} else {

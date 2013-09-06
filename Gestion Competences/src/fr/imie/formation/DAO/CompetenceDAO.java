@@ -55,7 +55,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 	public int deleteCompetence(CompetenceDTO competence)
 			throws TransactionalConnectionException, DAOException{
 		int deleteNum=0;
-		deleteNum=createCompetence(competence,getConnection());
+		deleteNum=deleteCompetence(competence,getConnection());
 		return deleteNum;
 	}
 
@@ -239,9 +239,9 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 			} catch (SQLException e) {
 
 				e.printStackTrace();
-			}
-			return updateNum;
+			}		
 		}
+		return updateNum;
 	}
 
 	private int deleteCompetence(CompetenceDTO competence,Connection cn)
@@ -270,8 +270,8 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 				e.printStackTrace();
 			}
-			return deleteNum;
 
 		}
+		return deleteNum;
 	}
 }

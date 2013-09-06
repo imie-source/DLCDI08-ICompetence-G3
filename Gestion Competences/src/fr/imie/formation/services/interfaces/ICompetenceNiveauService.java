@@ -29,4 +29,12 @@ public interface ICompetenceNiveauService extends ITransactional {
 			CompetenceDTO competence) throws TransactionalConnectionException,
 			ServiceException;
 
+	public int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException,  ServiceException;
+	
+	public int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException,  ServiceException;
+
+	public int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException,  ServiceException;
 }
