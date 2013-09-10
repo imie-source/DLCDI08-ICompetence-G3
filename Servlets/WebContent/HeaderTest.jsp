@@ -5,7 +5,7 @@
 		</div>
 		<div class="titreMenu">
 			<div class="titreChapeau">
-			<h1> <span class = "kill">s</span>kill manager</h1>
+			<h1> <span class = "kill">S</span>kills Manager</h1>
 			</div>
 			<div class="menu">
 				<a href ="./ListProjetView">projets</a>
@@ -14,6 +14,10 @@
 			</div>
 		</div>
 		<div class="connexion">
-		connexion
+		<form>
+		Pseudo<input type="text"/>
+		Mot de passe<input type="text"/><br/>
+		<input type="submit" value="Valider"/>
 		</div>
+		</form>
 </div>
