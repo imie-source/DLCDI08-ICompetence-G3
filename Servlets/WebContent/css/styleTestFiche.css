@@ -36,7 +36,7 @@ width : 50%;
 			margin-left : 20px;
 			/*background-color : blue;*/
 			height: 60%;
-			width: 70%;
+			width: 75%;
 			}
 			.kill{
 			color : red;
@@ -53,14 +53,17 @@ width : 50%;
 			
 		.connexion{
 		display : inline-block;
-		margin-top : 10px;
+		margin-left:95px;
 		vertical-align: bottom;
 		background-color : white;
 		width: 25%;
-		height : 70%;
+		height : 95%;
 		border-radius : 20px;
+		font-size:small;
 		}
-		
+		.valider{
+		text-align:center;
+		}
 		.titre{
 		display : inline-block;
 		width : 50%;
