@@ -92,5 +92,52 @@ public class CompetenceNiveauService extends ATransactional implements
 
 		return listNiveau;
 	}
+	public int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)		
+			throws TransactionalConnectionException, ServiceException {
 
+		int addNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			addNum = iDaoFactory.createINiveauDAO(this).addCompUtil(utilisateur,comp,niveau);
+					
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return addNum;
+
+	}
+	public int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)		
+			throws TransactionalConnectionException, ServiceException {
+
+		int updateNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			updateNum = iDaoFactory.createINiveauDAO(this).updateCompUtil(utilisateur,comp,niveau);
+					
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return updateNum;
+
+	}
+	public int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)		
+			throws TransactionalConnectionException, ServiceException {
+
+		int deleteNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			deleteNum = iDaoFactory.createINiveauDAO(this).deleteCompUtil(utilisateur,comp,niveau);
+					
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return deleteNum;
+
+	}
 }

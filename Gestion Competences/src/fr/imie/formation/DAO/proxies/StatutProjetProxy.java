@@ -82,4 +82,23 @@ public class StatutProjetProxy implements IStatutProjetDAO{
 		return statutProjetDTO;
 	}
 
+	@Override
+	public int updateStatutProjet(StatutProjetDTO statut)
+			throws TransactionalConnectionException, DAOException {
+		int updateNum = 0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		updateNum = statutProjetDAO.updateStatutProjet(statut);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return updateNum;
+	}
+
 }

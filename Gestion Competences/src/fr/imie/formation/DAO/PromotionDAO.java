@@ -1,6 +1,7 @@
 package fr.imie.formation.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,7 +27,35 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 		return listPromo;
 
 	}
-                    
+	
+	public int createPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, DAOException {
+
+		int createNum = 0;
+		createNum = createPromotion(promo, getConnection());
+		return createNum;
+
+	}
+	
+	public int updatePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, DAOException {
+
+		int updateNum = 0;
+		updateNum = updatePromotion(promo, getConnection());
+		return updateNum;
+
+	}
+	
+	public int deletePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, DAOException {
+
+		int deleteNum = 0;
+		deleteNum = deletePromotion(promo, getConnection());
+		return deleteNum;
+
+	}
+	
+	
 	// Liste de toutes les promotions
 	private List<PromotionDTO> readAllPromotion(Connection cn)
 			throws TransactionalConnectionException, DAOException {
@@ -71,4 +100,85 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 		return listPromo;
 	}
 
+	private int createPromotion(PromotionDTO promo,Connection cn){
+		int createNum=0;
+		PreparedStatement pstm=null;
+
+		try {
+			String query="insert into promotion (intitule, annee) values (?,?);";
+			pstm=cn.prepareStatement(query);
+			pstm.setString(1, promo.getIntitule());
+			pstm.setInt(2, promo.getAnnee());
+
+			createNum=pstm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return createNum;
+	}
+	 private int updatePromotion(PromotionDTO promo,Connection cn){
+		 int updateNum=0;
+		 PreparedStatement pstm=null;
+		 try {
+		 String query="UPDATE promotion SET  intitule=?, annee=? where num=?;";
+		    pstm=cn.prepareStatement(query);
+			pstm.setString(1, promo.getIntitule());
+			pstm.setInt(2, promo.getAnnee());
+			updateNum=pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 finally {
+				try {
+					if (pstm != null) {
+						pstm.close();
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	 }
+		 return updateNum;
+}
+	 private int deletePromotion(PromotionDTO promo,Connection cn){
+		 int deleteNum=0;
+		  PreparedStatement pstm=null;
+		  try {
+		  String query= "delete from promotion where num=?;";
+			pstm=cn.prepareStatement(query);
+			pstm.setInt(1, promo.getNum());
+			
+			deleteNum=pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  finally {
+				try {
+					if (pstm != null) {
+						pstm.close();
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	 }
+		  return deleteNum;
+		  
+}
 }

@@ -13,4 +13,13 @@ public interface IPromotionService extends ITransactional {
 
 	public List<PromotionDTO> readAllPromotion()
 			throws TransactionalConnectionException, ServiceException;
+	
+	public int createPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException;
+	
+	public int deletePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException;
+	
+	public int updatePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException;
 }

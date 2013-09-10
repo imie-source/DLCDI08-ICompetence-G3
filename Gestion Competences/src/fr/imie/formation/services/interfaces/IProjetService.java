@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.StatutProjetDTO;
+import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ITransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
@@ -17,7 +18,7 @@ public interface IProjetService extends ITransactional{
 	public ProjetDTO readProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, ServiceException;
 	
-	public List<ProjetDTO> readProjetByUtilisateur()
+	public List<ProjetDTO> readProjetByUtilisateur(UtilisateurDTO utilisateur)
 	throws TransactionalConnectionException, ServiceException;
 
 	public int ajoutChefDeProjet(ProjetDTO projet)

@@ -19,7 +19,7 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 
 	public List<NiveauDTO> readCompetenceNiveauUtilisateur(
 			UtilisateurDTO utilisateur)
-			throws TransactionalConnectionException, DAOException {
+					throws TransactionalConnectionException, DAOException {
 
 		// initialisation de la liste qui servira au retour
 		List<NiveauDTO> listcompNiv = null;
@@ -35,6 +35,8 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 			CompetenceDTO competence) throws TransactionalConnectionException,
 			DAOException {
 
+
+
 		// initialisation de la liste qui servira au retour
 		List<NiveauDTO> listNivUtilisateur = null;
 
@@ -44,11 +46,31 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 		return listNivUtilisateur;
 
 	}
+	public int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException{		
+			int addNum=0;
+			addNum= addCompUtil(utilisateur, comp, niveau, getConnection());
+			return addNum;
+	}
+	
+	public int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException{		
+			int updateNum=0;
+			updateNum= updateCompUtil(utilisateur, comp, niveau, getConnection());
+			return updateNum;
+	}
 
+	public int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException{		
+			int deleteNum=0;
+			deleteNum= deleteCompUtil(utilisateur, comp, niveau, getConnection());
+			return deleteNum;
+	}
+	
 	// Liste des Niveaux et compétences pour un utilisateur
 	private List<NiveauDTO> readCompetenceNiveauUtilisateur(
 			UtilisateurDTO utilisateur, Connection cn)
-			throws TransactionalConnectionException, DAOException {
+					throws TransactionalConnectionException, DAOException {
 
 		PreparedStatement pstm = null;
 		ResultSet rst = null;
@@ -93,7 +115,7 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 	// Liste des Niveaux et utilisateurs pour une compétence
 	private List<NiveauDTO> readNiveauUtilisateurCompetence(
 			CompetenceDTO competence, Connection cn)
-			throws TransactionalConnectionException, DAOException {
+					throws TransactionalConnectionException, DAOException {
 
 		PreparedStatement pstm = null;
 		ResultSet rst = null;
@@ -137,5 +159,88 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 
 		return listNiveau;
 	}
+	private int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn){		
+		int addNum=0;
+		PreparedStatement pstm=null;
 
+		try {
+			String query="INSERT INTO competence_util (num_util, num_competence, num_niveau)VALUES(?,?,?)";
+			pstm= cn.prepareStatement(query);
+			pstm.setInt(1,utilisateur.getNum());
+			pstm.setInt(2, comp.getNum());
+			pstm.setInt(3, niveau.getNum());
+
+			addNum= pstm.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return addNum;
+	}
+	private int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn){
+		PreparedStatement pstm= null;
+		int updateNum = 0;
+		
+		try {
+		String query ="update competence_util set num_util='?', num_competence='?', num_niveau='?' where num='?'";
+			pstm=cn.prepareStatement(query);
+			pstm.setInt(1, utilisateur.getNum());
+			pstm.setInt(2, comp.getNum());
+			pstm.setInt(3, niveau.getNum());
+			
+			updateNum=pstm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+		return updateNum;
+}
+	private int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn){
+		int deleteNum=0;
+		PreparedStatement pstm=null;
+		try {
+		String query="delete from competence_util where num_util=?, and num_competence=?, and num_niveau=?";
+			pstm=cn.prepareStatement(query);
+			pstm.setInt(1, utilisateur.getNum());
+			pstm.setInt(2, comp.getNum());
+			pstm.setInt(3, niveau.getNum());
+			
+			deleteNum=pstm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+		return deleteNum;
+}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.StatutProjetDTO;
+import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.services.ProjetService;
 import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.services.interfaces.IProjetService;
@@ -82,7 +83,7 @@ public class ProjetServiceProxy implements IProjetService{
 
 
 	@Override
-	public List<ProjetDTO> readProjetByUtilisateur()
+	public List<ProjetDTO> readProjetByUtilisateur(UtilisateurDTO utilisateur)
 			throws TransactionalConnectionException, ServiceException {
 
 		List<ProjetDTO> listeProjetUtilisateur= new ArrayList<ProjetDTO>();
@@ -92,7 +93,7 @@ public class ProjetServiceProxy implements IProjetService{
 		} else {
 			putInTransaction(caller);
 		}
-		listeProjetUtilisateur = projetService.readProjetByUtilisateur();
+		listeProjetUtilisateur = projetService.readProjetByUtilisateur(utilisateur);
 		if (caller == null) {
 			endTransactionalConnexion();
 		} else {

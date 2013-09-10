@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
@@ -43,13 +42,13 @@ public class UserForm extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// Afficher un utilisateur
-		if ((request.getParameter("read") != null && request.getParameter(
-				"read").equals("afficher"))
-				|| (request.getParameter("delete") != null && request
-						.getParameter("delete").equals("supprimer"))) {
-			if (request.getParameter("ligne") != null) {
+		//if ((request.getParameter("read") != null && request.getParameter(
+			//	"read").equals("afficher"))
+			//	|| (request.getParameter("delete") != null && request
+			//			.getParameter("delete").equals("supprimer"))) {
+			if (request.getParameter("numligne") != null) {
 
-				int ligne = Integer.valueOf(request.getParameter("ligne"));
+				int ligne = Integer.valueOf(request.getParameter("numligne"));
 				Object listObj = session.getAttribute("listeUtilisateur");
 				@SuppressWarnings("unchecked")
 				List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
@@ -64,14 +63,15 @@ public class UserForm extends HttpServlet {
 					request.setAttribute("utilisateur", utilisateurDTO);
 					List<NiveauDTO> listCompNiv = DAOFactory1.getInstance().createCompetenceNiveauService(null).readCompetenceNiveauUtilisateur(utilisateurDTO);
 					request.setAttribute("ListeCompNiv", listCompNiv);
+					//List<UtilisateurDTO> listUtilProjet = DAOFactory1.getInstance().createProjetService(null).readProjetByUtilisateur(); en stand by manque paramètre utilisateur
 					
 					// Dans le cas de la suppression
-					if ((request.getParameter("delete") != null) 
-							&& (request.getParameter("delete").equals("supprimer"))) {
-						request.setAttribute("action", "delete");
-					} else {
-						request.setAttribute("action", "read");
-					}
+				//	if ((request.getParameter("delete") != null) 
+				//			&& (request.getParameter("delete").equals("supprimer"))) {
+				//		request.setAttribute("action", "delete");
+				//	} else {
+				//		request.setAttribute("action", "read");
+				//	}
 
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
@@ -79,11 +79,12 @@ public class UserForm extends HttpServlet {
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-
 				}
+				request.getRequestDispatcher("./UserForm.jsp")
+				.forward(request, response);
 			}
-		}
-
+	//	}
+/*
 		// Passage vers l'écran de modification
 		if (request.getParameter("update") != null
 				&& request.getParameter("update").equals("modifier")) {
@@ -92,16 +93,17 @@ public class UserForm extends HttpServlet {
 			request.setAttribute("utilisateur",
 					getUser(request.getParameter("numUtilisateur")));
 
-		}
+		}*/
 
 		// Passage vers l'écran de modification pour créer un utilisateur
-		if (request.getParameter("create") != null
+			else if (request.getParameter("numligne") == null && request.getParameter("create") != null
 				&& request.getParameter("create").equals("creer")) {
 
-			request.setAttribute("action", "add");
+			//request.setAttribute("action", "add");
+			request.getRequestDispatcher("./UserCreate.jsp").forward(request, response);
 		}
 			
-		//supprimer un utilisateur
+		/*//supprimer un utilisateur
 				if (request.getParameter("deleteAction") != null
 						&& request.getParameter("deleteAction").equals("supprimer")) {
 
@@ -120,10 +122,9 @@ public class UserForm extends HttpServlet {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				}*/
 
-		request.getRequestDispatcher("/UserForm.jsp")
-				.forward(request, response);
+		
 	}
 
 	/**

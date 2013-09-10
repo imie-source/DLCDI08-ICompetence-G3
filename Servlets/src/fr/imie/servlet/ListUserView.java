@@ -42,7 +42,7 @@ public class ListUserView extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (request.getParameter("ligne") == null) {
+		if (request.getParameter("numligne") == null && request.getParameter("create") == null) {
 
 
 			try {
@@ -60,6 +60,7 @@ public class ListUserView extends HttpServlet {
 			}
 
 		} 
+
 
 		response.setContentType("text/html");
 

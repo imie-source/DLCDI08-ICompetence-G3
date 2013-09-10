@@ -16,7 +16,7 @@
 		<div class="tableau">
 
 			<div class="ligneTableauLine ligneTableauHeader">
-				<div id=Nom class="celluleTableauInTable celluleTableau celluleTableau200">Intitulé</div>
+				<div id=Nom class="celluleTableauInTable celluleTableau celluleTableau200">Competence</div>
 				<div class="celluleTableauInTable celluleTableau celluleTableau100">Chef de projet</div>
 				<div class="celluleTableauInTable celluleTableau celluleTableau100">Statut</div>
 				<div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div>
@@ -25,7 +25,7 @@
 			<%
 				int ligne = 0;
 			%>
-			<c:forEach var="projetDTO" items="${listeProjet}"varStatus="numLigne">
+			<c:forEach var="competenceDTO" items="${listeCompetence}"varStatus="numLigne">
 			
 			<%
 					Boolean isAlternativLigne = ligne % 2 > 0;
@@ -35,7 +35,7 @@
 				%>
 				<div class="ligneTableauLine <%=ligneAlternative%>">
 					<div class="celluleTableauInTable celluleTableau celluleTableau200">
-					<c:out value="${projetDTO.intitule}" />
+					<c:out value="${competenceDTO.nom}" />
 					</div>
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">
 					<c:out value="${projetDTO.chefDeProjet.nom}" />

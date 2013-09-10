@@ -107,4 +107,67 @@ public class NiveauProxy implements INiveauDAO {
 		return listeNiveau;
 	}
 
+
+	public int addCompUtil(UtilisateurDTO utilisateur, CompetenceDTO comp,
+			NiveauDTO niveau) throws TransactionalConnectionException,
+			DAOException {
+		int addNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		addNum = niveauDAO.addCompUtil( utilisateur,comp,niveau);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return addNum;
+		
+	}
+
+	
+	public int updateCompUtil(UtilisateurDTO utilisateur, CompetenceDTO comp,
+			NiveauDTO niveau) throws TransactionalConnectionException,
+			DAOException {
+		int updateNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		updateNum = niveauDAO.updateCompUtil(utilisateur, comp, niveau);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		
+		return updateNum;
+	}
+
+	
+	public int deleteCompUtil(UtilisateurDTO utilisateur, CompetenceDTO comp,
+			NiveauDTO niveau) throws TransactionalConnectionException,
+			DAOException {
+		int deleteNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		deleteNum = niveauDAO.deleteCompUtil( utilisateur,comp,niveau);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		
+		return deleteNum;
+	}
+
 }

@@ -18,5 +18,15 @@ public interface INiveauDAO extends ITransactional{
 	public List<NiveauDTO> readNiveauUtilisateurCompetence(
 			CompetenceDTO competence) throws TransactionalConnectionException,
 			DAOException;
-
+	
+	public int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException;
+	
+	public int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException;
+	
+	public int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException;
+	
+	
 }
