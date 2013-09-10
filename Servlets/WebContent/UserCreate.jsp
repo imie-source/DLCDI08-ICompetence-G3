@@ -60,23 +60,14 @@ jQuery(document)
 </script>
 </head>
 <body>
-	<div id="modif_utilisateur">
-		<%-- <c:if test="${! empty utilisateur.num}">--%>
-			<div id="fiche_utilisateur">
-			
-			TEST!!!
-			<jsp:include page="UserOnlyUpdate.jsp" />
-
-
-<input type="submit" id="envoi" name="createAction" value="ajouter"></input> 
-<input type="reset" id="rafraichir" value="rafraichir"/>
-<%--<c:redirect url="/ListUserView" />--%>
-
-				</div>
-		<%-- </c:if>
-		<c:if test="${empty utilisateur.num}">
-			<c:redirect url="/ListUserView"/>
-		</c:if>--%>
+	<div id="creation_utilisateur">
+		<div id="fiche_utilisateur">
+			<form method="post" action="./UserForm">
+				<jsp:include page="UserInputOnly.jsp" />
+					<input type="submit" id="envoi" name="createAction" value="ajouter"></input> 
+					<input type="reset" id="rafraichir" value="rafraichir"/>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

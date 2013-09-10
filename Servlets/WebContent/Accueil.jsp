@@ -22,7 +22,7 @@
 	</a>
 
 	<a href="./ListCompView"> 
-	Liste Des Compétence
+	<h2>COMPETENCES</h2>
 	</a>
 --%>
 	
