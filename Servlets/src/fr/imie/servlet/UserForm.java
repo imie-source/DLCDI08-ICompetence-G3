@@ -124,6 +124,35 @@ public class UserForm extends HttpServlet {
 		 * Auto-generated catch block e.printStackTrace(); } }
 		 */
 
+<<<<<<< HEAD
+=======
+			//request.setAttribute("action", "add");
+			request.getRequestDispatcher("./UserCreate.jsp").forward(request, response);
+		}
+			
+		/*//supprimer un utilisateur
+				if (request.getParameter("deleteAction") != null
+						&& request.getParameter("deleteAction").equals("supprimer")) {
+
+					UtilisateurDTO utilisateurDelete = getUser(request
+							.getParameter("numUtilisateur"));
+
+					try {
+						DAOFactory1.getInstance().createUtilisateurService(null)
+								.deleteUtilisateur(utilisateurDelete);
+						// request.setAttribute("utilisateur", utilisateurUpdate);
+						request.setAttribute("action", "deleteAction");
+					} catch (TransactionalConnectionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ServiceException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}*/
+
+		
+>>>>>>> dec4091be33e55b28f1fa6bbb6e7e6386a832498
 	}
 
 	/**

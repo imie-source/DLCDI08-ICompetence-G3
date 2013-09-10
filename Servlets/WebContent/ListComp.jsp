@@ -16,35 +16,19 @@
 		<div class="tableau">
 
 			<div class="ligneTableauLine ligneTableauHeader">
-				<div id=Nom class="celluleTableauInTable celluleTableau celluleTableau200">Competence</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Chef de projet</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Statut</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div>
+			<div id=Competence class="celluleTableauInTable celluleTableau celluleTableau200">Competence</div>
 			</div>
 
-			<%
-				int ligne = 0;
-			%>
-			<c:forEach var="competenceDTO" items="${listeCompetence}"varStatus="numLigne">
-			
-			<%
-					Boolean isAlternativLigne = ligne % 2 > 0;
-						String ligneAlternative = isAlternativLigne ? "ligneTableauAlternativLine"
-								: "ligneTableauNormalLine";
-						ligne++;
-				%>
-				<div class="ligneTableauLine <%=ligneAlternative%>">
+			<c:forEach var="competenceDTO" items="${listeCompetence}"
+				varStatus="numLigneComp">
+				<c:set var="isAlternativeLigne" value="${numLigneComp.index%2>0}" />
+					<div class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
 					<div class="celluleTableauInTable celluleTableau celluleTableau200">
-					<c:out value="${competenceDTO.nom}" />
-					</div>
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-					<c:out value="${projetDTO.chefDeProjet.nom}" />
-					</div>
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-					<c:out value="${projetDTO.statutProjet.valeurStatut}" />
+						<a href="./CompForm?numLigneComp=${numLigneComp.index}">
+							<c:out value="${competenceDTO.nom}" />
+						</a>
 					</div>
 				</div>
-			
 			</c:forEach>
 			
 			</div>			

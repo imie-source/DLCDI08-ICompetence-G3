@@ -5,9 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+<link rel=stylesheet type=text/css href=css/style.css />
 <title>Gestion des Compétences</title>
 </head>
 <body>
+<jsp:include page="HeaderTest.jsp" />
+<%-- 
 <h1>GESTION DES COMPETENCES</h1>
 	<a href="./ListUserView"> 
 	<h2>MEMBRES</h2>
@@ -18,8 +22,9 @@
 	</a>
 
 	<a href="./ListCompView"> 
-	Liste Des Compétence
+	<h2>COMPETENCES</h2>
 	</a>
+--%>
 	
 </body>
 </html>
