@@ -118,7 +118,7 @@ public class UserForm extends HttpServlet {
 					} catch (TransactionalConnectionException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} catch (DAOException e) {
+					} catch (ServiceException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

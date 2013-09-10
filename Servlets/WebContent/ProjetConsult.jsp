@@ -7,9 +7,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+<link rel=stylesheet type=text/css href=css/style.css />
 <title>Projet</title>
 </head>
 <body>
+<jsp:include page="HeaderTest.jsp" />
 <h1>ID PROJECT</h1>
 Intitulé
 <div>

@@ -1,0 +1,139 @@
+@CHARSET "UTF-8";
+body{
+background-color : #f3f2f0;
+margin : auto;
+width : 50%;
+}
+.page
+{
+
+}
+
+.chapeau{
+	/*display: block;*/
+	background-color : #48b9c7;
+	width : 900px;
+	height : 140px;
+	border-radius : 20px;
+}
+		.logo{
+		margin-top : 10px;
+		display : inline-block;
+		vertical-align : bottom;
+		}
+		
+		.titreMenu{
+		display : inline-block;
+		margin-top : 10px;
+		vertical-align: top;
+		/*background-color : white;*/
+		width: 40%;
+		height : 90%;
+		}
+			
+			.titreChapeau{
+			display : inline-block;
+			margin-left : 20px;
+			/*background-color : blue;*/
+			height: 60%;
+			width: 70%;
+			}
+			.kill{
+			color : red;
+			}
+			
+			.menu{	
+			margin-top: 10px;
+			display : inline-block;
+			margin-left : 20px;
+			/*background-color: green;*/
+			height : 30%;
+			width: 70%;
+			}
+			
+		.connexion{
+		display : inline-block;
+		margin-top : 10px;
+		vertical-align: bottom;
+		background-color : white;
+		width: 25%;
+		height : 70%;
+		border-radius : 20px;
+		}
+		
+		.titre{
+		display : inline-block;
+		width : 50%;
+		height : 50px;
+		/*background-color : red;*/
+		background-color :#f3f2f0;
+		vertical-align: top;
+	
+		}
+	
+
+.contenu{
+	display:inline-block;
+	/*background-color : blue;*/
+	background-color :#f3f2f0;
+	width : 900px;
+	height: 700px;	
+}
+		.fiche{
+		display: inline-block;
+		width : 100%;
+		height :100%;
+		/*background-color : white;*/
+		background-color :#f3f2f0;
+		}
+			.ficheGauche{
+			display: inline-block;
+			width : 48%;
+			background-color : #e2e2e2;
+			height :100%;
+			border-radius : 20px;
+			vertical-align : top;
+			}	
+			
+			.ficheDroite
+			{
+			margin-left: 20px;
+			display: inline-block;
+			width : 48%;
+			/*background-color : red;*/
+			background-color :#f3f2f0;
+			height :100%;
+			border-radius : 20px;
+			vertical-align : top;
+			}
+			
+				.ficheHaut{
+				display: inline-block;
+				width:100%;
+				background-color :white;
+				/*background-color:navy;*/
+				height :30%;
+				border-radius : 20px;
+				vertical-align : top;
+				}
+				
+				.ficheCentre{
+				display : inline-block;
+				margin-top : 20px;
+				width:100%;
+				/*background-color:navy;*/
+				background-color :white;
+				height :30%;
+				border-radius : 20px;
+				}
+				.ficheBas{
+				display : inline-block;
+				margin-top : 20px;
+				width:100%;
+				/*background-color:navy;*/
+				background-color :white;
+				height :30%;
+				border-radius : 20px;
+				}
+			
+			

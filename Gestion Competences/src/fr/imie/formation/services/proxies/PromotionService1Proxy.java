@@ -86,4 +86,68 @@ public class PromotionService1Proxy implements IPromotionService {
 		return listePromotion;
 	}
 
+	@Override
+	public int createPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+		int createNum = 0;
+
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		createNum = promotionService1.createPromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return createNum;
+
+	}
+
+	@Override
+	public int deletePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+
+		int createNum = 0;
+
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		createNum = promotionService1.deletePromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return createNum;
+
+	}
+
+	@Override
+	public int updatePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+
+		int createNum = 0;
+
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		createNum = promotionService1.updatePromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return createNum;
+
+		
+		
+	}
+
 }

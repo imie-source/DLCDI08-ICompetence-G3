@@ -70,10 +70,11 @@ public class Projet extends HttpServlet {
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+	
+		
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-		
 				}
 				
 			}

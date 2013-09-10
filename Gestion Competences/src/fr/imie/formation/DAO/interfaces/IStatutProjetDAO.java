@@ -11,5 +11,8 @@ public interface IStatutProjetDAO extends ITransactional{
 
 	public List<StatutProjetDTO> readAllStatutProjet()
 		throws TransactionalConnectionException, DAOException;
+	
+	public int updateStatutProjet(StatutProjetDTO statut)
+			throws TransactionalConnectionException, DAOException;
 
 }

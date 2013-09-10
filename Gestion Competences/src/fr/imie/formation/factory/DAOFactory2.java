@@ -21,7 +21,6 @@ import fr.imie.formation.DAO.proxies.UtilisateurProxy;
 import fr.imie.formation.factory.interfaces.IDAOFactory;
 import fr.imie.formation.services.CompetenceNiveauService;
 import fr.imie.formation.services.ProjetService;
-import fr.imie.formation.services.PromotionService2;
 import fr.imie.formation.services.UtilisateurService;
 import fr.imie.formation.services.interfaces.ICompetenceNiveauService;
 import fr.imie.formation.services.interfaces.IProfilService;
@@ -30,7 +29,6 @@ import fr.imie.formation.services.interfaces.IPromotionService;
 import fr.imie.formation.services.interfaces.IUtilisateurService;
 import fr.imie.formation.services.proxies.CompetenceNiveauServiceProxy;
 import fr.imie.formation.services.proxies.ProjetServiceProxy;
-import fr.imie.formation.services.proxies.PromotionService2Proxy;
 import fr.imie.formation.services.proxies.UtilisateurServiceProxy;
 import fr.imie.formation.transactionalFramework.ITransactional;
 
@@ -65,11 +63,11 @@ public class DAOFactory2 implements IDAOFactory {
 				caller);
 	}
 
-	@Override
-	public IPromotionService createPromotionService(ITransactional caller) {
+	//@Override
+	//public IPromotionService createPromotionService(ITransactional caller) {
 		// TODO Auto-generated method stub
-		return new PromotionService2Proxy(new PromotionService2(), caller);
-	}
+		//return new PromotionService2Proxy(new PromotionService2(), caller);
+	//}
 
 	@Override
 	public IUtilisateurDAO createIUtilisateurDAO(ITransactional caller) {
@@ -115,6 +113,12 @@ public class DAOFactory2 implements IDAOFactory {
 
 	@Override
 	public IProfilService createProfilService(ITransactional caller) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IPromotionService createPromotionService(ITransactional caller) {
 		// TODO Auto-generated method stub
 		return null;
 	}

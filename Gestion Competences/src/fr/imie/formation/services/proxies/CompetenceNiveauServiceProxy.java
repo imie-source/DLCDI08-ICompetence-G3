@@ -151,4 +151,66 @@ public class CompetenceNiveauServiceProxy implements ICompetenceNiveauService {
 		return competence;
 	}
 
+	@Override
+	public int addCompUtil(UtilisateurDTO utilisateur, CompetenceDTO comp,
+			NiveauDTO niveau) throws TransactionalConnectionException,
+			ServiceException {
+		int addNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		addNum = competenceNiveauService.addCompUtil(utilisateur, comp, niveau);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		
+		return addNum;
+	}
+
+	@Override
+	public int deleteCompUtil(UtilisateurDTO utilisateur, CompetenceDTO comp,
+			NiveauDTO niveau) throws TransactionalConnectionException,
+			ServiceException {
+		int deleteNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		deleteNum = competenceNiveauService.deleteCompUtil(utilisateur, comp, niveau);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		
+		return deleteNum;
+	}
+
+	@Override
+	public int updateCompUtil(UtilisateurDTO utilisateur, CompetenceDTO comp,
+			NiveauDTO niveau) throws TransactionalConnectionException,
+			ServiceException {
+		int updateNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		updateNum = competenceNiveauService.updateCompUtil(utilisateur, comp, niveau);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return updateNum;
+	}
+
 }

@@ -1,6 +1,7 @@
 package fr.imie.formation.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,6 +25,14 @@ public class StatutProjetDAO extends ATransactional implements IStatutProjetDAO 
 		List<StatutProjetDTO> listStatutProjet = null;
 		listStatutProjet = readAllStatutProjet(getConnection());
 		return listStatutProjet;
+	}
+	
+	public int updateStatutProjet(StatutProjetDTO statut)
+			throws TransactionalConnectionException, DAOException {
+		int updateNum = 0;
+		updateNum = updateStatutProjet(statut, getConnection());
+		return updateNum;
+
 	}
 	
 	private List<StatutProjetDTO> readAllStatutProjet(Connection cn)
@@ -64,4 +73,29 @@ public class StatutProjetDAO extends ATransactional implements IStatutProjetDAO 
 		}
 		return listStatutProjet;
 	}
+	private int updateStatutProjet(StatutProjetDTO statut,Connection cn){
+		int updateNum=0;
+		PreparedStatement pstm=null;
+		try {
+		String query="UPDATE statut SET  prenom=? where num=?;";
+			pstm=cn.prepareStatement(query);
+			pstm.setString(1, statut.getValeurStatut());
+			 updateNum=pstm.executeUpdate();
+			 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 finally {
+		try {
+			if (pstm != null) {
+				pstm.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		return updateNum;
+}
 }

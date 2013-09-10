@@ -36,4 +36,50 @@ public class PromotionService1 extends ATransactional implements
 
 		return listPromotion;
 	}
+	public int createPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+
+		int createNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			createNum = iDaoFactory.createIPromotionDAO(this).createPromotion(
+					promo);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return createNum;
+}
+	
+	public int deletePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+
+		int deleteNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			deleteNum = iDaoFactory.createIPromotionDAO(this).deletePromotion(
+					promo);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return deleteNum;
+}
+	public int updatePromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+
+		int updateNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			updateNum = iDaoFactory.createIPromotionDAO(this).updatePromotion(
+					promo);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return updateNum;
+}	
 }
