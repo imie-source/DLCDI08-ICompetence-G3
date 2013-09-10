@@ -7,6 +7,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+<link rel=stylesheet type=text/css href=css/style.css />
 <title>Insert title here</title>
 <script>
 jQuery(document)
@@ -60,6 +62,7 @@ jQuery(document)
 </script>
 </head>
 <body>
+<jsp:include page="HeaderTest.jsp" />
 <div id="creation_utilisateur">
 	<c:if test="${! empty utilisateur.num}">
 			<div id="fiche_utilisateur">

@@ -1,9 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
-<div id="nom_util">
-	Nom : <input type="text" name="nom" value="${utilisateur.nom}"></input>
+<div class="contenu">
+<div class="titre">
+<h1>projet</h1>
+</div>
+<div class="fiche">
+			<div class="ficheGauche">ID Utilisateur 
+						<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
+						<div id="nom_util">
+							Nom : <input type="text" name="nom" value="${utilisateur.nom}"></input>
 						</div>
 						<div id="prenom_util">
 							Prénom : <input type="text" name="prenom" value="${utilisateur.prenom}"></input>
@@ -36,4 +42,21 @@
 						<div id="password_util">
 							Password : <input type="text" name="password" value="${utilisateur.password}"></input>
 						</div>
+			</div>
+			
+			<div class = "ficheDroite">
+					<div class="ficheHaut">
+					Modif Compétences à faire
+					</div>
 					
+					<div class="ficheCentre">	
+					Projets
+					</div>
+					
+					<div class="ficheBas">
+					Invitations:
+					</div>
+					
+			</div>
+</div>
+</div>					

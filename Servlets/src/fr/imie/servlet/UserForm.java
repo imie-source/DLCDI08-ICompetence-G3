@@ -124,10 +124,9 @@ public class UserForm extends HttpServlet {
 		 * Auto-generated catch block e.printStackTrace(); } }
 		 */
 
-<<<<<<< HEAD
-=======
+
 			//request.setAttribute("action", "add");
-			request.getRequestDispatcher("./UserCreate.jsp").forward(request, response);
+			//request.getRequestDispatcher("./UserCreate.jsp").forward(request, response);
 		}
 			
 		/*//supprimer un utilisateur
@@ -152,8 +151,7 @@ public class UserForm extends HttpServlet {
 				}*/
 
 		
->>>>>>> dec4091be33e55b28f1fa6bbb6e7e6386a832498
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
