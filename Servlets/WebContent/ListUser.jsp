@@ -8,14 +8,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel=stylesheet type=text/css href=css/style.css />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel=stylesheet type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <title>Liste des Utilisateurs</title>
 </head>
 <body>
-<!--
+<jsp:include page="HeaderTest.jsp" />
+	<!--
  Bouton de confirmation
 
 	<script>
@@ -57,63 +60,75 @@
     <span id="dialog-nomUtilisateur"><strong></strong></span></p>
 </div>
 -->
-	<div class="tableauContainer">
-		<div class="tableau">
+	<div class="contenu">
+		<div class="titre">
+			<h1>liste des utilisateurs</h1>
+		</div>
+		<p></p>
+		<div class="liste">
+			<div class="global">
+				<div class="tableauContainer">
+					<div class="tableau">
 
-			<div class="ligneTableauLine ligneTableauHeader">
-				<div id=Nom
-					class="celluleTableauInTable celluleTableau celluleTableau200">Nom</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Prénom</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Promotion</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Année</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div>
-			</div>
-			<c:forEach var="utilisateurDTO" items="${listeUtilisateur}"
-				varStatus="numLigne">
-				<c:set var="isAlternativeLigne" value="${numLigne.index%2>0}" />
-					<div class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
-					<div class="celluleTableauInTable celluleTableau celluleTableau200">
-						<a href="./UserForm?numligne=${numLigne.index}">
-							<c:out value="${utilisateurDTO.nom}" />
-						</a>
-					</div>
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-						<c:out value="${utilisateurDTO.prenom}" />
-					</div>
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-						<c:out value="${utilisateurDTO.promotion.intitule}"/>
-					</div>
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-						<c:out value="${utilisateurDTO.promotion.annee}"/>
-					</div>
+						<div class="ligneTableauLine ligneTableauHeader">
+							<div id=Nom
+								class="celluleTableauInTable celluleTableau celluleTableau200">Nom</div>
+							<div
+								class="celluleTableauInTable celluleTableau celluleTableau100">Prénom</div>
+							<div
+								class="celluleTableauInTable celluleTableau celluleTableau100">Promotion</div>
+							<div
+								class="celluleTableauInTable celluleTableau celluleTableau100">Année</div>
+						</div>
+						<c:forEach var="utilisateurDTO" items="${listeUtilisateur}"
+							varStatus="numLigne">
+							<c:set var="isAlternativeLigne" value="${numLigne.index%2>0}" />
+							<div
+								class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
+								<div
+									class="celluleTableauInTable celluleTableau celluleTableau200">
+									<a href="./UserForm?numligne=${numLigne.index}"> <c:out
+											value="${utilisateurDTO.nom}" />
+									</a>
+								</div>
+								<div
+									class="celluleTableauInTable celluleTableau celluleTableau100">
+									<c:out value="${utilisateurDTO.prenom}" />
+								</div>
+								<div
+									class="celluleTableauInTable celluleTableau celluleTableau100">
+									<c:out value="${utilisateurDTO.promotion.intitule}" />
+								</div>
+								<div
+									class="celluleTableauInTable celluleTableau celluleTableau100">
+									<c:out value="${utilisateurDTO.promotion.annee}" />
+								</div>
 
+
+								<%--
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">
 
-						<form action="./UserForm">
-							<input type="hidden" name="ligne" value="${numLigne.index}"></input>
-							<input type="submit" name="read" value="afficher"></input>
-						</form>
-
-						<form action="./UserForm">
-							<input type="hidden" name="numUtilisateur" value=<c:out value="${utilisateurDTO.num}"/>> </input> 
-								<input type="submit" name="update" value="modifier"></input>
-						</form>
+						
 						
 						<form id="sup" action="./UserForm">
 							<input type="hidden" name="ligne" value="${numLigne.index}"></input>
 							<input type="hidden" id="nomUtilisateur" value="${utilisateurDTO.nom}"></input>
 							<input type="hidden" id="prenomUtilisateur" value="${utilisateurDTO.prenom}"></input>
 							<input type="submit" name="delete" value="supprimer"></input>
-						</form>
+						</form> 
 						
 
+					</div>--%>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
-			</c:forEach>
+				<form action="./UserForm">
+					<input type="submit" name="create" id="create" value="creer"></input>
+				</form>
+			</div>
 		</div>
 	</div>
-	<form action="./UserForm">
-		<input type="submit" name="create" id="create" value="creer"></input>
-	</form>
+
 </body>
 </html>

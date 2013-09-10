@@ -14,6 +14,7 @@ import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
 /**
@@ -69,11 +70,12 @@ public class Projet extends HttpServlet {
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (DAOException e) {
+	
+		
+				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-		
-				}
+				} 
 				
 			}
 		

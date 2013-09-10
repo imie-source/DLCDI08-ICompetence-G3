@@ -7,11 +7,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel=stylesheet type=text/css href=css/style.css />
+<link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Projets</title>
 </head>
 <body>
-
+<jsp:include page="HeaderTest.jsp" />
 <div class="tableauContainer">
 		<div class="tableau">
 
