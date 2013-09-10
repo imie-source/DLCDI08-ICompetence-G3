@@ -11,20 +11,6 @@
 </head>
 <body>
 <jsp:include page="HeaderTest.jsp" />
-<%-- 
-<h1>GESTION DES COMPETENCES</h1>
-	<a href="./ListUserView"> 
-	<h2>MEMBRES</h2>
-	</a>
-	
-	<a href="./ListProjetView"> 
-	<h2>PROJETS</h2>
-	</a>
-
-	<a href="./ListCompView"> 
-	<h2>COMPETENCES</h2>
-	</a>
---%>
 	
 </body>
 </html>
