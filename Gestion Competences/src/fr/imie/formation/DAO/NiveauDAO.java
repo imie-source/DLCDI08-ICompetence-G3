@@ -159,7 +159,9 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 
 		return listNiveau;
 	}
-	private int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn){		
+	private int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn)
+			throws TransactionalConnectionException, DAOException {
+		
 		int addNum=0;
 		PreparedStatement pstm=null;
 
@@ -188,7 +190,9 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 		}
 		return addNum;
 	}
-	private int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn){
+	private int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn)
+		throws TransactionalConnectionException, DAOException {
+
 		PreparedStatement pstm= null;
 		int updateNum = 0;
 		
@@ -216,7 +220,8 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 	}
 		return updateNum;
 }
-	private int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn){
+	private int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn)
+			throws TransactionalConnectionException, DAOException {
 		int deleteNum=0;
 		PreparedStatement pstm=null;
 		try {

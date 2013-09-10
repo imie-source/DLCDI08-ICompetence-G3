@@ -71,19 +71,19 @@ public class PromotionService1Proxy implements IPromotionService {
 	public List<PromotionDTO> readAllPromotion()
 			throws TransactionalConnectionException, ServiceException {
 
-		List<PromotionDTO> listePromotion = new ArrayList<PromotionDTO>();
+		List<PromotionDTO> listePromo = new ArrayList<PromotionDTO>();
 		if (caller == null) {
 			beginTransactionalConnexion();
 		} else {
 			putInTransaction(caller);
 		}
-		listePromotion = promotionService1.readAllPromotion();
+		listePromo = promotionService1.readAllPromotion();
 		if (caller == null) {
 			endTransactionalConnexion();
 		} else {
 			putOffTransaction();
 		}
-		return listePromotion;
+		return listePromo;
 	}
 
 	@Override
@@ -147,6 +147,27 @@ public class PromotionService1Proxy implements IPromotionService {
 		return createNum;
 
 		
+		
+	}
+
+	@Override
+	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+		
+		List<PromotionDTO> listePromotion = new ArrayList<PromotionDTO>();
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		listePromotion = promotionService1.readPromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return listePromotion;
+	
 		
 	}
 

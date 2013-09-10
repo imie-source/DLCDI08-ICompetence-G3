@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
@@ -213,4 +214,27 @@ public class CompetenceNiveauServiceProxy implements ICompetenceNiveauService {
 		return updateNum;
 	}
 
-}
+	@Override
+	public List<CompetenceDTO> readListeUtilComp(CompetenceDTO competenceDto)
+			throws TransactionalConnectionException, DAOException,
+			ServiceException {
+		
+		List<CompetenceDTO>listeUtilComp=new ArrayList<CompetenceDTO>();
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		listeUtilComp= competenceNiveauService
+				.readListeUtilComp(competenceDto);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return listeUtilComp;
+	}
+
+	}
+
+

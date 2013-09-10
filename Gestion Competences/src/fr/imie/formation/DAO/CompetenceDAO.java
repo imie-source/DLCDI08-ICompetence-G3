@@ -11,6 +11,7 @@ import java.util.List;
 import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DAO.interfaces.ICompetenceDAO;
 import fr.imie.formation.DTO.CompetenceDTO;
+import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -38,6 +39,16 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 		return listCompetence;
 
 	}
+	public List<CompetenceDTO> readListeUtilComp(CompetenceDTO competenceDto)
+			throws TransactionalConnectionException, DAOException{
+		List<CompetenceDTO>listeUtilComp=null;
+
+		listeUtilComp=readListeUtilComp(competenceDto,getConnection());
+		return listeUtilComp;
+
+	}
+
+
 	public int createCompetence(CompetenceDTO competence)
 			throws TransactionalConnectionException, DAOException{
 		int createNum=0;
@@ -194,6 +205,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 		PreparedStatement pstmt=null;
 
 		try {
+
 			String query="insert into competence(nom,competence_domaine)values ('?','?')";
 			pstmt= cn.prepareStatement(query);
 			pstmt.setString(1, competence.getNom());
@@ -219,14 +231,17 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 	}
 	private int updateCompetence(CompetenceDTO competence,Connection cn)
 			throws TransactionalConnectionException, DAOException{
+
 		int updateNum=0;
 		PreparedStatement pstmt=null;
+
 		try {
 			String query="update competence set nom='?',competence_domaine='?' where num='?'";
 			pstmt= cn.prepareStatement(query);
 			pstmt.setString(1, competence.getNom());
 			pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
 			updateNum=pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -243,6 +258,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 		}
 		return updateNum;
 	}
+
 
 	private int deleteCompetence(CompetenceDTO competence,Connection cn)
 			throws TransactionalConnectionException, DAOException{
@@ -273,5 +289,56 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		}
 		return deleteNum;
+	}
+
+	//liste d'utilisateur par competence
+
+	private List<CompetenceDTO> readListeUtilComp(CompetenceDTO competenceDto,Connection cn)
+			throws TransactionalConnectionException, DAOException{
+
+		List<CompetenceDTO>listeUtilComp=new ArrayList<CompetenceDTO>();
+		PreparedStatement psmt=null;
+		ResultSet rst=null;
+
+		UtilisateurDTO utilisateur= new UtilisateurDTO();
+		CompetenceDTO competence = new CompetenceDTO();
+
+		try {
+
+			String query="SELECT utilisateur.num,utilisateur.nom, utilisateur.prenom, competence.nom as competence FROM competence inner JOIN competence_util ON competence.num=competence_util.num_competence INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util where competence.num='?'";
+			psmt=cn.prepareStatement(query);
+			rst=psmt.executeQuery();
+
+			while (rst.next()){
+
+				utilisateur.setNum(rst.getInt(1));
+				utilisateur.setNom(rst.getString(2));
+				utilisateur.setPrenom(rst.getString(3));
+				competence.setNom(rst.getString(4));
+
+				listeUtilComp.add(competence);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rst != null) {
+					rst.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return listeUtilComp;
+
 	}
 }

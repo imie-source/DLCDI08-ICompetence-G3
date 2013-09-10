@@ -107,4 +107,11 @@ public class PromotionService2Proxy implements IPromotionService {
 		return 0;
 	}
 
+	@Override
+	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
