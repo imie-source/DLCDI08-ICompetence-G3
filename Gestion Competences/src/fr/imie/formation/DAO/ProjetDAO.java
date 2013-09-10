@@ -15,7 +15,6 @@ import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
-import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -36,7 +35,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			throws TransactionalConnectionException, DAOException{
 
 		List<ProjetDTO> listeProjetUtilisateur= null;
-		
+
 		listeProjetUtilisateur= readProjetByUtilisateur(utilisateur,getConnection());
 		return listeProjetUtilisateur;
 
@@ -93,6 +92,28 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		return deleteNum;
 	}
 
+	public int addProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException{		
+		int addNum=0;
+		addNum= addProjetUtil(utilisateur, projet,  getConnection());
+		return addNum;
+	}
+
+	public int updateProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException{		
+		int updateNum=0;
+		updateNum= updateProjetUtil(utilisateur, projet,  getConnection());
+		return updateNum;
+	}
+
+	public int deleteProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException{		
+		int deleteNum=0;
+		deleteNum= deleteProjetUtil(utilisateur, projet, getConnection());
+		return deleteNum;
+	}
+
+	
 
 	// Liste des projets et de leur statut
 	private List<ProjetDTO> readAllProjets(Connection cn)
@@ -228,21 +249,20 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 				chefDeProjet.setNom(rst.getString(5));
 				chefDeProjet.setPrenom(rst.getString(6));
 				proj.setChefDeProjet(chefDeProjet);
-				proj.setListUtilProjet(DAOFactory1.getInstance().
-						createUtilisateurService(this).
-						readUtilisateurProjet(projet));
+				try {
+					proj.setListUtilProjet(DAOFactory1.getInstance().
+							createUtilisateurService(this).
+							readUtilisateurProjet(projet));
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+		}  finally {
 			try {
 				if (rst != null) {
 					rst.close();
@@ -256,7 +276,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			}
 		}
 
-			return proj;
+		return proj;
 	}
 
 
@@ -398,9 +418,102 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 	}
 
 
+	//affectation des volontaires à un projet CUD de la table technique
+
+	private int addProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet,Connection cn)throws TransactionalConnectionException, DAOException {		
+		int addNum=0;
+		PreparedStatement pstm=null;
+
+		try {
+			String query="INSERT INTO projet_util (num_util, num_projet)VALUES(?,?)";
+			pstm= cn.prepareStatement(query);
+			pstm.setInt(1,utilisateur.getNum());
+			pstm.setInt(2, projet.getNum());
+
+
+			addNum= pstm.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return addNum;
+	}
+
+
+
+	private int updateProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet,Connection cn)throws TransactionalConnectionException, DAOException {
+		PreparedStatement pstm= null;
+		int updateNum = 0;
+
+		try {
+			String query ="update projet_util set num_util='?', num_projet='?' where num='?'";
+			pstm=cn.prepareStatement(query);
+			pstm.setInt(1, utilisateur.getNum());
+			pstm.setInt(2, projet.getNum());
+
+
+			updateNum=pstm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return updateNum;
+	}
+	private int deleteProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet,Connection cn) throws TransactionalConnectionException, DAOException {
+		int deleteNum=0;
+		PreparedStatement pstm=null;
+
+		try {
+
+			String query="delete from competence_util where num_util=?, and num_competence=?, and num_niveau=?";
+			pstm=cn.prepareStatement(query);
+			pstm.setInt(1, utilisateur.getNum());
+			pstm.setInt(2, projet.getNum());
+
+
+			deleteNum=pstm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return deleteNum;
+	}
+
 	
 
 	
-	
+}	
 
-}
+
+

@@ -212,6 +212,74 @@ public class ProjetServiceProxy implements IProjetService{
 		return listStatutProjet;
 	}
 
+	@Override
+	public int addProjetUtil(UtilisateurDTO utilisateur, ProjetDTO projet)
+			throws TransactionalConnectionException, ServiceException {
+		
+       int addNum=0;
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		addNum = projetService.addProjetUtil(utilisateur, projet);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		
+		return addNum;
+	}
+	
+
+	@Override
+	public int updateProjetUtil(UtilisateurDTO utilisateur, ProjetDTO projet)
+			throws TransactionalConnectionException, ServiceException {
+		 
+		int updateNum=0;
+			
+			if (caller == null) {
+				beginTransactionalConnexion();
+			} else {
+				putInTransaction(caller);
+			}
+			updateNum = projetService.updateProjetUtil(utilisateur, projet);
+			if (caller == null) {
+				endTransactionalConnexion();
+			} else {
+				putOffTransaction();
+			}
+			
+			return updateNum;
+		}
+		
+	
+
+	@Override
+	public int deleteProjetUtil(UtilisateurDTO utilisateur, ProjetDTO projet)
+			throws TransactionalConnectionException, ServiceException {
+		
+		int deleteNum=0;
+			
+			if (caller == null) {
+				beginTransactionalConnexion();
+			} else {
+				putInTransaction(caller);
+			}
+			deleteNum = projetService.deleteProjetUtil(utilisateur, projet);
+			if (caller == null) {
+				endTransactionalConnexion();
+			} else {
+				putOffTransaction();
+			}
+			
+			return deleteNum;
+		}
+		
+	}
 
 
-}
+
+

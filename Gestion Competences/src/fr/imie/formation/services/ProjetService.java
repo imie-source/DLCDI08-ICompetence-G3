@@ -146,8 +146,50 @@ public class ProjetService extends ATransactional implements IProjetService {
 		return listStatusProj;
 	}
 
-	
+	public int addProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, ServiceException {
+         int addNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			addNum = iDaoFactory.createIProjetDAO(this).addProjetUtil(utilisateur,projet);
+					
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return addNum;
+	}
+
+	public int updateProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, ServiceException {
+         int updateNum = 0;
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			updateNum = iDaoFactory.createIProjetDAO(this).updateProjetUtil(utilisateur,projet);
+					
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return updateNum;
+	}
+		
+		public int deleteProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+				throws TransactionalConnectionException, ServiceException {
+	         int deleteNum = 0;
+			
+			IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+			try {
+				deleteNum = iDaoFactory.createIProjetDAO(this).deleteProjetUtil(utilisateur,projet);
+						
+			} catch (DAOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return deleteNum;
+		}
+	}
 
 
-
-}

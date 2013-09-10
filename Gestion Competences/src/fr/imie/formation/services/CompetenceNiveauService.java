@@ -92,6 +92,25 @@ public class CompetenceNiveauService extends ATransactional implements
 
 		return listNiveau;
 	}
+	
+	
+	public List<CompetenceDTO> readListeUtilComp(CompetenceDTO competenceDto)
+			throws TransactionalConnectionException, ServiceException {
+
+		List<CompetenceDTO>listeUtilComp=new ArrayList<CompetenceDTO>();
+
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			listeUtilComp = iDaoFactory.createICompetenceDAO(this)
+					.readListeUtilComp(competenceDto);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return listeUtilComp;
+
+	}
 	public int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)		
 			throws TransactionalConnectionException, ServiceException {
 

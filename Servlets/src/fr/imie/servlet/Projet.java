@@ -38,21 +38,19 @@ public class Projet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
-		// Afficher un projet
-		if ((request.getParameter("read") != null && request.getParameter(
-				"read").equals("afficher"))
-				|| (request.getParameter("delete") != null && request
-						.getParameter("delete").equals("supprimer"))) {
-			if (request.getParameter("ligneProjet") != null) {
-
-				int ligne = Integer.valueOf(request.getParameter("ligneProjet"));
-				Object listObj = session.getAttribute("listeProjet");
-				@SuppressWarnings("unchecked")
-				List<ProjetDTO> listeProjet = (List<ProjetDTO>) listObj;
-				ProjetDTO projet = listeProjet.get(ligne);
-
-				session.removeAttribute("listeProjet");
-				
+		// Afficher un projet marche bien
+		if (request.getParameter("numligne") != null
+				&& request.getParameter("update") == null
+				&& request.getParameter("delete") == null) {
+		
+					int ligne = Integer.valueOf(request.getParameter("numligne"));
+					Object listObj = session.getAttribute("listeProjet");
+					@SuppressWarnings("unchecked")
+					List<ProjetDTO> listeProjet = (List<ProjetDTO>) listObj;
+					ProjetDTO projet = listeProjet.get(ligne);
+	
+					session.removeAttribute("listeProjet");
+					
 				try {
 					ProjetDTO projetDTO = DAOFactory1.getInstance().createProjetService(null).readProjet(projet);
 					request.setAttribute("projetDTO", projetDTO);
@@ -60,28 +58,50 @@ public class Projet extends HttpServlet {
 					request.setAttribute("listeUtil", listeUtil);
 
 					// Dans le cas de la suppression
-					if ((request.getParameter("delete") != null) 
+					/*if ((request.getParameter("delete") != null) 
 							&& (request.getParameter("delete").equals("supprimer"))) {
 						request.setAttribute("action", "delete");
 					} else {
 						request.setAttribute("action", "read");
 					}
+					*/
 
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 	
-		
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} 
 				
-			}
 		
-		}
 		request.getRequestDispatcher("/ProjetConsult.jsp")
 		.forward(request, response);
+		}
+		
+		//La suppression, la modification et la création ne sont pas faites
+		//création projet
+		else if (request.getParameter("numligne") == null
+				&& request.getParameter("create") != null
+				&& request.getParameter("create").equals("creer")) {
+
+			request.getRequestDispatcher("./ProjetCreate.jsp").forward(request,
+					response);
+		}
+		//modification projet
+		else if (request.getParameter("update") != null
+				&& request.getParameter("update").equals("modifier")) {
+			request.setAttribute("projet",getProjet(request.getParameter("numligne")));
+			request.getRequestDispatcher("./ProjetUpdate.jsp").forward(request,response);
+		} 
+		// suppression projet
+		else if (request.getParameter("delete") != null
+				& request.getParameter("delete").equals("supprimer")) {
+			request.setAttribute("projet",getProjet(request.getParameter("numligne")));
+			request.getRequestDispatcher("./ProjetDelete.jsp").forward(request,
+					response);
+		}
 	}
 
 	/**
@@ -89,6 +109,32 @@ public class Projet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	}
+	
+	
+	
+	
+	private ProjetDTO getProjet(String requestNumProjet) {
+
+		ProjetDTO projetDTO = new ProjetDTO();
+		int numProjet = Integer.valueOf(requestNumProjet);
+		
+		ProjetDTO projetTemp = new ProjetDTO();
+		projetTemp.setNum(numProjet);
+
+	
+		try {
+			projetDTO = DAOFactory1.getInstance().createProjetService(null).readProjet(projetTemp);
+					
+		} catch (TransactionalConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return projetDTO;
 	}
 
 }

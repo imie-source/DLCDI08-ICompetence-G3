@@ -24,11 +24,27 @@ public class PromotionService1 extends ATransactional implements
 	public List<PromotionDTO> readAllPromotion()
 			throws TransactionalConnectionException, ServiceException {
 
+		List<PromotionDTO> listPromo = new ArrayList<PromotionDTO>();
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			listPromo = iDaoFactory.createIPromotionDAO(this)
+					.readAllPromotion();
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return listPromo;
+	}
+	
+	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, ServiceException {
+
 		List<PromotionDTO> listPromotion = new ArrayList<PromotionDTO>();
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
 		try {
 			listPromotion = iDaoFactory.createIPromotionDAO(this)
-					.readAllPromotion();
+					.readPromotion(promo);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,6 +52,7 @@ public class PromotionService1 extends ATransactional implements
 
 		return listPromotion;
 	}
+	
 	public int createPromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, ServiceException {
 
