@@ -75,7 +75,7 @@ public class Projet extends HttpServlet {
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} 
 				
 			}
 		

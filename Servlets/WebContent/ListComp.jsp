@@ -11,7 +11,6 @@
 <title>Projets</title>
 </head>
 <body>
-
 <div class="tableauContainer">
 		<div class="tableau">
 

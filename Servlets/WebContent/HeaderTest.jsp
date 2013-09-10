@@ -10,7 +10,7 @@
 			<div class="menu">
 				<a href ="./ListProjetView">projets</a>
 				<a href = "./ListUserView"> membres</a>
-				<a href - "xx"> competences</a>
+				<a href = "./ListCompView"> competences</a>
 			</div>
 		</div>
 		<div class="connexion">

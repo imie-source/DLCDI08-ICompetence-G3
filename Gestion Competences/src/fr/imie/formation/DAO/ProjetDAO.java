@@ -15,7 +15,6 @@ import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
-import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -228,21 +227,20 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 				chefDeProjet.setNom(rst.getString(5));
 				chefDeProjet.setPrenom(rst.getString(6));
 				proj.setChefDeProjet(chefDeProjet);
-				proj.setListUtilProjet(DAOFactory1.getInstance().
-						createUtilisateurService(this).
-						readUtilisateurProjet(projet));
+				try {
+					proj.setListUtilProjet(DAOFactory1.getInstance().
+							createUtilisateurService(this).
+							readUtilisateurProjet(projet));
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+		}  finally {
 			try {
 				if (rst != null) {
 					rst.close();
