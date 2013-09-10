@@ -16,7 +16,7 @@ public class UtilisateurDTO {
 	private String login;
 	private String password;
 	private String mail;
-	private  int tel;
+	private Integer tel;
 
 	public String getMail() {
 		return mail;
@@ -26,13 +26,7 @@ public class UtilisateurDTO {
 		this.mail = mail;
 	}
 
-	public int getTel() {
-		return tel;
-	}
-
-	public void setTel(int tel) {
-		this.tel = tel;
-	}
+	
 
 	public UtilisateurDTO() {
 
@@ -123,6 +117,14 @@ public class UtilisateurDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Integer getTel() {
+		return tel;
+	}
+
+	public void setTel(Integer tel) {
+		this.tel = tel;
 	}
 
 }
