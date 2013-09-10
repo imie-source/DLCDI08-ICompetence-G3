@@ -13,54 +13,27 @@
 </head>
 <body>
 <jsp:include page="HeaderTest.jsp" />
-
-<div class="contenu">
-
-		<div class="titre">
-		<h1>Projet</h1>
-		</div>
-		
-		<div class="fiche">
-			<div class="ficheGauche">
-					<h1>ID PROJET</h1>
-					Intitulé
-					<div>
-					<c:out value="${projetDTO.intitule}" />
-					</div>
-					Contenu
-					<div>
-					<c:out value="${projetDTO.description}" />
-					</div>
-					Chef de projet
-					<div>
-					<c:out value="${projetDTO.chefDeProjet.nom} ${projetDTO.chefDeProjet.prenom}" />
-					</div>
-					Avancement
-					<div>
-					<c:out value="${projetDTO.statutProjet.valeurStatut}" />
-					</div>
+			<div id="lecture_projet">
+				<c:if test="${! empty projetDTO.num}">
+					<jsp:include page="ProjetReadOnly.jsp"/>					
+					<form action="./Projet">
+						<input type="hidden" name="numProjet" value="${projetDTO.num}"></input> 
+						<input type="submit" name="update" value="modifier"></input>
+					</form>
+					<form action="./Projet">
+						<input type="hidden" name="numProjet" value="${projetDTO.num}"></input>
+						<input type="submit" name="delete" value="supprimer"/>
+					</form>
+					<form action="./ListProjetView">
+						<input type="submit" value="retour"></input>
+					</form>
+				</c:if>
+				<c:if test="${empty projetDTO.num}">
+					<c:redirect url="./ListProjetView" />
+				</c:if>
 			</div>
 
-		<div class = "ficheDroite">
-					<div class="ficheHaut">
-					
-						<h1>PARTICIPANTS</h1>
-						<c:forEach var="util" items="${listeUtil}">
-						<div>
-						<c:out value="${util.nom} ${util.prenom}" />
-						</div>
-						</c:forEach>
-					</div>
-					<div class="ficheCentre">
-					</div>
-					<div class="ficheBas">
-					</div>
-		</div>
-	</div>
-	
-		<div class = "boutons">
-		</div>	
-</div>
+
 		
 </body>
 </html>
