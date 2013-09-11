@@ -45,11 +45,11 @@ public class UserForm extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		//Affichage utilisateur
-		if (request.getParameter("numligne") != null
+		if (request.getParameter("numligneutil") != null
 				&& request.getParameter("update") == null
 				&& request.getParameter("delete") == null) {
 
-			int ligne = Integer.valueOf(request.getParameter("numligne"));
+			int ligne = Integer.valueOf(request.getParameter("numligneutil"));
 			Object listObj = session.getAttribute("listeUtilisateur");
 			@SuppressWarnings("unchecked")
 			List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
@@ -201,8 +201,13 @@ public class UserForm extends HttpServlet {
 			utilisateurUpdate.setAdresse(request.getParameter("adresse"));
 			
 			String telParam = request.getParameter("tel");
-			Integer userTel = Integer.valueOf(telParam);
+			Integer userTel = null;
+			if (telParam != null){
+				userTel = Integer.valueOf(telParam);
+			}
+			if (userTel !=null){
 			utilisateurUpdate.setTel(userTel);
+			}
 			
 			utilisateurUpdate.setMail(request.getParameter("mail"));
 			
@@ -265,9 +270,15 @@ public class UserForm extends HttpServlet {
 			
 			utilisateurCreate.setAdresse(request.getParameter("adresse"));
 			
+			
 			String telParam = request.getParameter("tel");
-			Integer userTel = Integer.valueOf(telParam);
+			Integer userTel = null;
+			if (telParam != null){
+				userTel = Integer.valueOf(telParam);
+			}
+			if (userTel !=null){
 			utilisateurCreate.setTel(userTel);
+			}
 			
 			utilisateurCreate.setMail(request.getParameter("mail"));
 			
@@ -333,7 +344,6 @@ public class UserForm extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return utilisateurDTO;
 	}
 }

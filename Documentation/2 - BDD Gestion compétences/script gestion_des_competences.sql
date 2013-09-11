@@ -14,6 +14,7 @@ Tel NUMERIC NULL,
 Date_naissance Date NULL,
 Num_promotion INTEGER,
 Login VARCHAR NULL,
+Password VARCHAR,
 PRIMARY KEY (Num));
 
 CREATE TABLE PROMOTION(

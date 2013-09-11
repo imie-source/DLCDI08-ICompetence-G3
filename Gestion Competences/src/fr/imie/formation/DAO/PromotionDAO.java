@@ -122,9 +122,10 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 
 			pstmt = cn.prepareStatement(query);
 			pstmt.setInt(1, promo.getNum());
-			rst = pstmt.executeQuery(query);
+			rst = pstmt.executeQuery();
 
 			while (rst.next()) {
+				promotion.setNum(rst.getInt(1));
 				promotion.setIntitule(rst.getString(2));
 				promotion.setAnnee(rst.getInt(3));
 			}
@@ -146,7 +147,6 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 				e.printStackTrace();
 			}
 		}
-
 		return promotion;
 	}
 

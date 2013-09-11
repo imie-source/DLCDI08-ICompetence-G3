@@ -168,7 +168,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 		PromotionDTO promotion = new PromotionDTO();
 
 		try {
-			String query = "select utilisateur.num, utilisateur.nom, prenom, adresse, date_naissance, promotion.num, promotion.intitule, promotion.annee,login from utilisateur left join promotion on utilisateur.num_promotion=promotion.num where utilisateur.num=?";
+			String query = "select utilisateur.num, utilisateur.nom, prenom, adresse, date_naissance, promotion.num, promotion.intitule, promotion.annee, tel, mail, login, password from utilisateur left join promotion on utilisateur.num_promotion=promotion.num where utilisateur.num=?";
 
 			pstmt = cn.prepareStatement(query);
 			pstmt.setInt(1, utilisateur.getNum());
@@ -179,6 +179,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 				util.setNom(rst.getString(2));
 				util.setPrenom(rst.getString(3));
 				util.setAdresse(rst.getString(4));
+				util.setDateNaissance(rst.getDate(5));
 				util.setAge(AgeUtil.getInstance().getAge(rst.getDate(5)));
 				util.setListNiveau(DAOFactory1.getInstance()
 						.createCompetenceNiveauService(this)
@@ -187,7 +188,10 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 				promotion.setNum(rst.getInt(6));
 				promotion.setIntitule(rst.getString(7));
 				promotion.setAnnee(rst.getInt(8));
-				util.setLogin(rst.getString(9));
+				util.setTel(rst.getInt(9));
+				util.setMail(rst.getString(10));
+				util.setLogin(rst.getString(11));
+				util.setPassword(rst.getString(12));
 				util.setPromotion(promotion);
 
 			}
@@ -221,13 +225,18 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 		int createNum = 0;
 
 		try {
-			String query = "insert into utilisateur (nom, prenom, date_naissance, num_promotion)  values (?,?,?,?);";
+			String query = "insert into utilisateur (nom, prenom, date_naissance, num_promotion, adresse, mail, tel, login, password )  values (?,?,?,?,?,?,?,?,?);";
 
 			pstmt = cn.prepareStatement(query);
 			pstmt.setString(1, utilisateur.getNom());
 			pstmt.setString(2, utilisateur.getPrenom());
 			pstmt.setDate(3, new java.sql.Date(utilisateur.getDateNaissance().getTime()));
 			pstmt.setInt(4, utilisateur.getPromotion().getNum());
+			pstmt.setString(5, utilisateur.getAdresse());
+			pstmt.setString(6, utilisateur.getMail());
+			pstmt.setInt(7, utilisateur.getTel());
+			pstmt.setString(8, utilisateur.getLogin());
+			pstmt.setString(9, utilisateur.getPassword());
 			createNum = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -253,7 +262,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 		int updateNum = 0;
 
 		try {
-			String query = "UPDATE utilisateur SET nom=?, prenom=?, date_naissance=?, adresse=?, num_promotion=?, mail=?, tel=?, login=? where num=?;";
+			String query = "UPDATE utilisateur SET nom=?, prenom=?, date_naissance=?, adresse=?, num_promotion=?, mail=?, tel=?, login=?, password=? where num=?;";
 
 			pstmt = cn.prepareStatement(query);
 			pstmt.setString(1, utilisateur.getNom());
@@ -264,8 +273,8 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 			pstmt.setString(6, utilisateur.getMail());
 			pstmt.setInt(7, utilisateur.getTel());
 			pstmt.setString(8, utilisateur.getLogin());
-			//pstmt.setString(9, utilisateur.getPassword());
-			pstmt.setInt(9, utilisateur.getNum());
+			pstmt.setString(9, utilisateur.getPassword());
+			pstmt.setInt(10, utilisateur.getNum());
 			updateNum = pstmt.executeUpdate();
 
 		} catch (SQLException e) {

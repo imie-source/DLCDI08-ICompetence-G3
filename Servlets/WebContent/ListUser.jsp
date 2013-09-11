@@ -86,7 +86,7 @@
 								class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau200">
-									<a href="./UserForm?numligne=${numLigne.index}"> <c:out
+									<a href="./UserForm?numligneutil=${numLigne.index}"> <c:out
 											value="${utilisateurDTO.nom}" />
 									</a>
 								</div>

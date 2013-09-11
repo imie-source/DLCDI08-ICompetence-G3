@@ -15,7 +15,7 @@
 						Prénom : <input type="text" readonly="readonly" name="prenom" value="${utilisateur.prenom}"></input>
 					</div>
 					<div id="date_nais_util">
-						Date de naissance :<input type="text" readonly="readonly" name="dateNaissance" value="${utilisateur.dateNaissance}"></input>
+						Date de naissance :<input type="text" readonly="readonly" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
 					</div>
 					<div id="adresse_util">
 						Adresse : <input type="text" readonly="readonly" name="adresse" value="${utilisateur.adresse}"></input>
