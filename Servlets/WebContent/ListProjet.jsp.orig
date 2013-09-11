@@ -23,7 +23,6 @@
 				<div class="tableauContainer">
 					<div class="tableau">
 
-<<<<<<< HEAD
 						<div class="ligneTableauLine ligneTableauHeader">
 							<div id=Nom
 								class="celluleTableauInTable celluleTableau celluleTableau200">Intitulé</div>
@@ -41,18 +40,29 @@
 						%>
 						<c:forEach var="projetDTO" items="${listeProjet}"
 							varStatus="numLigne">
-
-							<%
+							<c:set var="isAlternativeLigne" value="${numLigne.index%2>0}" />
+							<div
+								class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
+							<%-- <%
 								Boolean isAlternativLigne = ligne % 2 > 0;
 									String ligneAlternative = isAlternativLigne ? "ligneTableauAlternativLine"
 											: "ligneTableauNormalLine";
 									ligne++;
 							%>
+<<<<<<< HEAD
 							<div class="ligneTableauLine <%=ligneAlternative%>">
-								<div
-									class="celluleTableauInTable celluleTableau celluleTableau200">
-									<c:out value="${projetDTO.intitule}" />
+								
+									<a href="./Projet?numligne=${numLigne.index}">
+						<c:out value="${projetDTO.intitule}" />
+					</a></div>
+=======
+							<div class="ligneTableauLine <%=ligneAlternative%>"> --%>
+								<div class="celluleTableauInTable celluleTableau celluleTableau200">
+									<a href="./Projet?numligne=${numLigne.index}">
+										<c:out value="${projetDTO.intitule}" />
+									</a>
 								</div>
+>>>>>>> 1f5ba14e5a2e0f3b89a8c64a2a000753b967ecf8
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<c:out value="${projetDTO.chefDeProjet.nom}" />
@@ -61,7 +71,7 @@
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<c:out value="${projetDTO.statutProjet.valeurStatut}" />
 								</div>
-								<%--Boutons AFFICHER MODIFIER SUPPRIMER --%>
+								<%--Boutons AFFICHER MODIFIER SUPPRIMER 
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<form action="./Projet">
@@ -83,55 +93,13 @@
 											type="submit" name="delete" value="supprimer"></input>
 									</form>
 								</div>
+					--%>
 
 							</div>
 
 						</c:forEach>
-=======
-			<div class="ligneTableauLine ligneTableauHeader">
-				<div id=Nom class="celluleTableauInTable celluleTableau celluleTableau200">Intitulé</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Chef de projet</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Statut</div>
-				<%-- <div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div> --%>
-			</div>
-
-			<%
-				int ligne = 0;
-			%>
-			<c:forEach var="projetDTO" items="${listeProjet}"varStatus="numLigne">
-			
-			<%
-					Boolean isAlternativLigne = ligne % 2 > 0;
-						String ligneAlternative = isAlternativLigne ? "ligneTableauAlternativLine"
-								: "ligneTableauNormalLine";
-						ligne++;
-				%>
-				<div class="ligneTableauLine <%=ligneAlternative%>">
-					<div class="celluleTableauInTable celluleTableau celluleTableau200">
-					<a href="./Projet?numligne=${numLigne.index}">
-						<c:out value="${projetDTO.intitule}" />
-					</a>
-					</div>
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-					<c:out value="${projetDTO.chefDeProjet.nom}" />
-					</div>
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-					<c:out value="${projetDTO.statutProjet.valeurStatut}" />
-					</div>
-					<%--Boutons AFFICHER MODIFIER SUPPRIMER 
-					<div class="celluleTableauInTable celluleTableau celluleTableau100">
-						<form action="./Projet">
-							<input type="hidden" name="ligneProjet" value="${numLigne.index}"></input>
-							<input type="submit" name="read" value="afficher"></input>
-						</form>
->>>>>>> 2e0e9e26abaedaa628273c7d9ee3c8ff8f008473
 
 					</div>
-<<<<<<< HEAD
-=======
-					--%>
-					
->>>>>>> 2e0e9e26abaedaa628273c7d9ee3c8ff8f008473
 				</div>
 			</div>
 		</div>

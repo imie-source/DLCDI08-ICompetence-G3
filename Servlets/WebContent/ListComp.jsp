@@ -11,6 +11,7 @@
 <title>Projets</title>
 </head>
 <body>
+<jsp:include page="HeaderTest.jsp" />
 <div class="tableauContainer">
 		<div class="tableau">
 
