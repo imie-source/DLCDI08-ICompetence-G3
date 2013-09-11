@@ -216,7 +216,15 @@ public class UserForm extends HttpServlet {
 				
 				PromotionDTO promoUpdate = new PromotionDTO();
 				promoUpdate.setNum(promoNum);
-				//PromotionDTO promo = DAOFactory1.getInstance().createPromotionService(null).
+				try {
+					PromotionDTO promo = DAOFactory1.getInstance().createPromotionService(null).readPromotion(promoUpdate);
+				} catch (TransactionalConnectionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 			//utilisateurUpdate.setPromotion(promo);

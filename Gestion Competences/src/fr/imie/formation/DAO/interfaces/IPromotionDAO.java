@@ -21,7 +21,7 @@ public interface IPromotionDAO extends ITransactional {
 	public int deletePromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, DAOException;
 	
-	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+	public PromotionDTO readPromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, DAOException;
 
 }

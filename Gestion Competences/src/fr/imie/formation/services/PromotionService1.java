@@ -37,20 +37,20 @@ public class PromotionService1 extends ATransactional implements
 		return listPromo;
 	}
 	
-	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+	public PromotionDTO readPromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, ServiceException {
 
-		List<PromotionDTO> listPromotion = new ArrayList<PromotionDTO>();
+		PromotionDTO promotion = new PromotionDTO();
 		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
 		try {
-			listPromotion = iDaoFactory.createIPromotionDAO(this)
+			promotion = iDaoFactory.createIPromotionDAO(this)
 					.readPromotion(promo);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return listPromotion;
+		return promotion;
 	}
 	
 	public int createPromotion(PromotionDTO promo)
