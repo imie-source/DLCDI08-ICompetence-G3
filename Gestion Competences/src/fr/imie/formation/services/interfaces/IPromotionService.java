@@ -23,7 +23,7 @@ public interface IPromotionService extends ITransactional {
 	public int updatePromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, ServiceException;
 	
-	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+	public PromotionDTO readPromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, ServiceException;
 	
 }

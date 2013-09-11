@@ -151,22 +151,22 @@ public class PromotionService1Proxy implements IPromotionService {
 	}
 
 	@Override
-	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+	public PromotionDTO readPromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, ServiceException {
 		
-		List<PromotionDTO> listePromotion = new ArrayList<PromotionDTO>();
+		PromotionDTO promotion = new PromotionDTO();
 		if (caller == null) {
 			beginTransactionalConnexion();
 		} else {
 			putInTransaction(caller);
 		}
-		listePromotion = promotionService1.readPromotion(promo);
+		promotion = promotionService1.readPromotion(promo);
 		if (caller == null) {
 			endTransactionalConnexion();
 		} else {
 			putOffTransaction();
 		}
-		return listePromotion;
+		return promotion;
 	
 		
 	}
