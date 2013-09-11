@@ -4,8 +4,9 @@
 
 		<div class="titre">
 		<h1>Projet</h1>
-		</div>
 		
+		</div>
+		<div class="liste">
 		<div class="fiche">
 			<div class="ficheGauche">
 			<input type="hidden" name="numProjet" value="${projetDTO.num }"></input>
@@ -47,6 +48,7 @@
 	
 		<div class = "boutons">
 		</div>	
+</div>
 </div>
 
 </body>

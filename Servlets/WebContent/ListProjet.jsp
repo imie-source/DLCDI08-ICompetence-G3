@@ -16,7 +16,7 @@
 	<jsp:include page="HeaderTest.jsp" />
 	<div class="contenu">
 		<div class="titre">
-			<h1>Liste des projets</h1>
+			<h1>Liste des Projets</h1>
 		</div>
 		<div class="liste">
 			<div class="global">
@@ -31,8 +31,7 @@
 								de projet</div>
 							<div
 								class="celluleTableauInTable celluleTableau celluleTableau100">Statut</div>
-							<div
-								class="celluleTableauInTable celluleTableau celluleTableau100">Action</div>
+							<%-- <div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div> --%>
 						</div>
 
 						<%
@@ -40,13 +39,20 @@
 						%>
 						<c:forEach var="projetDTO" items="${listeProjet}"
 							varStatus="numLigne">
-							<c:set var="isAlternativeLigne" value="${numLigne.index%2>0}" />
-							<div
-								class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
-								<div class="celluleTableauInTable celluleTableau celluleTableau200">
-									<a href="./Projet?numligne=${numLigne.index}">
-										<c:out value="${projetDTO.intitule}" />
+
+							<%
+								Boolean isAlternativLigne = ligne % 2 > 0;
+									String ligneAlternative = isAlternativLigne ? "ligneTableauAlternativLine"
+											: "ligneTableauNormalLine";
+									ligne++;
+							%>
+							<div class="ligneTableauLine <%=ligneAlternative%>">
+								<div
+									class="celluleTableauInTable celluleTableau celluleTableau200">
+									<a href="./Projet?numligne=${numLigne.index}"> <c:out
+											value="${projetDTO.intitule}" />
 									</a>
+								</div>
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<c:out value="${projetDTO.chefDeProjet.nom}" />
@@ -55,29 +61,25 @@
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<c:out value="${projetDTO.statutProjet.valeurStatut}" />
 								</div>
-								<%--Boutons AFFICHER MODIFIER SUPPRIMER 
-								<div
-									class="celluleTableauInTable celluleTableau celluleTableau100">
-									<form action="./Projet">
-										<input type="hidden" name="ligneProjet"
-											value="${numLigne.index}"></input> <input type="submit"
-											name="read" value="afficher"></input>
-									</form>
+								<%--Boutons AFFICHER MODIFIER SUPPRIMER
+<div class="celluleTableauInTable celluleTableau celluleTableau100">
+<form action="./Projet">
+<input type="hidden" name="ligneProjet" value="${numLigne.index}"></input>
+<input type="submit" name="read" value="afficher"></input>
+</form>
 
-									<form action="./Projet">
-										<input type="hidden" name="numProjet"
-											value=<c:out value="${projetDTO.num}"/>> </input> <input
-											type="submit" name="update" value="modifier"></input>
-									</form>
+<form action="./Projet">
+<input type="hidden" name="numProjet" value=<c:out value="${projetDTO.num}"/>> </input>
+<input type="submit" name="update" value="modifier"></input>
+</form>
 
-									<form id="sup" action="./Projet">
-										<input type="hidden" name="ligneProjet"
-											value="${numLigne.index}"></input> <input type="hidden"
-											id="intituleProjet" value="${projetDTO.intitule}"></input> <input
-											type="submit" name="delete" value="supprimer"></input>
-									</form>
-								</div>
-					--%>
+<form id="sup" action="./Projet">
+<input type="hidden" name="ligneProjet" value="${numLigne.index}"></input>
+<input type="hidden" id="intituleProjet" value="${projetDTO.intitule}"></input>
+<input type="submit" name="delete" value="supprimer"></input>
+</form>	
+</div>
+--%>
 
 							</div>
 

@@ -4,6 +4,7 @@
 <div class="titre">
 <h1>Utilisateur</h1>
 </div>
+<div class="liste">
 <div class="fiche">
 			<div class="ficheGauche">ID Utilisateur 
 					<div id="fiche_utilisateur">	
@@ -71,5 +72,6 @@
 		
 		
 		
+	</div>
 	</div>
 </div>

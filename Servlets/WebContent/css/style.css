@@ -53,9 +53,6 @@
 	text-align: right;
 }
 
-.ligneTableauLine {
-	display: table-row;
-}
 
 .ligneTableauNormalLine {
 	background-color: white;
@@ -66,20 +63,23 @@
 }
 
 .tableau {
-	display: table;
+	
 	width: 100%;
 }
 
 .ligneTableauHeader {
-	display: table-row;
+	
 	width: 100%;
 	background-color: black;
 	color: white;
 }
 
 .tableauContainer {
+	
 	border-radius: 0px 10px 0px 10px;
 	border-style: solid;
-	width: 80%;
+	overflow: -moz-scrollbars-vertical;
+	width: auto;
 	margin: auto;
+	height:300px;
 }
