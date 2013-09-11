@@ -174,7 +174,8 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			throws TransactionalConnectionException, DAOException{
 
 		List<ProjetDTO>listeProjetUtilisateur=new ArrayList<ProjetDTO>();
-
+		
+		
 		PreparedStatement pstmt= null;
 		ResultSet rst= null;
 
@@ -182,20 +183,14 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			String query="select projet.num as projet,projet.intitule ,utilisateur.num from projet  inner join projet_util on projet_util.num_projet=projet.num inner join utilisateur on utilisateur.num=projet_util.num_util where utilisateur.num=?";
 
 			pstmt=cn.prepareStatement(query);
-			
+			pstmt.setInt(1, utilisateur.getNum());
 			rst=pstmt.executeQuery();
 
 			while(rst.next()){
 				ProjetDTO project = new ProjetDTO();
 				project.setNum(rst.getInt(1));
-				project.setNum(rst.getInt(2));
-
-				UtilisateurDTO user= new UtilisateurDTO();
-				user.setNom(rst.getString(3));
-				user.setPrenom(rst.getString(4));
+				project.setIntitule(rst.getString(2));
 				listeProjetUtilisateur.add(project);
-
-
 			}
 
 		} catch (SQLException e) {
@@ -217,8 +212,6 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			}
 		}
 		return listeProjetUtilisateur;
-
-
 	}
 
 
