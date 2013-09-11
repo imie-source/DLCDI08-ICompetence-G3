@@ -182,6 +182,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 			String query="select projet.num as projet,projet.intitule ,utilisateur.num from projet  inner join projet_util on projet_util.num_projet=projet.num inner join utilisateur on utilisateur.num=projet_util.num_util where utilisateur.num=?";
 
 			pstmt=cn.prepareStatement(query);
+			
 			rst=pstmt.executeQuery();
 
 			while(rst.next()){
