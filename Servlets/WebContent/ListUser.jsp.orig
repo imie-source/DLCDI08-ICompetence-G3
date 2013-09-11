@@ -8,17 +8,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<<<<<<< HEAD
 <link rel=stylesheet type="text/css" href="css/style.css" />
-<link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+<link rel=stylesheet type="text/css" href="css/styleTestFiche.css" />
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+=======
+<link rel=stylesheet type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+>>>>>>> 6d13dd0a5f60bb35fa7c849d70db9361404924b0
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <title>Liste des Utilisateurs</title>
 </head>
 <body>
 <jsp:include page="HeaderTest.jsp" />
+<<<<<<< HEAD
 	<!--
+=======
+<!--
+>>>>>>> 6d13dd0a5f60bb35fa7c849d70db9361404924b0
  Bouton de confirmation
 
 	<script>
@@ -62,8 +72,9 @@
 -->
 	<div class="contenu">
 		<div class="titre">
-			<h1>Liste des utilisateurs</h1>
+			<h1>liste des utilisateurs</h1>
 		</div>
+		<p></p>
 		<div class="liste">
 			<div class="global">
 				<div class="tableauContainer">
