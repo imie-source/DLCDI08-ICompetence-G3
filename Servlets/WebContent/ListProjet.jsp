@@ -40,18 +40,20 @@
 						%>
 						<c:forEach var="projetDTO" items="${listeProjet}"
 							varStatus="numLigne">
-
-							<%
+							<c:set var="isAlternativeLigne" value="${numLigne.index%2>0}" />
+							<div
+								class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
+							<%-- <%
 								Boolean isAlternativLigne = ligne % 2 > 0;
 									String ligneAlternative = isAlternativLigne ? "ligneTableauAlternativLine"
 											: "ligneTableauNormalLine";
 									ligne++;
 							%>
-							<div class="ligneTableauLine <%=ligneAlternative%>">
-								<div
-					<a href="./Projet?numligne=${numLigne.index}">
-						<c:out value="${projetDTO.intitule}" />
-					</a>
+							<div class="ligneTableauLine <%=ligneAlternative%>"> --%>
+								<div class="celluleTableauInTable celluleTableau celluleTableau200">
+									<a href="./Projet?numligne=${numLigne.index}">
+										<c:out value="${projetDTO.intitule}" />
+									</a>
 								</div>
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau100">

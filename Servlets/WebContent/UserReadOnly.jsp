@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <div class="contenu">
 <div class="titre">
-<h1>projet</h1>
+<h1>Utilisateur</h1>
 </div>
 <div class="fiche">
 			<div class="ficheGauche">ID Utilisateur 
