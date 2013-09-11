@@ -124,7 +124,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 				util.setAdresse(rst.getString(4));
 				util.setAge(AgeUtil.getInstance().getAge(rst.getDate(5)));
 				util.setMail(rst.getString(9));
-				util.setTel(rst.getInt(10));
+				util.setTel(rst.getString(10));
 
 				PromotionDTO promotion = new PromotionDTO();
 				promotion.setIntitule(rst.getString(6));
@@ -188,7 +188,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 				promotion.setNum(rst.getInt(6));
 				promotion.setIntitule(rst.getString(7));
 				promotion.setAnnee(rst.getInt(8));
-				util.setTel(rst.getInt(9));
+				util.setTel(rst.getString(9));
 				util.setMail(rst.getString(10));
 				util.setLogin(rst.getString(11));
 				util.setPassword(rst.getString(12));
@@ -234,7 +234,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 			pstmt.setInt(4, utilisateur.getPromotion().getNum());
 			pstmt.setString(5, utilisateur.getAdresse());
 			pstmt.setString(6, utilisateur.getMail());
-			pstmt.setInt(7, utilisateur.getTel());
+			pstmt.setString(7, utilisateur.getTel());
 			pstmt.setString(8, utilisateur.getLogin());
 			pstmt.setString(9, utilisateur.getPassword());
 			createNum = pstmt.executeUpdate();
@@ -271,7 +271,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 			pstmt.setString(4, utilisateur.getAdresse());
 			pstmt.setInt(5, utilisateur.getPromotion().getNum());
 			pstmt.setString(6, utilisateur.getMail());
-			pstmt.setInt(7, utilisateur.getTel());
+			pstmt.setString(7, utilisateur.getTel());
 			pstmt.setString(8, utilisateur.getLogin());
 			pstmt.setString(9, utilisateur.getPassword());
 			pstmt.setInt(10, utilisateur.getNum());
