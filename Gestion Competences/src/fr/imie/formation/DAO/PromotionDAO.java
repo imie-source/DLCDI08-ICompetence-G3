@@ -28,6 +28,14 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 
 	}
 	
+	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+		throws TransactionalConnectionException, DAOException {
+		
+		List<PromotionDTO> listePromotion =null;
+		listePromotion=readPromotion(promo,getConnection());
+		return listePromotion;
+
+	}
 	public int createPromotion(PromotionDTO promo)
 			throws TransactionalConnectionException, DAOException {
 
@@ -99,8 +107,52 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 
 		return listPromo;
 	}
+	
+	private List<PromotionDTO> readPromotion(PromotionDTO promo,Connection cn)
+			throws TransactionalConnectionException, DAOException {
 
-	private int createPromotion(PromotionDTO promo,Connection cn){
+	 PreparedStatement pstmt = null;
+		ResultSet rst = null;
+
+		List<PromotionDTO> listePromotion = new ArrayList<PromotionDTO>();
+
+		try {
+			String query = "SELECT promotion.num, promotion.intitule, promotion.annee FROM promotion WHERE promotion.num=?";
+
+
+			pstmt = cn.prepareStatement(query);
+			pstmt.setInt(1, promo.getNum());
+			rst = pstmt.executeQuery(query);
+
+			while (rst.next()) {
+				PromotionDTO promotion = new PromotionDTO();
+				promotion.setIntitule(rst.getString(2));
+				promo.setAnnee(rst.getInt(3));
+				listePromotion.add(promotion);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) {
+					rst.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return listePromotion;
+	}
+
+	private int createPromotion(PromotionDTO promo,Connection cn)throws TransactionalConnectionException, DAOException {
 		int createNum=0;
 		PreparedStatement pstm=null;
 
@@ -128,7 +180,7 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 
 		return createNum;
 	}
-	 private int updatePromotion(PromotionDTO promo,Connection cn){
+	 private int updatePromotion(PromotionDTO promo,Connection cn) throws TransactionalConnectionException, DAOException{
 		 int updateNum=0;
 		 PreparedStatement pstm=null;
 		 try {
@@ -154,7 +206,7 @@ public class PromotionDAO extends ATransactional implements IPromotionDAO {
 	 }
 		 return updateNum;
 }
-	 private int deletePromotion(PromotionDTO promo,Connection cn){
+	 private int deletePromotion(PromotionDTO promo,Connection cn) throws TransactionalConnectionException, DAOException{
 		 int deleteNum=0;
 		  PreparedStatement pstm=null;
 		  try {

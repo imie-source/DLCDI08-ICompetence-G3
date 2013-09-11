@@ -14,5 +14,11 @@ public interface IStatutProjetDAO extends ITransactional{
 	
 	public int updateStatutProjet(StatutProjetDTO statut)
 			throws TransactionalConnectionException, DAOException;
+	
+	public int createStatutProjet(StatutProjetDTO statut)
+			throws TransactionalConnectionException, DAOException;
+	
+	public int deleteStatutProjet(StatutProjetDTO statut)
+			throws TransactionalConnectionException, DAOException;
 
 }

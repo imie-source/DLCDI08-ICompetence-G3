@@ -33,6 +33,15 @@ public interface IProjetService extends ITransactional{
 	public int deleteProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, ServiceException;
 	
+	public int addProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException,  ServiceException;
+	
+	public int updateProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException,  ServiceException;
+	
+	public int deleteProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException,  ServiceException;
+	
 	//STATUT PROJET
 	public List<StatutProjetDTO> readAllStatutProjet()
 			throws TransactionalConnectionException, ServiceException;

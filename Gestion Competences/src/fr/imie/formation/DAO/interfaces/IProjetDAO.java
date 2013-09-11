@@ -27,8 +27,18 @@ public interface IProjetDAO extends ITransactional{
 
 	public int deleteProjet(ProjetDTO projet)
 			throws TransactionalConnectionException, DAOException;
-	
-	public List<ProjetDTO> readProjetByUtilisateur(UtilisateurDTO utilisateur)
-	throws TransactionalConnectionException, DAOException;
 
+	public List<ProjetDTO> readProjetByUtilisateur(UtilisateurDTO utilisateur)
+			throws TransactionalConnectionException, DAOException;
+
+	public int addProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException;
+
+	public int updateProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException;
+
+	public int deleteProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException;
+
+	
 }

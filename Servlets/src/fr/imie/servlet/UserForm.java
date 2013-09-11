@@ -125,7 +125,7 @@ public class UserForm extends HttpServlet {
 		 */
 
 			//request.setAttribute("action", "add");
-			request.getRequestDispatcher("./UserCreate.jsp").forward(request, response);
+			//request.getRequestDispatcher("./UserCreate.jsp").forward(request, response);
 		}
 			
 		/*//supprimer un utilisateur
