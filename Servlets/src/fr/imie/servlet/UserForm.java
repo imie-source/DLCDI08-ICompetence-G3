@@ -208,16 +208,16 @@ public class UserForm extends HttpServlet {
 			utilisateurUpdate.setMail(request.getParameter("mail"));
 			
 			String promoParam = request.getParameter("promotion");
+			PromotionDTO promo = new PromotionDTO();
 			Integer promoNum = null;
 			if (promoParam != null){
 				promoNum = Integer.valueOf(promoParam);
 			}
 			if (promoNum != null){
-				
 				PromotionDTO promoUpdate = new PromotionDTO();
 				promoUpdate.setNum(promoNum);
 				try {
-					PromotionDTO promo = DAOFactory1.getInstance().createPromotionService(null).readPromotion(promoUpdate);
+					promo = DAOFactory1.getInstance().createPromotionService(null).readPromotion(promoUpdate);
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -225,9 +225,8 @@ public class UserForm extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 			}
-			//utilisateurUpdate.setPromotion(promo);
+			utilisateurUpdate.setPromotion(promo);
 			
 			utilisateurUpdate.setLogin(request.getParameter("login"));
 			utilisateurUpdate.setPassword(request.getParameter("password"));
@@ -272,6 +271,27 @@ public class UserForm extends HttpServlet {
 			utilisateurCreate.setTel(userTel);
 			
 			utilisateurCreate.setMail(request.getParameter("mail"));
+			
+			String promoParam = request.getParameter("promotion");
+			PromotionDTO promo = new PromotionDTO();
+			Integer promoNum = null;
+			if (promoParam != null){
+				promoNum = Integer.valueOf(promoParam);
+			}
+			if (promoNum != null){
+				PromotionDTO promoUpdate = new PromotionDTO();
+				promoUpdate.setNum(promoNum);
+				try {
+					promo = DAOFactory1.getInstance().createPromotionService(null).readPromotion(promoUpdate);
+				} catch (TransactionalConnectionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			utilisateurCreate.setPromotion(promo);
 			
 			utilisateurCreate.setLogin(request.getParameter("login"));
 			utilisateurCreate.setPassword(request.getParameter("password"));
