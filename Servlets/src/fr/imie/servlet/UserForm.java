@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.imie.formation.DTO.NiveauDTO;
+import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.PromotionDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
@@ -65,8 +66,8 @@ public class UserForm extends HttpServlet {
 						.createCompetenceNiveauService(null)
 						.readCompetenceNiveauUtilisateur(utilisateurDTO);
 				request.setAttribute("ListeCompNiv", listCompNiv);
-				// List<ProjetDTO> listUtilProjet = DAOFactory1.getInstance().createProjetService(null).readProjetByUtilisateur(utilisateurDTO);
-				//request.setAttribute("ListeUtilProjet", listUtilProjet);
+				List<ProjetDTO> listUtilProjet = DAOFactory1.getInstance().createProjetService(null).readProjetByUtilisateur(utilisateurDTO);
+				request.setAttribute("ListeUtilProjet", listUtilProjet);
 				
 				
 
