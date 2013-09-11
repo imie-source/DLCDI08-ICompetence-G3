@@ -67,9 +67,6 @@
 					<div class="ficheBas">
 					Invitations:
 					</div>
-		</div>
-		
-		
-		
+		</div>		
 	</div>
 </div>
