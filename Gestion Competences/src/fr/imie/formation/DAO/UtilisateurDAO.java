@@ -169,7 +169,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 		PromotionDTO promotion = new PromotionDTO();
 
 		try {
-			String query = "select utilisateur.num, utilisateur.nom, prenom, adresse, date_naissance, promotion.intitule, promotion.annee,login from utilisateur left join promotion on utilisateur.num_promotion=promotion.num where utilisateur.num=?";
+			String query = "select utilisateur.num, utilisateur.nom, prenom, adresse, date_naissance, promotion.num, promotion.intitule, promotion.annee,login from utilisateur left join promotion on utilisateur.num_promotion=promotion.num where utilisateur.num=?";
 
 			pstmt = cn.prepareStatement(query);
 			pstmt.setInt(1, utilisateur.getNum());
@@ -185,9 +185,10 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 						.createCompetenceNiveauService(this)
 						.readCompetenceNiveauUtilisateur(utilisateur));
 
-				promotion.setIntitule(rst.getString(6));
-				promotion.setAnnee(rst.getInt(7));
-				util.setLogin(rst.getString(8));
+				promotion.setNum(rst.getInt(6));
+				promotion.setIntitule(rst.getString(7));
+				promotion.setAnnee(rst.getInt(8));
+				util.setLogin(rst.getString(9));
 				util.setPromotion(promotion);
 
 			}
@@ -226,7 +227,7 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 			pstmt = cn.prepareStatement(query);
 			pstmt.setString(1, utilisateur.getNom());
 			pstmt.setString(2, utilisateur.getPrenom());
-			pstmt.setDate(3, (Date) utilisateur.getDateNaissance());
+			pstmt.setDate(3, new java.sql.Date(utilisateur.getDateNaissance().getTime()));
 			pstmt.setInt(4, utilisateur.getPromotion().getNum());
 			createNum = pstmt.executeUpdate();
 
@@ -253,12 +254,19 @@ public class UtilisateurDAO extends ATransactional implements IUtilisateurDAO {
 		int updateNum = 0;
 
 		try {
-			String query = "UPDATE utilisateur SET nom=?, prenom=? where num=?;";
+			String query = "UPDATE utilisateur SET nom=?, prenom=?, date_naissance=?, adresse=?, num_promotion=?, mail=?, tel=?, login=? where num=?;";
 
 			pstmt = cn.prepareStatement(query);
 			pstmt.setString(1, utilisateur.getNom());
 			pstmt.setString(2, utilisateur.getPrenom());
-			pstmt.setInt(3, utilisateur.getNum());
+			pstmt.setDate(3, new java.sql.Date(utilisateur.getDateNaissance().getTime()));
+			pstmt.setString(4, utilisateur.getAdresse());
+			pstmt.setInt(5, utilisateur.getPromotion().getNum());
+			pstmt.setString(6, utilisateur.getMail());
+			pstmt.setInt(7, utilisateur.getTel());
+			pstmt.setString(8, utilisateur.getLogin());
+			//pstmt.setString(9, utilisateur.getPassword());
+			pstmt.setInt(9, utilisateur.getNum());
 			updateNum = pstmt.executeUpdate();
 
 		} catch (SQLException e) {

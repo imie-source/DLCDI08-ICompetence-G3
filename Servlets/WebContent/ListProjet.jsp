@@ -21,7 +21,7 @@
 				<div id=Nom class="celluleTableauInTable celluleTableau celluleTableau200">Intitulé</div>
 				<div class="celluleTableauInTable celluleTableau celluleTableau100">Chef de projet</div>
 				<div class="celluleTableauInTable celluleTableau celluleTableau100">Statut</div>
-				<div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div>
+				<%-- <div class="celluleTableauInTable celluleTableau celluleTableau100">Action</div> --%>
 			</div>
 
 			<%
@@ -37,7 +37,9 @@
 				%>
 				<div class="ligneTableauLine <%=ligneAlternative%>">
 					<div class="celluleTableauInTable celluleTableau celluleTableau200">
-					<c:out value="${projetDTO.intitule}" />
+					<a href="./Projet?numligne=${numLigne.index}">
+						<c:out value="${projetDTO.intitule}" />
+					</a>
 					</div>
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">
 					<c:out value="${projetDTO.chefDeProjet.nom}" />
@@ -45,7 +47,7 @@
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">
 					<c:out value="${projetDTO.statutProjet.valeurStatut}" />
 					</div>
-					<%--Boutons AFFICHER MODIFIER SUPPRIMER --%>
+					<%--Boutons AFFICHER MODIFIER SUPPRIMER 
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">
 						<form action="./Projet">
 							<input type="hidden" name="ligneProjet" value="${numLigne.index}"></input>
@@ -63,6 +65,7 @@
 							<input type="submit" name="delete" value="supprimer"></input>
 						</form>						
 					</div>
+					--%>
 					
 				</div>
 			
