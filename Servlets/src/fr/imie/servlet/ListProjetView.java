@@ -39,7 +39,7 @@ public class ListProjetView extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		if (request.getParameter("ligneProjet") == null) {
+		if (request.getParameter("ligneProjet") == null && request.getParameter("create") == null) {
 		
 			try {
 				List<ProjetDTO> listeProjet = DAOFactory1.getInstance().createProjetService(null).readAllProjets();

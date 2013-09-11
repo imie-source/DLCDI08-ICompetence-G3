@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.imie.formation.DTO.CompetenceDTO;
+import fr.imie.formation.DTO.NiveauDTO;
+import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
@@ -39,7 +41,7 @@ public class CompForm extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (request.getParameter("numligneComp") != null) {
+		if (request.getParameter("numLigneComp") != null) {
 
 			int ligne = Integer.valueOf(request.getParameter("numligneComp"));
 			Object listObj = session.getAttribute("listeCompetence");
@@ -54,9 +56,9 @@ public class CompForm extends HttpServlet {
 						.createCompetenceNiveauService(null)
 						.readCompetence(competence);
 				request.setAttribute("competence", competenceDTO);
-				// List<UtilisateurDTO> listUtilisateur =
-				// DAOFactory1.getInstance().createCompetenceNiveauService(null).
-				// request.setAttribute("listeUtilisateur", listUtilisateur);
+				List<NiveauDTO> listNivUtil =
+				DAOFactory1.getInstance().createCompetenceNiveauService(null).readNiveauUtilisateurCompetence(competence);
+				request.setAttribute("ListeNivUtil", listNivUtil);
 
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
@@ -65,7 +67,7 @@ public class CompForm extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("./CompConsult.jsp").forward(request,
+			request.getRequestDispatcher("./CompRead.jsp").forward(request,
 					response);
 		}
 

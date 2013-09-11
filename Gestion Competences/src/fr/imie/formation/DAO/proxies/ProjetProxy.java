@@ -200,6 +200,65 @@ public class ProjetProxy implements IProjetDAO {
 		return deleteNum;
 	}
 
+	@Override
+	public int addProjetUtil(UtilisateurDTO utilisateur, ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException {
+		
+		int createNum = 0;
+		if (caller == null){
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		createNum = projetDAO.addProjetUtil(utilisateur,projet);
+		if (caller == null){
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return createNum;
+	}
+
+	@Override
+	public int updateProjetUtil(UtilisateurDTO utilisateur, ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException {
+		
+		int updateNum = 0;
+		if (caller == null){
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		updateNum = projetDAO.updateProjetUtil(utilisateur,projet);
+		if (caller == null){
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return updateNum;
+	}
+
+	@Override
+	public int deleteProjetUtil(UtilisateurDTO utilisateur, ProjetDTO projet)
+			throws TransactionalConnectionException, DAOException {
+		int deleteNum = 0;
+		if (caller == null){
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		deleteNum = projetDAO.deleteProjetUtil(utilisateur,projet);
+		if (caller == null){
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return deleteNum;
+	}
+
+
+	
+
 
 
 

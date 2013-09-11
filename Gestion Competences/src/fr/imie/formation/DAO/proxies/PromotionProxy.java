@@ -69,19 +69,19 @@ public class PromotionProxy implements IPromotionDAO {
 	public List<PromotionDTO> readAllPromotion()
 			throws TransactionalConnectionException, DAOException {
 
-		List<PromotionDTO> listePromotion = new ArrayList<PromotionDTO>();
+		List<PromotionDTO> listePromo= new ArrayList<PromotionDTO>();
 		if (caller == null) {
 			beginTransactionalConnexion();
 		} else {
 			putInTransaction(caller);
 		}
-		listePromotion = promotionDAO.readAllPromotion();
+		listePromo = promotionDAO.readAllPromotion();
 		if (caller == null) {
 			endTransactionalConnexion();
 		} else {
 			putOffTransaction();
 		}
-		return listePromotion;
+		return listePromo;
 
 	}
 
@@ -143,6 +143,26 @@ public class PromotionProxy implements IPromotionDAO {
 		}
 		
 		return deleteNum;
+	}
+
+	@Override
+	public List<PromotionDTO> readPromotion(PromotionDTO promo)
+			throws TransactionalConnectionException, DAOException {
+		
+		List<PromotionDTO> listePromotion = new ArrayList<PromotionDTO>();
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		listePromotion = promotionDAO.readPromotion(promo);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		
+		return listePromotion;
 	}
 
 }

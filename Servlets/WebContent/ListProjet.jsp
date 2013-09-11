@@ -49,8 +49,9 @@
 							%>
 							<div class="ligneTableauLine <%=ligneAlternative%>">
 								<div
-									class="celluleTableauInTable celluleTableau celluleTableau200">
-									<c:out value="${projetDTO.intitule}" />
+					<a href="./Projet?numligne=${numLigne.index}">
+						<c:out value="${projetDTO.intitule}" />
+					</a>
 								</div>
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau100">
@@ -60,7 +61,7 @@
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<c:out value="${projetDTO.statutProjet.valeurStatut}" />
 								</div>
-								<%--Boutons AFFICHER MODIFIER SUPPRIMER --%>
+					<%--Boutons AFFICHER MODIFIER SUPPRIMER 
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<form action="./Projet">
@@ -82,6 +83,7 @@
 											type="submit" name="delete" value="supprimer"></input>
 									</form>
 								</div>
+					--%>
 
 							</div>
 

@@ -27,14 +27,17 @@
 							Adresse mail : <input type="text" name="mail" value="${utilisateur.mail}"></input>
 						</div>
 						<div id="promotion_util">
-							Promotion : <select name="promotion">
-										<c:forEach var="promotion" items="${ListePromo}">
-										<%-- <c:if test="${utilisateur.promotion.num eq promotion.num}">--%>
-										<option selected="selected" value="${promotion.num}">${promotion.intitule} ${promotion.annee}</option>
-										<%--</c:if> --%>
-										</c:forEach>
-										</select>
-							<%-- <input type="text" name="promotion" value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></input>--%>
+							Promotion : 
+							<select name="promotion">
+								<c:forEach var="promotion" items="${ListePromo}">
+									<c:if test="${utilisateur.promotion.num == promotion.num}">
+										<option selected="selected" value="${promotion.num}"> ${promotion.intitule} ${promotion.annee}</option>
+									 </c:if>
+									<c:if test="${utilisateur.promotion.num != promotion.num}">
+										<option value="${promotion.num}"> ${promotion.intitule} ${promotion.annee}</option>
+									</c:if>
+								</c:forEach>		
+							</select>
 						</div>
 						<div id="login_util">
 							Login : <input type="text" name="login" value="${utilisateur.login}"></input>
