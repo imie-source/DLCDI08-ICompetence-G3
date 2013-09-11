@@ -1,19 +1,42 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-<div id="fiche_competence">	
-	<input type="hidden" name="numCompetence" value="${competence.num }"></input>
-<div id="nom_util">
-	Competence : <input type="text" readonly="readonly" name="nom" value="${competence.nom}"></input>
-</div>
-</div>
-<div id="util_comp">
-	Utilisateurs :
-		<div>
-			<c:forEach var="niv" items="${listNiveauUtil}" varStatus="numLigne">
-				<div>
-					<c:out value="${niv.utilisateur.nom}"></c:out>
+<div class="contenu">
+	<div class="titre">
+		<h1>Competence</h1>
+	</div>
+	<div class="fiche">
+		<div class="ficheGauche">
+			ID Competence
+			<div id="fiche_competence">
+				<input type="hidden" name="numCompetence" value="${competence.num }"></input>
+				<div id="nom_competence">
+					Nom : <input type="text" readonly="readonly" name="nom"
+						value="${competence.nom}"></input>
 				</div>
-			</c:forEach>
+			</div>
 		</div>
+
+		<div class="ficheDroite">
+			<div class="ficheHaut">
+
+				<div id="comp_util">
+					Utilisateurs :
+					<div>
+						<c:forEach var="niv" items="${ListeNivUtil}" varStatus="numLigneUtil">
+							<div>
+								<a href="./CompForm?numLigneUtil=${numLigneUtil.index}"> <c:out
+										value="${niv.utilisateur}"></c:out>
+								</a>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+
+	</div>
 </div>

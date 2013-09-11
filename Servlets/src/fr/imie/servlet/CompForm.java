@@ -43,7 +43,7 @@ public class CompForm extends HttpServlet {
 
 		if (request.getParameter("numLigneComp") != null) {
 
-			int ligne = Integer.valueOf(request.getParameter("numligneComp"));
+			int ligne = Integer.valueOf(request.getParameter("numLigneComp"));
 			Object listObj = session.getAttribute("listeCompetence");
 			@SuppressWarnings("unchecked")
 			List<CompetenceDTO> listComp = (List<CompetenceDTO>) listObj;
