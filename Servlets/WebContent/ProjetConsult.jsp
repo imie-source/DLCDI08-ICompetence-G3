@@ -16,7 +16,7 @@
 			<div id="lecture_projet">
 				<c:if test="${! empty projetDTO.num}">
 					<jsp:include page="ProjetReadOnly.jsp"/>					
-					<form action="./Projet">
+					<form method ="get" action="./Projet">
 						<input type="hidden" name="numProjet" value="${projetDTO.num}"></input> 
 						<input type="submit" name="update" value="modifier"></input>
 					</form>

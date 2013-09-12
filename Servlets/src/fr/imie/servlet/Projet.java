@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import fr.imie.formation.DAO.exceptions.DAOException;
 import fr.imie.formation.DTO.ProjetDTO;
+import fr.imie.formation.DTO.PromotionDTO;
+import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
@@ -56,6 +58,8 @@ public class Projet extends HttpServlet {
 					request.setAttribute("projetDTO", projetDTO);
 					List<UtilisateurDTO> listeUtil = DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateurProjet(projetDTO);
 					request.setAttribute("listeUtil", listeUtil);
+					
+					
 
 					// Dans le cas de la suppression
 					/*if ((request.getParameter("delete") != null) 
@@ -89,12 +93,36 @@ public class Projet extends HttpServlet {
 			request.getRequestDispatcher("./ProjetCreate.jsp").forward(request,
 					response);
 		}
+		
+		
 		//modification projet
 		else if (request.getParameter("update") != null
 				&& request.getParameter("update").equals("modifier")) {
-			request.setAttribute("projet",getProjet(request.getParameter("numligne")));
+			request.setAttribute("projetDTO",getProjet(request.getParameter("numProjet")));
+			
+			List<UtilisateurDTO> listeForChef =null;
+			List<StatutProjetDTO>listeStatut = null;
+			List<UtilisateurDTO> listeUtil = null;
+			try {
+				listeForChef= DAOFactory1.getInstance().createUtilisateurService(null).readAllUtilisateur();
+				listeStatut=DAOFactory1.getInstance().createProjetService(null).readAllStatutProjet();
+				listeUtil = DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateurProjet(getProjet(request.getParameter("numProjet")));
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("listeForChef", listeForChef);
+			request.setAttribute("listeStatut", listeStatut);
+			request.setAttribute("listeUtil", listeUtil);
+			
 			request.getRequestDispatcher("./ProjetUpdate.jsp").forward(request,response);
+		
 		} 
+		
+		
 		// suppression projet
 		else if (request.getParameter("delete") != null
 				& request.getParameter("delete").equals("supprimer")) {
@@ -108,7 +136,23 @@ public class Projet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Modifier un projet
+			/*	if (request.getParameter("updateAction") != null
+						&& request.getParameter("updateAction").equals("Confirmer")) {
+					
+					ProjetDTO projetUpdate = getProjet(request.getParameter("numProjet"));
+					projetUpdate.setIntitule(request.getParameter("intituleProjet"));
+					projetUpdate.setDescription(request.getParameter("descriptionProjet"));
+					
+					String chefParam = request.getParameter("chefProjet");
+					UtilisateurDTO chef = new UtilisateurDTO();
+					
+					
+					
+				}
+		*/
+		
+		
 	}
 	
 	

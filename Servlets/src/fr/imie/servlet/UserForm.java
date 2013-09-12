@@ -105,8 +105,10 @@ public class UserForm extends HttpServlet {
 			request.setAttribute("utilisateur", getUser(request.getParameter("numUtilisateur")));
 			
 			List<PromotionDTO> listPromo =null;
+			
 			try {
 				listPromo = DAOFactory1.getInstance().createPromotionService(null).readAllPromotion();
+				
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

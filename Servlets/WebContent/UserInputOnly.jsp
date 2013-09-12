@@ -9,13 +9,13 @@
 			<div class="ficheGauche">ID Utilisateur 
 						<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
 						<div id="nom_util">
-							Nom : <input type="text" name="nom" value="${utilisateur.nom}"></input>
+							Nom : <input type="text" name="nom" required="required" value="${utilisateur.nom}"></input>
 						</div>
 						<div id="prenom_util">
-							Prénom : <input type="text" name="prenom" value="${utilisateur.prenom}"></input>
+							Prénom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
 						</div>
 						<div id="date_nais_util">
-							Date de naissance :<input type="text" name="dateNaissance" value="${utilisateur.dateNaissance}"></input>
+							Date de naissance :<input type="text" name="dateNaissance" placeholder="Ex: 16/12/1980" value="${utilisateur.dateNaissance}"></input>
 						</div>
 						<div id="adresse_util">
 							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
@@ -43,7 +43,7 @@
 							Login : <input type="text" name="login" value="${utilisateur.login}"></input>
 						</div>
 						<div id="password_util">
-							Password : <input type="text" name="password" value="${utilisateur.password}"></input>
+							Password : <input type="password" name="password" value="${utilisateur.password}"></input>
 						</div>
 			</div>
 			
