@@ -54,6 +54,7 @@ public class UserForm extends HttpServlet {
 			@SuppressWarnings("unchecked")
 			List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
 			UtilisateurDTO utilisateur = listUtil.get(ligne);
+			List<ProjetDTO>listeProjetForInvit = null;
 
 			session.removeAttribute("listeUtilisateur");
 
@@ -69,6 +70,8 @@ public class UserForm extends HttpServlet {
 				List<ProjetDTO> listUtilProjet = DAOFactory1.getInstance().createProjetService(null).readProjetByUtilisateur(utilisateurDTO);
 				request.setAttribute("ListeUtilProjet", listUtilProjet);
 				
+				listeProjetForInvit = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
+				request.setAttribute("listeProjetForInvit", listeProjetForInvit);
 				
 
 			} catch (TransactionalConnectionException e) {

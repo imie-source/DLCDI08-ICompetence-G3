@@ -12,16 +12,16 @@
 							Nom : <input type="text" name="nom" required="required" value="${utilisateur.nom}"></input>
 						</div>
 						<div id="prenom_util">
-							Prï¿½nom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
+							Prénom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
 						</div>
 						<div id="date_nais_util">
-							Date de naissance :<input type="text" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
+							Date de naissance :<input type="text" name="dateNaissance" required="required" placeholder="ex. 16/12/1980" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
 						</div>
 						<div id="adresse_util">
 							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
 						</div>
 						<div id="tel_util">
-							Tï¿½lï¿½phone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
+							Téléphone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
 						</div>
 						<div id="mail_util">
 							Adresse mail : <input type="text" name="mail" value="${utilisateur.mail}"></input>
@@ -49,7 +49,7 @@
 			
 			<div class = "ficheDroite">
 					<div class="ficheHaut">
-					Modif Compï¿½tences ï¿½ faire
+					Modif Compéences à faire
 					</div>
 					
 					<div class="ficheCentre">	

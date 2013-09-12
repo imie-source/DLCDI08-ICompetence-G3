@@ -147,11 +147,30 @@ public class Projet extends HttpServlet {
 					String chefParam = request.getParameter("chefProjet");
 					UtilisateurDTO chef = new UtilisateurDTO();
 					
-					
-					
+						
 				}
 		*/
-		
+		//ajout d' l'utilisateur au projet
+		if (request.getParameter("envoyerInvite")!=null){
+			
+			
+			ProjetDTO projetForUtil = getProjet(request.getParameter("numProjetForInvite"));
+			UtilisateurDTO utilForProjet = new UtilisateurDTO();
+			int numUtil = Integer.valueOf((String) request.getAttribute("numUtilisateur"));
+			utilForProjet.setNum(numUtil);
+			
+			try {
+				DAOFactory1.getInstance().createProjetService(null).addProjetUtil(utilForProjet, projetForUtil);
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+			request.getRequestDispatcher("./ProjetRead.jsp").forward(request, response);
+		}
 		
 	}
 	
