@@ -9,14 +9,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
 <link rel=stylesheet type=text/css href=css/style.css />
+<link rel="stylesheet" href=JQuery/jquery-ui.css></link>
+<script type="text/javascript" src=JQuery/jquery-1.9.1.js></script>
+<script type="text/javascript" src=JQuery/ui-1.10.3-jquery-ui.js></script>
 <title>Insert title here</title>
 <script>
-jQuery(document)
-.ready(
-		function() {
+$(document).ready(function() {
 			// Du code en jQuery va pouvoir être tapé ici !
 
-			var $nom = $('#nom'), $envoi = $('#envoi'), $reset = $('#rafraichir'), $erreur = $('#erreur'), $champ = $('.champ');
+			/* var $nom = $('#nom'), $envoi = $('#envoi'), $reset = $('#rafraichir'), $erreur = $('#erreur'), $champ = $('.champ');
 
 			$champ.keyup(function() {
 				if ($(this).val().length < 5) { // si la chaîne de caractères est inférieure à 5
@@ -56,8 +57,21 @@ jQuery(document)
 						color : 'red'
 					});
 				}
-			}
-
+			} */
+			$( "#modal" ).dialog({
+			     autoOpen: false,
+			      show: {
+			        effect: "blind",
+			        duration: 1000
+			      },
+			      hide: {
+			        effect: "explode",
+			        duration: 1000
+			      }
+			    });
+			  $( "#ajoutComp" ).click(function() {
+			     $( "#modal" ).dialog( "open" );
+			  });
 		});
 </script>
 </head>
@@ -68,9 +82,9 @@ jQuery(document)
 			<div id="fiche_utilisateur">
 				<form method="post" action="./UserForm">
 					<jsp:include page="UserInputOnly.jsp" />
-						<input type="hidden" name="numUtilisateur" value=<c:out value="${utilisateurDTO.num}"/>> </input>
-						<input type="submit" name="updateAction" value="Confirmer"></input>
-				</form>
+					<input type="hidden" name="numUtilisateur" value=<c:out value="${utilisateurDTO.num}"/>> </input>
+					<input type="submit" name="updateAction" value="Confirmer"></input>
+				</form>	
 				<form action="./ListUserView">
 					<input type="submit" value="retour"></input>
 				</form>

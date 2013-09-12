@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
 <div class="contenu">
 <div class="titre">
 <h1>Utilisateur</h1>
@@ -12,7 +13,7 @@
 							Nom : <input type="text" name="nom" required="required" value="${utilisateur.nom}"></input>
 						</div>
 						<div id="prenom_util">
-							Prï¿½nom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
+							Prénom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
 						</div>
 						<div id="date_nais_util">
 							Date de naissance :<input type="text" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
@@ -21,7 +22,7 @@
 							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
 						</div>
 						<div id="tel_util">
-							Tï¿½lï¿½phone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
+							Téléphone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
 						</div>
 						<div id="mail_util">
 							Adresse mail : <input type="text" name="mail" value="${utilisateur.mail}"></input>
@@ -49,7 +50,25 @@
 			
 			<div class = "ficheDroite">
 					<div class="ficheHaut">
-					Modif Compï¿½tences ï¿½ faire
+						<div id="comp_util">
+						Compétences :
+							<div>
+								<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
+									<div>
+										<c:out value="${comp.competence} ${comp.nom }"></c:out>
+									</div>
+								</c:forEach>
+								<div id="modal">
+									<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
+									<div>
+										<c:out value="${comp.competence} ${comp.nom }"></c:out>
+									</div>
+								</c:forEach>
+								</div>
+								<button id="ajoutComp">Modifier</button>
+								
+							</div>
+						</div>
 					</div>
 					
 					<div class="ficheCentre">	
