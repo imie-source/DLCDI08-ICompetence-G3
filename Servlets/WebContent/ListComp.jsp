@@ -43,6 +43,9 @@
 
 					</div>
 				</div>
+				<form action="./CompForm">
+					<input type="submit" name="create" id="create" value="creer"></input>
+				</form>
 			</div>
 		</div>
 	</div>
