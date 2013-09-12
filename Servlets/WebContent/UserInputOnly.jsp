@@ -13,7 +13,7 @@
 							Nom : <input type="text" name="nom" required="required" value="${utilisateur.nom}"></input>
 						</div>
 						<div id="prenom_util">
-							Prï¿½nom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
+							Prénom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
 						</div>
 						<div id="date_nais_util">
 							Date de naissance :<input type="text" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
@@ -22,7 +22,7 @@
 							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
 						</div>
 						<div id="tel_util">
-							Tï¿½lï¿½phone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
+							Téléphone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
 						</div>
 						<div id="mail_util">
 							Adresse mail : <input type="text" name="mail" value="${utilisateur.mail}"></input>
@@ -50,8 +50,7 @@
 			
 			<div class = "ficheDroite">
 					<div class="ficheHaut">
-<<<<<<< HEAD
-					<div id="comp_util">
+						<div id="comp_util">
 						Compétences :
 							<div>
 								<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
@@ -70,9 +69,6 @@
 								
 							</div>
 						</div>
-=======
-					Modif Compï¿½tences ï¿½ faire
->>>>>>> 833a37d831374f374e003fad48a359c490dc0d48
 					</div>
 					
 					<div class="ficheCentre">	
