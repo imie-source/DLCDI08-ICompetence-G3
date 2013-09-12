@@ -44,20 +44,29 @@ public class UserForm extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		//Affichage utilisateur
+		// Affichage utilisateur
 		if (request.getParameter("numligneutil") != null
 				&& request.getParameter("update") == null
 				&& request.getParameter("delete") == null) {
 
 			int ligne = Integer.valueOf(request.getParameter("numligneutil"));
 			Object listObj = session.getAttribute("listeUtilisateur");
-			@SuppressWarnings("unchecked")
-			List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
-			UtilisateurDTO utilisateur = listUtil.get(ligne);
-			List<ProjetDTO>listeProjetForInvit = null;
-
-			session.removeAttribute("listeUtilisateur");
-
+			Object listObj1 = session.getAttribute("ListeNivUtil");
+			UtilisateurDTO utilisateur = null;
+				
+			if (listObj1 != null) {
+	
+				List<NiveauDTO> listNiveau = (List<NiveauDTO>) listObj1;
+				utilisateur = listNiveau.get(ligne).getUtilisateur();
+				session.removeAttribute("ListeNivUtil");
+			}
+			else {
+				
+				List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
+				utilisateur = listUtil.get(ligne);
+				session.removeAttribute("listeUtilisateur");
+			}
+			
 			try {
 				UtilisateurDTO utilisateurDTO = DAOFactory1.getInstance()
 						.createUtilisateurService(null)
@@ -67,13 +76,13 @@ public class UserForm extends HttpServlet {
 						.createCompetenceNiveauService(null)
 						.readCompetenceNiveauUtilisateur(utilisateurDTO);
 				request.setAttribute("ListeCompNiv", listCompNiv);
-				List<ProjetDTO> listUtilProjet = DAOFactory1.getInstance().createProjetService(null).readProjetByUtilisateur(utilisateurDTO);
+				List<ProjetDTO> listUtilProjet = DAOFactory1.getInstance()
+						.createProjetService(null)
+						.readProjetByUtilisateur(utilisateurDTO);
 				request.setAttribute("ListeUtilProjet", listUtilProjet);
-				
+
 				listeProjetForInvit = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
 				request.setAttribute("listeProjetForInvit", listeProjetForInvit);
-				
-
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -85,13 +94,14 @@ public class UserForm extends HttpServlet {
 					response);
 		}
 
-		//création utilisateur
+		// création utilisateur
 		else if (request.getParameter("numligne") == null
 				&& request.getParameter("create") != null
 				&& request.getParameter("create").equals("creer")) {
-			List<PromotionDTO> listPromo =null;
+			List<PromotionDTO> listPromo = null;
 			try {
-				listPromo = DAOFactory1.getInstance().createPromotionService(null).readAllPromotion();
+				listPromo = DAOFactory1.getInstance()
+						.createPromotionService(null).readAllPromotion();
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -102,13 +112,26 @@ public class UserForm extends HttpServlet {
 			request.setAttribute("ListePromo", listPromo);
 			request.getRequestDispatcher("./UserCreate.jsp").forward(request,
 					response);
-		} //modification utilisateur
+		} // modification utilisateur
 		else if (request.getParameter("update") != null
 				&& request.getParameter("update").equals("modifier")) {
-			request.setAttribute("utilisateur", getUser(request.getParameter("numUtilisateur")));
+			request.setAttribute("utilisateur",
+					getUser(request.getParameter("numUtilisateur")));
 			List<ProjetDTO> listUtilProjet = null;
+			List<PromotionDTO> listPromo = null;
+			List<NiveauDTO> listCompNiv = null;
 			try {
-				listUtilProjet = DAOFactory1.getInstance().createProjetService(null).readProjetByUtilisateur(getUser(request.getParameter("numUtilisateur")));
+				listUtilProjet = DAOFactory1
+						.getInstance()
+						.createProjetService(null)
+						.readProjetByUtilisateur(
+								getUser(request.getParameter("numUtilisateur")));
+				listPromo = DAOFactory1.getInstance()
+						.createPromotionService(null).readAllPromotion();
+				listCompNiv = DAOFactory1.getInstance()
+						.createCompetenceNiveauService(null)
+						.readCompetenceNiveauUtilisateur(getUser(request.getParameter("numUtilisateur")));
+				
 			} catch (TransactionalConnectionException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -116,21 +139,13 @@ public class UserForm extends HttpServlet {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			request.setAttribute("ListeCompNiv", listCompNiv);
 			request.setAttribute("ListeUtilProjet", listUtilProjet);
-			List<PromotionDTO> listPromo =null;
 			
-			try {
-				listPromo = DAOFactory1.getInstance().createPromotionService(null).readAllPromotion();
 				
-			} catch (TransactionalConnectionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			request.setAttribute("ListePromo", listPromo);
 			
+
 			request.getRequestDispatcher("./UserUpdate.jsp").forward(request,
 					response);
 		} // suppression utilisateur
@@ -142,49 +157,7 @@ public class UserForm extends HttpServlet {
 					response);
 
 		}
-
-		/*
-		 * //supprimer un utilisateur if (request.getParameter("deleteAction")
-		 * != null && request.getParameter("deleteAction").equals("supprimer"))
-		 * {
-		 * 
-		 * UtilisateurDTO utilisateurDelete = getUser(request
-		 * .getParameter("numUtilisateur"));
-		 * 
-		 * try { DAOFactory1.getInstance().createUtilisateurService(null)
-		 * .deleteUtilisateur(utilisateurDelete); //
-		 * request.setAttribute("utilisateur", utilisateurUpdate);
-		 * request.setAttribute("action", "deleteAction"); } catch
-		 * (TransactionalConnectionException e) { // TODO Auto-generated catch
-		 * block e.printStackTrace(); } catch (DAOException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } }
-		 */
-
-			
-		}
-			
-		/*//supprimer un utilisateur
-				if (request.getParameter("deleteAction") != null
-						&& request.getParameter("deleteAction").equals("supprimer")) {
-
-					UtilisateurDTO utilisateurDelete = getUser(request
-							.getParameter("numUtilisateur"));
-
-					try {
-						DAOFactory1.getInstance().createUtilisateurService(null)
-								.deleteUtilisateur(utilisateurDelete);
-						// request.setAttribute("utilisateur", utilisateurUpdate);
-						request.setAttribute("action", "deleteAction");
-					} catch (TransactionalConnectionException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ServiceException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}*/
-
-
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -202,32 +175,35 @@ public class UserForm extends HttpServlet {
 
 			utilisateurUpdate.setNom(request.getParameter("nom"));
 			utilisateurUpdate.setPrenom(request.getParameter("prenom"));
-			
+
 			String userDateNaisParam = request.getParameter("dateNaissance");
 			Date userDateNais = new Date();
 			try {
-				userDateNais = new SimpleDateFormat("dd/MM/yyyy").parse(userDateNaisParam);
+				userDateNais = new SimpleDateFormat("dd/MM/yyyy")
+						.parse(userDateNaisParam);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			utilisateurUpdate.setDateNaissance(userDateNais);
-			
+
 			utilisateurUpdate.setAdresse(request.getParameter("adresse"));
 			utilisateurUpdate.setTel(request.getParameter("tel"));
 			utilisateurUpdate.setMail(request.getParameter("mail"));
-			
+
 			String promoParam = request.getParameter("promotion");
 			PromotionDTO promo = new PromotionDTO();
 			Integer promoNum = null;
-			if (promoParam != null){
+			if (promoParam != null) {
 				promoNum = Integer.valueOf(promoParam);
 			}
-			if (promoNum != null){
+			if (promoNum != null) {
 				PromotionDTO promoUpdate = new PromotionDTO();
 				promoUpdate.setNum(promoNum);
 				try {
-					promo = DAOFactory1.getInstance().createPromotionService(null).readPromotion(promoUpdate);
+					promo = DAOFactory1.getInstance()
+							.createPromotionService(null)
+							.readPromotion(promoUpdate);
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -237,7 +213,7 @@ public class UserForm extends HttpServlet {
 				}
 			}
 			utilisateurUpdate.setPromotion(promo);
-			
+
 			utilisateurUpdate.setLogin(request.getParameter("login"));
 			utilisateurUpdate.setPassword(request.getParameter("password"));
 
@@ -253,7 +229,8 @@ public class UserForm extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("utilisateur", getUser(request.getParameter("numUtilisateur")));
+			request.setAttribute("utilisateur",
+					getUser(request.getParameter("numUtilisateur")));
 			request.getRequestDispatcher("./UserRead.jsp").forward(request,
 					response);
 		}
@@ -266,32 +243,35 @@ public class UserForm extends HttpServlet {
 
 			utilisateurCreate.setNom(request.getParameter("nom"));
 			utilisateurCreate.setPrenom(request.getParameter("prenom"));
-			
+
 			String userDateNaisParam = request.getParameter("dateNaissance");
 			Date userDateNais = new Date();
 			try {
-				userDateNais = new SimpleDateFormat("dd/MM/yyyy").parse(userDateNaisParam);
+				userDateNais = new SimpleDateFormat("dd/MM/yyyy")
+						.parse(userDateNaisParam);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			utilisateurCreate.setDateNaissance(userDateNais);
-			
+
 			utilisateurCreate.setAdresse(request.getParameter("adresse"));
 			utilisateurCreate.setTel(request.getParameter("tel"));
 			utilisateurCreate.setMail(request.getParameter("mail"));
-			
+
 			String promoParam = request.getParameter("promotion");
 			PromotionDTO promo = new PromotionDTO();
 			Integer promoNum = null;
-			if (promoParam != null){
+			if (promoParam != null) {
 				promoNum = Integer.valueOf(promoParam);
 			}
-			if (promoNum != null){
+			if (promoNum != null) {
 				PromotionDTO promoUpdate = new PromotionDTO();
 				promoUpdate.setNum(promoNum);
 				try {
-					promo = DAOFactory1.getInstance().createPromotionService(null).readPromotion(promoUpdate);
+					promo = DAOFactory1.getInstance()
+							.createPromotionService(null)
+							.readPromotion(promoUpdate);
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -301,10 +281,9 @@ public class UserForm extends HttpServlet {
 				}
 			}
 			utilisateurCreate.setPromotion(promo);
-			
+
 			utilisateurCreate.setLogin(request.getParameter("login"));
 			utilisateurCreate.setPassword(request.getParameter("password"));
-			
 
 			try {
 				DAOFactory1.getInstance().createUtilisateurService(null)
@@ -321,7 +300,7 @@ public class UserForm extends HttpServlet {
 			request.getRequestDispatcher("./UserRead.jsp").forward(request,
 					response);
 		}
-		//Supprimer un utilisateur
+		// Supprimer un utilisateur
 		else if (request.getParameter("deleteAction") != null
 				&& request.getParameter("deleteAction").equals("supprimer")) {
 
@@ -338,8 +317,8 @@ public class UserForm extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		response.sendRedirect("./ListUserView");
-		} 
+			response.sendRedirect("./ListUserView");
+		}
 	}
 
 	private UtilisateurDTO getUser(String requestNumUtilisateur) {

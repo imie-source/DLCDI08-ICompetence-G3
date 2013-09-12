@@ -170,4 +170,25 @@ public class NiveauProxy implements INiveauDAO {
 		return deleteNum;
 	}
 
-}
+	@Override
+	public List<NiveauDTO> readAllNomNiveau(NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException {
+		
+		List<NiveauDTO> listeNomNiveau = new ArrayList<NiveauDTO>();
+		
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		listeNomNiveau = niveauDAO.readAllNomNiveau(niveau);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return listeNomNiveau;
+	}
+	}
+
+

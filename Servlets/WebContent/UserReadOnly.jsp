@@ -64,7 +64,6 @@
 							</c:forEach>
 						</div>
 					</div>
-					
 					<div class="ficheBas">
 					Invitations au projet
 					Choisir un projet : 
