@@ -15,11 +15,11 @@
 	<c:if test="${! empty utilisateur.num}">
 		Etes-vous sûr de vouloir supprimer cet utilisateur ?
 		<jsp:include page="UserReadOnly.jsp"/>
-		<form action="./UserForm">
+		<form method="post" action="./UserForm">
 			<input type="hidden" name="numUtilisateur" value="${utilisateur.num}"></input> 
 			<input type="submit" name="deleteAction" value="supprimer"></input>		
 		</form>
-		<form action="./ListUserView">
+		<form action="./UserRead.jsp">
 			<input type="hidden" name="numUtilisateur" value="${utilisateur.num}"></input>
 			<input type="submit" value="retour"></input>
 		</form>

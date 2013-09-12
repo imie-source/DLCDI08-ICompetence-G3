@@ -3,7 +3,7 @@
 
 <div class="contenu">
 <div class="titre">
-<h1>projet</h1>
+<h1>Utilisateur</h1>
 </div>
 <div class="fiche">
 			<div class="ficheGauche">ID Utilisateur 
@@ -12,16 +12,16 @@
 							Nom : <input type="text" name="nom" required="required" value="${utilisateur.nom}"></input>
 						</div>
 						<div id="prenom_util">
-							Prénom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
+							Prï¿½nom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
 						</div>
 						<div id="date_nais_util">
-							Date de naissance :<input type="text" name="dateNaissance" placeholder="Ex: 16/12/1980" value="${utilisateur.dateNaissance}"></input>
+							Date de naissance :<input type="text" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
 						</div>
 						<div id="adresse_util">
 							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
 						</div>
 						<div id="tel_util">
-							Téléphone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
+							Tï¿½lï¿½phone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
 						</div>
 						<div id="mail_util">
 							Adresse mail : <input type="text" name="mail" value="${utilisateur.mail}"></input>
@@ -49,11 +49,18 @@
 			
 			<div class = "ficheDroite">
 					<div class="ficheHaut">
-					Modif Compétences à faire
+					Modif Compï¿½tences ï¿½ faire
 					</div>
 					
 					<div class="ficheCentre">	
 					Projets
+						<div>
+							<c:forEach var="projet" items="${ListeUtilProjet}">
+								<div>
+									<c:out value="${projet.intitule}"></c:out>
+								</div>
+							</c:forEach>
+						</div>
 					</div>
 					
 					<div class="ficheBas">

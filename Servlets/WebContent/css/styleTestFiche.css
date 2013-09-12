@@ -160,5 +160,15 @@ width : 50%;
 				border-radius : 20px;
 				vertical-align : top;
 				}
+				.info_site{
+				padding-left : 10px;
+				display : inline-block;
+				margin-top : 10px;
+				width:50%;
+				background-color :green;
+				height :auto;
+				border-radius : 70px;
+				margin-bottom:25px;
+				}
 				
 			

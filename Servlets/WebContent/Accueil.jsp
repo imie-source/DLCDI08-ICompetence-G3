@@ -10,7 +10,29 @@
 <title>Gestion des Compétences</title>
 </head>
 <body>
-<jsp:include page="HeaderTest.jsp" />
-	
+	<jsp:include page="HeaderTest.jsp" />
+	<div class="contenu">
+		<div class="titre">
+			<h1>Bienvenue</h1>
+		</div>
+		<div class="liste">
+			<div class="global">
+				<div class="block accueil">
+					<div class="info_site">
+						<p>Conception, développement d'un outil de gestion des
+							compétences permettant d'obtenir toutes les compétences
+							détaillées de chaque utilisateur de ce site</p>
+					</div>
+
+					<div class="image2">
+						<img src="images/affiche_ce_informatique_0.png" width=200
+							height=400 style="float: center; align: center" border="0" />
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
