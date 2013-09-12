@@ -58,7 +58,7 @@ public class CompForm extends HttpServlet {
 				request.setAttribute("competence", competenceDTO);
 				List<NiveauDTO> listNivUtil =
 				DAOFactory1.getInstance().createCompetenceNiveauService(null).readNiveauUtilisateurCompetence(competence);
-				request.setAttribute("ListeNivUtil", listNivUtil);
+				session.setAttribute("ListeNivUtil", listNivUtil);
 
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block

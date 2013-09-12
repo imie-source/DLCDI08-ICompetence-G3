@@ -51,12 +51,22 @@ public class UserForm extends HttpServlet {
 
 			int ligne = Integer.valueOf(request.getParameter("numligneutil"));
 			Object listObj = session.getAttribute("listeUtilisateur");
-			@SuppressWarnings("unchecked")
-			List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
-			UtilisateurDTO utilisateur = listUtil.get(ligne);
-
-			session.removeAttribute("listeUtilisateur");
-
+			Object listObj1 = session.getAttribute("ListeNivUtil");
+			UtilisateurDTO utilisateur = null;
+				
+			if (listObj1 != null) {
+	
+				List<NiveauDTO> listNiveau = (List<NiveauDTO>) listObj1;
+				utilisateur = listNiveau.get(ligne).getUtilisateur();
+				session.removeAttribute("ListeNivUtil");
+			}
+			else {
+				
+				List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
+				utilisateur = listUtil.get(ligne);
+				session.removeAttribute("listeUtilisateur");
+			}
+			
 			try {
 				UtilisateurDTO utilisateurDTO = DAOFactory1.getInstance()
 						.createUtilisateurService(null)

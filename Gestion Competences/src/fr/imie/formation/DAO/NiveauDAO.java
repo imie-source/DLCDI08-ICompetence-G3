@@ -12,6 +12,8 @@ import fr.imie.formation.DAO.interfaces.INiveauDAO;
 import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
+import fr.imie.formation.factory.DAOFactory1;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -135,7 +137,7 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				UtilisateurDTO utilisateur = new UtilisateurDTO();
 				NiveauDTO niveau = new NiveauDTO();
 				utilisateur.setNum(rst.getInt(1));
-				niveau.setUtilisateur(utilDAO.readUtilisateur(utilisateur));
+				niveau.setUtilisateur(DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateur(utilisateur));
 				niveau.setNom(rst.getString(2));
 				niveau.setCompetence(rst.getString(3));
 
@@ -143,6 +145,9 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 			}
 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
