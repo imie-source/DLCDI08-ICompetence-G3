@@ -129,6 +129,8 @@ public class UserForm extends HttpServlet {
 			}
 			request.setAttribute("ListeCompNiv", listCompNiv);
 			request.setAttribute("ListeUtilProjet", listUtilProjet);
+			
+				
 			request.setAttribute("ListePromo", listPromo);
 			
 

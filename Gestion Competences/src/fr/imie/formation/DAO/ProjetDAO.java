@@ -227,21 +227,22 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		UtilisateurDTO chefDeProjet = new UtilisateurDTO();
 
 		try {
-			String query = "SELECT projet.num, projet.intitule as projet, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom FROM projet Inner join statut on statut.num=projet.num_statut inner join utilisateur on projet.num_util=utilisateur.num where projet.num =?";
+			String query = "SELECT projet.num, projet.intitule as projet, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom, utilisateur.num, statut.num FROM projet Inner join statut on statut.num=projet.num_statut inner join utilisateur on projet.num_util=utilisateur.num where projet.num =?";
 
 			pstmt = cn.prepareStatement(query);
 
 			pstmt.setInt(1, projet.getNum());
 			rst = pstmt.executeQuery();
-
 			while (rst.next()) {
 				proj.setNum(rst.getInt(1));
 				proj.setIntitule(rst.getString(2));
 				proj.setDescription(rst.getString(3));
 				statutProjet.setValeurStatut(rst.getString(4));
+				statutProjet.setNum(rst.getInt(8));
 				proj.setStatutProjet(statutProjet);
 				chefDeProjet.setNom(rst.getString(5));
 				chefDeProjet.setPrenom(rst.getString(6));
+				chefDeProjet.setNum(rst.getInt(7));
 				proj.setChefDeProjet(chefDeProjet);
 				try {
 					proj.setListUtilProjet(DAOFactory1.getInstance().

@@ -13,19 +13,19 @@
 					<h1>ID PROJET</h1>
 					Intitulé
 					<div>
-					<c:out value="${projetDTO.intitule}" />
+					<input type="text" readonly="readonly" name="intituleProjet" value="${projetDTO.intitule}"></input>
 					</div>
 					Contenu
 					<div>
-					<c:out value="${projetDTO.description}" />
+					<input type="text" readonly="readonly" name="descriptionProjet"  value="${projetDTO.description}"></input>
 					</div>
 					Chef de projet
 					<div>
-					<c:out value="${projetDTO.chefDeProjet.nom} ${projetDTO.chefDeProjet.prenom}" />
+					<input type="text" readonly="readonly" name="chefProjet"  value="${projetDTO.chefDeProjet.nom} ${projetDTO.chefDeProjet.prenom}" ></input>
 					</div>
 					Avancement
 					<div>
-					<c:out value="${projetDTO.statutProjet.valeurStatut}" />
+					<input type="text" readonly="readonly" name="statutProjet"  value="${projetDTO.statutProjet.valeurStatut}"></input>
 					</div>
 			</div>
 
@@ -35,7 +35,7 @@
 						<h1>PARTICIPANTS</h1>
 						<c:forEach var="util" items="${listeUtil}">
 						<div>
-						<c:out value="${util.nom} ${util.prenom}" />
+						<input type="text" readonly="readonly" name="utilProjet"  value="${util.nom} ${util.prenom}" />
 						</div>
 						</c:forEach>
 					</div>
