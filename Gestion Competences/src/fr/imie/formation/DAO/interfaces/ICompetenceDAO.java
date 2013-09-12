@@ -17,4 +17,13 @@ public interface ICompetenceDAO extends ITransactional {
 	
 	public List<CompetenceDTO> readListeUtilComp(CompetenceDTO competenceDto)
 			throws TransactionalConnectionException, DAOException;
+	
+	public int createCompetence(CompetenceDTO competence)
+			throws TransactionalConnectionException, DAOException;
+	
+	public int updateCompetence(CompetenceDTO competence)
+			throws TransactionalConnectionException, DAOException;
+	
+	public int deleteCompetence(CompetenceDTO competence)
+			throws TransactionalConnectionException, DAOException;
 }

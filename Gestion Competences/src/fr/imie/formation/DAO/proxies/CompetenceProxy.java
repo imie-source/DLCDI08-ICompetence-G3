@@ -87,7 +87,7 @@ public class CompetenceProxy implements ICompetenceDAO {
 	@Override
 	public CompetenceDTO readCompetence(CompetenceDTO competenceDTO)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		CompetenceDTO competence = new CompetenceDTO();
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -106,9 +106,9 @@ public class CompetenceProxy implements ICompetenceDAO {
 	@Override
 	public List<CompetenceDTO> readListeUtilComp(CompetenceDTO competenceDto)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		List<CompetenceDTO>listeUtilComp=new ArrayList<CompetenceDTO>();
-		
+
 		if (caller == null) {
 			beginTransactionalConnexion();
 		} else {
@@ -122,8 +122,67 @@ public class CompetenceProxy implements ICompetenceDAO {
 		}
 		return listeUtilComp;
 	}
-		
-		
+
+	@Override
+	public int createCompetence(CompetenceDTO competence)
+			throws TransactionalConnectionException, DAOException {
+
+		int createNum = 0;
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		createNum = competenceDAO.createCompetence(competence);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return createNum;
 	}
+
+
+	@Override
+	public int updateCompetence(CompetenceDTO competence)
+			throws TransactionalConnectionException, DAOException {
+
+		int updateNum = 0;
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		updateNum = competenceDAO.updateCompetence(competence);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return updateNum;
+	}
+
+	@Override
+	public int deleteCompetence(CompetenceDTO competence)
+			throws TransactionalConnectionException, DAOException {
+
+		int deleteNum = 0;
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		deleteNum = competenceDAO.deleteCompetence(competence);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+
+		return deleteNum;
+	}
+
+
+}
 
 

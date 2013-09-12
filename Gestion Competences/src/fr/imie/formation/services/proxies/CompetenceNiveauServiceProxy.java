@@ -235,6 +235,68 @@ public class CompetenceNiveauServiceProxy implements ICompetenceNiveauService {
 		return listeUtilComp;
 	}
 
+	@Override
+	public int createCompetence(CompetenceDTO competenceDto)
+			throws TransactionalConnectionException, ServiceException {
+		
+		int createNum = 0;
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		createNum = competenceNiveauService.createCompetence(competenceDto);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return createNum;
+	
+
+	}
+
+	@Override
+	public int updateCompetence(CompetenceDTO competenceDto)
+			throws TransactionalConnectionException, ServiceException {
+		
+       int updateNum = 0;
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		updateNum = competenceNiveauService.updateCompetence(competenceDto);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return updateNum;
+	
+	}
+
+	@Override
+	public int deleteCompetence(CompetenceDTO competenceDto)
+			throws TransactionalConnectionException, ServiceException {
+		   
+		int deleteNum = 0;
+			if (caller == null) {
+				beginTransactionalConnexion();
+			} else {
+				putInTransaction(caller);
+			}
+			deleteNum = competenceNiveauService.deleteCompetence(competenceDto);
+			if (caller == null) {
+				endTransactionalConnexion();
+			} else {
+				putOffTransaction();
+			}
+			return deleteNum;
+		
+		
+	}
+
 	}
 
 
