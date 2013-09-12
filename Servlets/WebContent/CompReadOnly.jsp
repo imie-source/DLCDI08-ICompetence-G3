@@ -24,8 +24,9 @@
 					<div>
 						<c:forEach var="niv" items="${ListeNivUtil}" varStatus="numLigneUtil">
 							<div>
-								<a href="./CompForm?numLigneUtil=${numLigneUtil.index}"> <c:out
-										value="${niv.utilisateur}"></c:out>
+								<a href="./UserForm?numligneutil=${numLigneUtil.index}"> <c:out
+										value="${niv.utilisateur.nom}"></c:out>
+										<c:out value="${niv.utilisateur.prenom}"></c:out>
 								</a>
 							</div>
 						</c:forEach>

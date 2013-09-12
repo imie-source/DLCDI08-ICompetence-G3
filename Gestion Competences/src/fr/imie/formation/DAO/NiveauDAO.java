@@ -13,6 +13,8 @@ import fr.imie.formation.DAO.interfaces.INiveauDAO;
 import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
+import fr.imie.formation.factory.DAOFactory1;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -137,16 +139,18 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 
 		try {
 
-			String query = "SELECT utilisateur.nom, niveau.valeur as niveau, competence.nom FROM niveau INNER JOIN competence_util ON niveau.num=competence_util.num_niveau INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util INNER JOIN competence ON competence.num=competence_util.num_competence where competence.num=?;";
+			String query = "SELECT utilisateur.num, niveau.valeur as niveau, competence.nom FROM niveau INNER JOIN competence_util ON niveau.num=competence_util.num_niveau INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util INNER JOIN competence ON competence.num=competence_util.num_competence where competence.num=?;";
 
 			pstm = cn.prepareStatement(query);
 			pstm.setInt(1, competence.getNum());
 			rst = pstm.executeQuery();
 
+			UtilisateurDAO utilDAO = new UtilisateurDAO();
 			while (rst.next()) {
+				UtilisateurDTO utilisateur = new UtilisateurDTO();
 				NiveauDTO niveau = new NiveauDTO();
-
-				niveau.setUtilisateur(rst.getString(1));
+				utilisateur.setNum(rst.getInt(1));
+				niveau.setUtilisateur(DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateur(utilisateur));
 				niveau.setNom(rst.getString(2));
 				niveau.setCompetence(rst.getString(3));
 
@@ -154,6 +158,9 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 			}
 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
