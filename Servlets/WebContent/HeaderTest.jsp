@@ -1,5 +1,6 @@
 
 <div class="chapeau">
+<a href="Accueil.jsp"/>
 	<div class="logo">
 		<img src="images/imie.jpg" />
 	</div>

@@ -3,7 +3,7 @@
 
 <div class="contenu">
 <div class="titre">
-<h1>projet</h1>
+<h1>Utilisateur</h1>
 </div>
 <div class="fiche">
 			<div class="ficheGauche">ID Utilisateur 
@@ -15,7 +15,7 @@
 							Prénom : <input type="text" name="prenom" value="${utilisateur.prenom}"></input>
 						</div>
 						<div id="date_nais_util">
-							Date de naissance :<input type="text" name="dateNaissance" value="${utilisateur.dateNaissance}"></input>
+							Date de naissance :<input type="text" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
 						</div>
 						<div id="adresse_util">
 							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
@@ -54,6 +54,13 @@
 					
 					<div class="ficheCentre">	
 					Projets
+						<div>
+							<c:forEach var="projet" items="${ListeUtilProjet}">
+								<div>
+									<c:out value="${projet.intitule}"></c:out>
+								</div>
+							</c:forEach>
+						</div>
 					</div>
 					
 					<div class="ficheBas">
