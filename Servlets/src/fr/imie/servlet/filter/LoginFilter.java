@@ -16,14 +16,13 @@ import javax.servlet.http.HttpSession;
 import fr.imie.formation.DTO.UtilisateurDTO;
 
 /**
- * Servlet Filter implementation class LoginFilter
+ * Servlet Filter implementation class AuthentificationFilter
  */
-@WebFilter("/LoginFilter")
+//@WebFilter(urlPatterns = "/*")
 public class LoginFilter implements Filter {
 
-	
-	private static final String LOGIN_PAGE = "Login.jsp";
-	
+	private static final String LOGIN_PAGE = "Accueil.jsp";
+
 	/**
 	 * Default constructor.
 	 */
@@ -50,7 +49,7 @@ public class LoginFilter implements Filter {
 		// http://onjava.com/pub/a/onjava/2002/06/12/form.html
 
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		//String contextPath = httpRequest.getContextPath();
+		String contextPath = httpRequest.getContextPath();
 		String resource = httpRequest.getRequestURI();
 
 		HttpSession session = httpRequest.getSession(true);
@@ -92,17 +91,18 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			if (!resource.contains("Deconnexion")) {
-				//String redirectionURL = (String) session
-					//	.getAttribute("redirectUrlLogin");
+				String redirectionURL = (String) session
+						.getAttribute("redirectUrlLogin");
 
 				session.setAttribute("redirectUrlLogin", resource);
 			}
 			RequestDispatcher requestDispatcher = httpRequest
-					.getRequestDispatcher(LOGIN_PAGE);                 
+					.getRequestDispatcher(LOGIN_PAGE);
 			requestDispatcher.forward(request, response);
 		}
 
 	}
+
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
