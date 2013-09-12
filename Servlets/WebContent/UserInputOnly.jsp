@@ -1,12 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
 <div class="contenu">
 <div class="titre">
 <h1>Utilisateur</h1>
 </div>
 <div class="fiche">
 			<div class="ficheGauche">ID Utilisateur 
+			<form method="post" action="./UserForm">
 						<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
 						<div id="nom_util">
 							Nom : <input type="text" name="nom" value="${utilisateur.nom}"></input>
@@ -45,11 +47,28 @@
 						<div id="password_util">
 							Password : <input type="text" name="password" value="${utilisateur.password}"></input>
 						</div>
+						<input type="hidden" name="numUtilisateur" value=<c:out value="${utilisateurDTO.num}"/>> </input>
+						<input type="submit" name="updateAction" value="Confirmer"></input>
+				</form>
 			</div>
 			
 			<div class = "ficheDroite">
 					<div class="ficheHaut">
-					Modif Compétences à faire
+					<div id="comp_util">
+						Compétences :
+							<div>
+								<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
+									<div>
+										<c:out value="${comp.competence} ${comp.nom }"></c:out>
+									</div>
+								</c:forEach>
+								<div id="modal">
+									<p>TEST ça fontionne!!</p>
+								</div>
+								<button id="ajoutComp">ajout Comp</button>
+								
+							</div>
+						</div>
 					</div>
 					
 					<div class="ficheCentre">	
