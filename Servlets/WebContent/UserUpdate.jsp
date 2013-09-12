@@ -80,9 +80,11 @@ $(document).ready(function() {
 <div id="creation_utilisateur">
 	<c:if test="${! empty utilisateur.num}">
 			<div id="fiche_utilisateur">
-				
+				<form method="post" action="./UserForm">
 					<jsp:include page="UserInputOnly.jsp" />
-						
+					<input type="hidden" name="numUtilisateur" value=<c:out value="${utilisateurDTO.num}"/>> </input>
+					<input type="submit" name="updateAction" value="Confirmer"></input>
+				</form>	
 				<form action="./ListUserView">
 					<input type="submit" value="retour"></input>
 				</form>
