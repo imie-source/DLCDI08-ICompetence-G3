@@ -6,7 +6,6 @@ public class CompetenceDTO {
 
 	private int num;
 	private String nom;
-	private String prenom;
 	private List<NiveauDTO> listNiveau;
 	private CompetenceDTO competenceDomaine;
 	private List<CompetenceDTO> listCompetence;
@@ -51,12 +50,5 @@ public class CompetenceDTO {
 		this.listCompetence = listCompetence;
 	}
 
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
 
 }
