@@ -69,9 +69,24 @@ $(document).ready(function() {
 			        duration: 1000
 			      }
 			    });
-			  $( "#ajoutComp" ).click(function() {
-			     $( "#modal" ).dialog( "open" );
+			  $( "#modifComp" ).click(function() {
+			   		$( "#modal" ).dialog( "open" );
 			  });
+
+			  $( "#modal2" ).dialog({
+				     autoOpen: false,
+				      show: {
+				        effect: "blind",
+				        duration: 1000
+				      },
+				      hide: {
+				        effect: "explode",
+				        duration: 1000
+				      }
+				    });
+			$( "#ajoutComp" ).click(function() {
+				     $( "#modal2" ).dialog( "open" );
+				  });
 		});
 </script>
 </head>
@@ -90,69 +105,66 @@ $(document).ready(function() {
 				</form>
 			</div>
 			<div class = "ficheDroite">
-					<div class="ficheHaut">
-						<div id="comp_util">
-						Compétences :
-							<div>
-								<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
-									<div>
-										<c:out value="${comp.competence} ${comp.nom }"></c:out>
-									</div>
-								</c:forEach>
-								<div id="modal">
-									<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
-									<div>
-										<c:out value="${comp.competence} ${comp.nom }"></c:out>
-										<select name="niveau">
-								<c:forEach var="niveau" items="${ListeNiveau}">
-									<c:if test="${comp.num == niveau.num}">
-										<option selected="selected" value="${niveau.num}"> ${niveau.nom}</option>
-									 </c:if>
-									<c:if test="${comp.num != niveau.num}">
-										<option value="${niveau.num}"> ${niveau.valeur}</option>
-									</c:if>
-								</c:forEach>		
-							</select>
-									</div>
-								</c:forEach>
-							Ajouter une compétence :
-							<div>
-							<form method="post" action="./UserForm">
-							<select name="comp">
-								<c:forEach var="comp" items="${ListeComp}">
-										<option value="${comp.num}"> ${comp.nom}</option>
-								</c:forEach>		
-							</select>
-							<select name="niveau">
-								<c:forEach var="niveau" items="${ListeNiveau}">
-										<option value="${niveau.num}"> ${niveau.valeur}</option>
-								</c:forEach>							
-							</select>
-							<input type="hidden" name="numUtilisateur" value="${utilisateurDTO.num}"> </input>
-							<input type="submit" name="updateAction" value="Confirmer"></input>
-							</form>
-							</div>
-								</div>
-								<button id="ajoutComp">Modifier</button>
-								
-							</div>
-						</div>
-					</div>
-					
-					<div class="ficheCentre">	
-					Projets
+				<div class="ficheHaut">
+					<div id="comp_util">
+					Compétences :
 						<div>
-							<c:forEach var="projet" items="${ListeUtilProjet}">
-								<div>
-									<c:out value="${projet.intitule}"></c:out>
+							<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
+								<div id="modifComp">
+									<c:out value="${comp.competence.nom} ${comp.nom }"></c:out>
 								</div>
 							</c:forEach>
+								<div id="modal">
+									<div>
+										<c:out value="${comp.competence.nom}"></c:out>
+											<select name="niveau">
+												<c:forEach var="niveau" items="${ListeNiveau}">
+													<c:if test="${comp.num == niveau.num}">
+														<option selected="selected" value="${niveau.num}"> ${niveau.nom}</option>
+									 				</c:if>
+													<c:if test="${comp.num != niveau.num}">
+														<option value="${niveau.num}"> ${niveau.nom}</option>
+													</c:if>
+												</c:forEach>		
+											</select>
+									</div>
+									<input type="hidden" name="numComp" value="${comp.competence.num}"> </input>
+									<input type="submit" name="updateAction" value="Ok"></input>
+								</div>
 						</div>
+						<div id="modal2">
+							<form method="post" action="./UserForm">
+								<select name="comp">
+									<c:forEach var="comp" items="${ListeComp}">
+										<option value="${comp.num}"> ${comp.nom}</option>
+									</c:forEach>		
+								</select>
+								<select name="niveau">
+									<c:forEach var="niveau" items="${ListeNiveau}">
+											<option value="${niveau.num}"> ${niveau.nom}</option>
+									</c:forEach>							
+								</select>
+								<input type="hidden" name="numUtil" value="${utilisateur.num}"></input>
+								<input type="submit" name="updateAction" value="Enregistrer"></input>
+							</form>
+						</div>
+							<button id="ajoutComp">Ajouter une compétence</button>
 					</div>
-					
-					<div class="ficheBas">
-					Invitations:
-					</div>
+				</div>
+			</div>
+			<div class="ficheCentre">	
+			Projets
+				<div>
+					<c:forEach var="projet" items="${ListeUtilProjet}">
+						<div>
+							<c:out value="${projet.intitule}"></c:out>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="ficheBas">
+			Invitations:
+			</div>
 	</c:if>
 	<c:if test="${empty utilisateur.num}">
 		<c:redirect url="/ListUserView"/>

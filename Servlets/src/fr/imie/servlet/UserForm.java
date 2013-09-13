@@ -57,7 +57,6 @@ public class UserForm extends HttpServlet {
 			UtilisateurDTO utilisateur = null;
 				
 			if (listObj1 != null) {
-	
 				List<NiveauDTO> listNiveau = (List<NiveauDTO>) listObj1;
 				utilisateur = listNiveau.get(ligne).getUtilisateur();
 				session.removeAttribute("ListeNivUtil");
@@ -68,7 +67,6 @@ public class UserForm extends HttpServlet {
 				session.removeAttribute("listeUtil");
 			}
 			else {
-				
 				List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
 				utilisateur = listUtil.get(ligne);
 				session.removeAttribute("listeUtilisateur");
@@ -231,7 +229,6 @@ public class UserForm extends HttpServlet {
 			try {
 				DAOFactory1.getInstance().createUtilisateurService(null)
 						.updateUtilisateur(utilisateurUpdate);
-				// request.setAttribute("utilisateur", utilisateurUpdate);
 				request.setAttribute("action", "updateAction");
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
@@ -246,9 +243,22 @@ public class UserForm extends HttpServlet {
 					response);
 		}
 		else if (request.getParameter("updateAction") != null
-				&& request.getParameter("updateAction").equals("Ajouter cette compétence")){
-			//A terminer!!!
+				&& request.getParameter("updateAction").equals("Enregistrer")){
+			UtilisateurDTO util = getUser(request.getParameter("numUtil"));
+			NiveauDTO niveau = getNiveau(request.getParameter("niveau"));
+			CompetenceDTO comp = getComp(request.getParameter("comp"));
 			
+			try {
+				DAOFactory1.getInstance().createCompetenceNiveauService(null).addCompUtil(util, comp, niveau);
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("./UserUpdate.jsp").forward(request,
+					response);
 		}
 
 		// Ajouter un utilisateur
@@ -357,5 +367,47 @@ public class UserForm extends HttpServlet {
 			e.printStackTrace();
 		}
 		return utilisateurDTO;
+	}
+	
+	private CompetenceDTO getComp(String requestNumComp) {
+
+		CompetenceDTO compDTO = new CompetenceDTO();
+		int numComp = Integer.valueOf(requestNumComp);
+
+		CompetenceDTO compTemp = new CompetenceDTO();
+		compTemp.setNum(numComp);
+
+		try {
+			compDTO = DAOFactory1.getInstance()
+					.createCompetenceNiveauService(null).readCompetence(compTemp);
+		} catch (TransactionalConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return compDTO;
+	}
+	
+	private NiveauDTO getNiveau(String requestNumNiveau) {
+
+		NiveauDTO niveauDTO = new NiveauDTO();
+		int numComp = Integer.valueOf(requestNumNiveau);
+
+		NiveauDTO niveauTemp = new NiveauDTO();
+		niveauTemp.setNum(numComp);
+
+		try {
+			niveauDTO = DAOFactory1.getInstance()
+					.createCompetenceNiveauService(null).readNiveau(niveauTemp);
+		} catch (TransactionalConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return niveauDTO;
 	}
 }

@@ -79,6 +79,14 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 
 		return listeNomNiveau;
 	}
+	
+	public NiveauDTO readNiveau(NiveauDTO niveauDTO)
+			throws TransactionalConnectionException, DAOException {
+		NiveauDTO niveau = null;
+		niveau = readNiveau(niveauDTO, getConnection());
+		
+		return niveau;
+	}
 
 	// Liste des Niveaux et compétences pour un utilisateur
 	private List<NiveauDTO> readCompetenceNiveauUtilisateur(
@@ -103,7 +111,7 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				niveau.setNum(rst.getInt(1));
 				niveau.setNom(rst.getString(2));
 				comp.setNum(rst.getInt(3));
-				comp.setNom(rst.getString(2));
+				comp.setNom(rst.getString(4));
 				niveau.setCompetence(comp);
 				listcompNiv.add(niveau);
 
@@ -314,5 +322,44 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 			}
 		}
 		return listeNomNiveau;
+	}
+	
+	private NiveauDTO readNiveau(NiveauDTO niveauDTO, Connection cn)
+			throws TransactionalConnectionException, DAOException {
+
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+
+		NiveauDTO niveau = new NiveauDTO();
+
+		String query = "select num, valeur from niveau where num=?";
+		try {
+			pstmt = cn.prepareStatement(query);
+			pstmt.setInt(1, niveauDTO.getNum());
+			rst = pstmt.executeQuery();
+
+			while (rst.next()) {			
+				niveau.setNum(rst.getInt(1));
+				niveau.setNom(rst.getString(2));
+						
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) {
+					rst.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return niveau;
 	}
 }
