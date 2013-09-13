@@ -109,7 +109,7 @@ $(document).ready(function() {
 										<option selected="selected" value="${niveau.num}"> ${niveau.nom}</option>
 									 </c:if>
 									<c:if test="${comp.num != niveau.num}">
-										<option value="${niveau.num}"> ${niveau.valeur}</option>
+										<option value="${niveau.num}"> ${niveau.nom}</option>
 									</c:if>
 								</c:forEach>		
 							</select>
@@ -125,11 +125,10 @@ $(document).ready(function() {
 							</select>
 							<select name="niveau">
 								<c:forEach var="niveau" items="${ListeNiveau}">
-										<option value="${niveau.num}"> ${niveau.valeur}</option>
+										<option value="${niveau.num}"> ${niveau.nom}</option>
 								</c:forEach>							
 							</select>
-							<input type="hidden" name="numUtilisateur" value="${utilisateurDTO.num}"> </input>
-							<input type="submit" name="updateAction" value="Confirmer"></input>
+							<input type="submit" name="updateAction" value="Ajouter cette compétence"></input>
 							</form>
 							</div>
 								</div>

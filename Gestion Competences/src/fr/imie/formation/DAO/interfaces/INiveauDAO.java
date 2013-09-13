@@ -31,5 +31,7 @@ public interface INiveauDAO extends ITransactional{
 	public List<NiveauDTO> readAllNomNiveau()
 			throws TransactionalConnectionException, DAOException ;
 	
+	public NiveauDTO readNiveau(NiveauDTO niveauDTO)
+			throws TransactionalConnectionException, DAOException ;
 	
 }

@@ -229,6 +229,25 @@ ICompetenceNiveauService {
 		return listNiveau;
 		
 	}
+
+	@Override
+	public NiveauDTO readNiveau(NiveauDTO niveauDTO)
+			throws TransactionalConnectionException, ServiceException {
+		
+		NiveauDTO niveau = new NiveauDTO();
+
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			niveau = iDaoFactory.createINiveauDAO(this)
+					.readNiveau(niveauDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return niveau;
+	}
+	
 	
 	
 	
