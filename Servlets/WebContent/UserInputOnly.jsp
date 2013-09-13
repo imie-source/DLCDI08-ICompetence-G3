@@ -46,46 +46,7 @@
 						<div id="password_util">
 							Password : <input type="password" name="password" value="${utilisateur.password}"></input>
 						</div>
-			</div>
-			
-			<div class = "ficheDroite">
-					<div class="ficheHaut">
-						<div id="comp_util">
-						Compétences :
-							<div>
-								<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
-									<div>
-										<c:out value="${comp.competence} ${comp.nom }"></c:out>
-									</div>
-								</c:forEach>
-								<div id="modal">
-									<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
-									<div>
-										<c:out value="${comp.competence} ${comp.nom }"></c:out>
-									</div>
-								</c:forEach>
-								</div>
-								<button id="ajoutComp">Modifier</button>
-								
-							</div>
-						</div>
-					</div>
-					
-					<div class="ficheCentre">	
-					Projets
-						<div>
-							<c:forEach var="projet" items="${ListeUtilProjet}">
-								<div>
-									<c:out value="${projet.intitule}"></c:out>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-					
-					<div class="ficheBas">
-					Invitations:
-					</div>
-					
-			</div>
+			</div>					
+		</div>
 </div>
-</div>					
+		
