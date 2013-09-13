@@ -111,7 +111,7 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				niveau.setNum(rst.getInt(1));
 				niveau.setNom(rst.getString(2));
 				comp.setNum(rst.getInt(3));
-				comp.setNom(rst.getString(2));
+				comp.setNom(rst.getString(4));
 				niveau.setCompetence(comp);
 				listcompNiv.add(niveau);
 

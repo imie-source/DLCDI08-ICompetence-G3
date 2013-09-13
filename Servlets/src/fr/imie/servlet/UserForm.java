@@ -237,13 +237,22 @@ public class UserForm extends HttpServlet {
 					response);
 		}
 		else if (request.getParameter("updateAction") != null
-				&& request.getParameter("updateAction").equals("Ajouter cette compétence")){
-			UtilisateurDTO util = getUser(request.getParameter("numUtilisateur"));
-			CompetenceDTO comp = getComp(request.getParameter(""));
+				&& request.getParameter("updateAction").equals("Enregistrer")){
+			UtilisateurDTO util = getUser(request.getParameter("numUtil"));
+			NiveauDTO niveau = getNiveau(request.getParameter("niveau"));
+			CompetenceDTO comp = getComp(request.getParameter("comp"));
 			
-			
-			
-			
+			try {
+				DAOFactory1.getInstance().createCompetenceNiveauService(null).addCompUtil(util, comp, niveau);
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("./UserUpdate.jsp").forward(request,
+					response);
 		}
 
 		// Ajouter un utilisateur

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -13,7 +14,7 @@
 							Nom : <input type="text" name="nom" required="required" value="${utilisateur.nom}"></input>
 						</div>
 						<div id="prenom_util">
-							Pr�nom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
+							Prénom : <input type="text" name="prenom" required="required" value="${utilisateur.prenom}"></input>
 						</div>
 						<div id="date_nais_util">
 							Date de naissance :<input type="text" name="dateNaissance" required="required" placeholder="ex. 16/12/1980" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
@@ -22,7 +23,7 @@
 							Adresse : <input type="text" name="adresse" value="${utilisateur.adresse}"></input>
 						</div>
 						<div id="tel_util">
-							T�l�phone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
+							Téléphone :<input type="text" name="tel" value="${utilisateur.tel}"></input>
 						</div>
 						<div id="mail_util">
 							Adresse mail : <input type="text" name="mail" value="${utilisateur.mail}"></input>
