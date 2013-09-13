@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<%@page import="fr.imie.formation.DTO.CompetenceDTO"%>
-<%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,39 +8,25 @@
 <head>
 <link rel=stylesheet type=text/css href=css/style.css />
 <link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
-<link rel="stylesheet" href="../css/jquery.treeview.css" />
-<link rel="stylesheet" href="../css/red-treeview.css" />
-
-<script src="../lib/jquery.js" type="text/javascript"></script>
-<script src="../lib/jquery.cookie.js" type="text/javascript"></script>
-<script src="../jquery.treeview.js" type="text/javascript"></script>
-
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Compétences</title>
-
-<script type="text/javascript">
-	$(function() {
-		$("#navigation").treeview({
-			persist : "location",
-			collapsed : true,
-			unique : true
-		});
-	});
-</script>
-
 </head>
 <body>
-
 	<jsp:include page="HeaderTest.jsp" />
 	<div class="contenu">
 		<div class="titre">
 			<h1>Liste des compétences</h1>
+		</div>
+		<div class="liste">
+			<div class="global">
+				<div class="tableauContainer">
+					<div class="tableau">
 
+						<div class="ligneTableauLine ligneTableauHeader">
+							<div id=Competence
+								class="celluleTableauInTable celluleTableau celluleTableau200">Competence</div>
+						</div>
 
-			<ul id="tree">
-					<ul id="navigation">
 						<c:forEach var="competenceDTO" items="${listeCompetence}"
 							varStatus="numLigneComp">
 							<c:set var="isAlternativeLigne" value="${numLigneComp.index%2>0}" />
@@ -50,17 +34,16 @@
 								class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau200">
-									<ul>
-										<li><a
-											href="./CompForm?numLigneComp=${numLigneComp.index}"> <c:out
-													value="${competenceDTO.nom}" /></a></li>
-									</ul>
+									<a href="./CompForm?numLigneComp=${numLigneComp.index}"> <c:out
+											value="${competenceDTO.nom}" />
+									</a>
 								</div>
 							</div>
 						</c:forEach>
 
-					</ul>
-			</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
