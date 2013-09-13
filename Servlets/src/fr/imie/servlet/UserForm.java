@@ -53,6 +53,7 @@ public class UserForm extends HttpServlet {
 			int ligne = Integer.valueOf(request.getParameter("numligneutil"));
 			Object listObj = session.getAttribute("listeUtilisateur");
 			Object listObj1 = session.getAttribute("ListeNivUtil");
+			Object listObj2 =session.getAttribute("listeUtil");
 			UtilisateurDTO utilisateur = null;
 				
 			if (listObj1 != null) {
@@ -60,6 +61,11 @@ public class UserForm extends HttpServlet {
 				List<NiveauDTO> listNiveau = (List<NiveauDTO>) listObj1;
 				utilisateur = listNiveau.get(ligne).getUtilisateur();
 				session.removeAttribute("ListeNivUtil");
+			}
+			else if (listObj2 != null) {
+				List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj2;
+				utilisateur = listUtil.get(ligne);
+				session.removeAttribute("listeUtil");
 			}
 			else {
 				
