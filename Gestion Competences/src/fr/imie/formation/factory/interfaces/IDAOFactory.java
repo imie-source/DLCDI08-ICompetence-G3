@@ -1,6 +1,7 @@
 package fr.imie.formation.factory.interfaces;
 
 import fr.imie.formation.DAO.interfaces.ICompetenceDAO;
+import fr.imie.formation.DAO.interfaces.IInvitationDAO;
 import fr.imie.formation.DAO.interfaces.INiveauDAO;
 import fr.imie.formation.DAO.interfaces.IProjetDAO;
 import fr.imie.formation.DAO.interfaces.IPromotionDAO;
@@ -39,5 +40,7 @@ public interface IDAOFactory {
 	public IProjetDAO createIProjetDAO(ITransactional caller);
 	
 	public IStatutProjetDAO createIStatutProjetDAO(ITransactional caller);
+
+	public IInvitationDAO createIInvitationDAO(ITransactional caller);
 
 }

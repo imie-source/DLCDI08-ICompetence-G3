@@ -7,6 +7,7 @@ import fr.imie.formation.DAO.PromotionDAO;
 import fr.imie.formation.DAO.StatutProjetDAO;
 import fr.imie.formation.DAO.UtilisateurDAO;
 import fr.imie.formation.DAO.interfaces.ICompetenceDAO;
+import fr.imie.formation.DAO.interfaces.IInvitationDAO;
 import fr.imie.formation.DAO.interfaces.INiveauDAO;
 import fr.imie.formation.DAO.interfaces.IProjetDAO;
 import fr.imie.formation.DAO.interfaces.IPromotionDAO;
@@ -119,6 +120,12 @@ public class DAOFactory2 implements IDAOFactory {
 
 	@Override
 	public IPromotionService createPromotionService(ITransactional caller) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IInvitationDAO createIInvitationDAO(ITransactional caller) {
 		// TODO Auto-generated method stub
 		return null;
 	}

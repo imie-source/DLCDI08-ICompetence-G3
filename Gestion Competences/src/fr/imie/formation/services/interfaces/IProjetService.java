@@ -2,6 +2,7 @@ package fr.imie.formation.services.interfaces;
 
 import java.util.List;
 
+import fr.imie.formation.DTO.InvitationDTO;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
@@ -44,5 +45,10 @@ public interface IProjetService extends ITransactional{
 	
 	//STATUT PROJET
 	public List<StatutProjetDTO> readAllStatutProjet()
+		throws TransactionalConnectionException, ServiceException;
+	
+	// invitattion
+	
+	public  List<InvitationDTO> readAllInvitation(ProjetDTO projet)
 			throws TransactionalConnectionException, ServiceException;
 }

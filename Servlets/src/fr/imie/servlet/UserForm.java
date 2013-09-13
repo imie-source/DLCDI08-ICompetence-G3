@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.PromotionDTO;
@@ -82,6 +83,7 @@ public class UserForm extends HttpServlet {
 				request.setAttribute("ListeUtilProjet", listUtilProjet);
 
 				 List<ProjetDTO >listeProjetForInvit = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
+				//request.setAttribute("listeProjetForInvit", listeProjetForInvit);
 				request.setAttribute("listeProjetForInvit", listeProjetForInvit);
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
@@ -120,6 +122,8 @@ public class UserForm extends HttpServlet {
 			List<ProjetDTO> listUtilProjet = null;
 			List<PromotionDTO> listPromo = null;
 			List<NiveauDTO> listCompNiv = null;
+			List<NiveauDTO> listNiveau =null;
+			List<CompetenceDTO> listComp = null;
 			try {
 				listUtilProjet = DAOFactory1
 						.getInstance()
@@ -131,6 +135,8 @@ public class UserForm extends HttpServlet {
 				listCompNiv = DAOFactory1.getInstance()
 						.createCompetenceNiveauService(null)
 						.readCompetenceNiveauUtilisateur(getUser(request.getParameter("numUtilisateur")));
+				listComp = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllCompetence();
+				listNiveau = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllNomNiveau();
 				
 			} catch (TransactionalConnectionException e1) {
 				// TODO Auto-generated catch block
@@ -141,10 +147,9 @@ public class UserForm extends HttpServlet {
 			}
 			request.setAttribute("ListeCompNiv", listCompNiv);
 			request.setAttribute("ListeUtilProjet", listUtilProjet);
-			
-				
 			request.setAttribute("ListePromo", listPromo);
-			
+			request.setAttribute("ListeComp", listComp);		
+			request.setAttribute("ListeNiveau", listNiveau);
 
 			request.getRequestDispatcher("./UserUpdate.jsp").forward(request,
 					response);
@@ -233,6 +238,11 @@ public class UserForm extends HttpServlet {
 					getUser(request.getParameter("numUtilisateur")));
 			request.getRequestDispatcher("./UserRead.jsp").forward(request,
 					response);
+		}
+		else if (request.getParameter("updateAction") != null
+				&& request.getParameter("updateAction").equals("Ajouter cette compétence")){
+			//A terminer!!!
+			
 		}
 
 		// Ajouter un utilisateur
