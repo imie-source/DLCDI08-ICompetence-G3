@@ -3,9 +3,9 @@ package fr.imie.formation.DTO;
 public class NiveauDTO {
 
 	private int num;
+	private String nom;
 	private UtilisateurDTO utilisateur;
 	private CompetenceDTO competence;
-	private String valeur;
 
 	public int getNum() {
 		return num;
@@ -32,12 +32,12 @@ public class NiveauDTO {
 		this.competence = competence;
 	}
 
-	public String getValeur() {
-		return valeur;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setValeur(String valeur) {
-		this.valeur = valeur;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 }

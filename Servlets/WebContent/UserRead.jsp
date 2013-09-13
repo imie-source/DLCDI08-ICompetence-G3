@@ -10,8 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel=stylesheet type=text/css href=css/style.css />
 <link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+<%-- 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	--%>
 <title>Utilisateur</title>
 <script>
 </script>
