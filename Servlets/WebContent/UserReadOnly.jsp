@@ -65,7 +65,21 @@
 						</div>
 					</div>
 					<div class="ficheBas">
-					Invitations:
+					Invitations au projet
+					Choisir un projet : 
+						<div>
+						<form action = "./Projet" method="post">
+						<select name="projetForInvite">
+							<c:forEach var ="projetForInvite" items = "${listeProjetForInvit}">
+									<option>${projetForInvite.intitule}</option>
+									<input type="hidden" name="numProjetForInvite" value="${projet.num}"></input> 
+							</c:forEach>
+						</select>
+						<input type="hidden" name="numUtilisateur" value="${utilisateur.num}"></input>
+						<input type="submit" name="envoyerInvite" value="envoyer"></input>					
+						</form>
+						
+						</div>
 					</div>
 		</div>		
 	</div>

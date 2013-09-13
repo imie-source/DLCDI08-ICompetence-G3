@@ -4,8 +4,9 @@ public class NiveauDTO {
 
 	private int num;
 	private String nom;
-	private String utilisateur;
+	private UtilisateurDTO utilisateur;
 	private String competence;
+	private String valeur;
 
 	public int getNum() {
 		return num;
@@ -23,11 +24,11 @@ public class NiveauDTO {
 		this.nom = nom;
 	}
 
-	public String getUtilisateur() {
+	public UtilisateurDTO getUtilisateur() {
 		return utilisateur;
 	}
 
-	public void setUtilisateur(String utilisateur) {
+	public void setUtilisateur(UtilisateurDTO utilisateur) {
 		this.utilisateur = utilisateur;
 	}
 
@@ -37,6 +38,14 @@ public class NiveauDTO {
 
 	public void setCompetence(String competence) {
 		this.competence = competence;
+	}
+
+	public String getValeur() {
+		return valeur;
+	}
+
+	public void setValeur(String valeur) {
+		this.valeur = valeur;
 	}
 
 }

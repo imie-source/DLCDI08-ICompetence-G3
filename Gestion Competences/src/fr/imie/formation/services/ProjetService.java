@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.imie.formation.DAO.exceptions.DAOException;
+import fr.imie.formation.DTO.InvitationDTO;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
@@ -190,6 +191,20 @@ public class ProjetService extends ATransactional implements IProjetService {
 			}
 			return deleteNum;
 		}
-	}
+	
 
+// invitation
 
+/*public  List<InvitationDTO> readAllInvitation(ProjetDTO projet)
+		throws TransactionalConnectionException, ServiceException {
+	
+	List<InvitationDTO> listAllInvitation = new ArrayList<InvitationDTO>();
+	IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+
+	listAllInvitation=iDaoFactory.createIInvitationDAO(this).readAllInvitation(projet);
+		
+		
+	return listAllInvitation;
+	
+}*/
+}

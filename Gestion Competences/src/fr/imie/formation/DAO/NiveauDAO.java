@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import fr.imie.formation.DAO.interfaces.INiveauDAO;
 import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.DTO.NiveauDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
+import fr.imie.formation.factory.DAOFactory1;
+import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.ATransactional;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
 
@@ -46,27 +49,39 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 		return listNivUtilisateur;
 
 	}
+
 	public int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
 			throws TransactionalConnectionException, DAOException{		
-			int addNum=0;
-			addNum= addCompUtil(utilisateur, comp, niveau, getConnection());
-			return addNum;
+		int addNum=0;
+		addNum= addCompUtil(utilisateur, comp, niveau, getConnection());
+		return addNum;
 	}
-	
+
+
 	public int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
 			throws TransactionalConnectionException, DAOException{		
-			int updateNum=0;
-			updateNum= updateCompUtil(utilisateur, comp, niveau, getConnection());
-			return updateNum;
+		int updateNum=0;
+		updateNum= updateCompUtil(utilisateur, comp, niveau, getConnection());
+		return updateNum;
 	}
+
 
 	public int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
 			throws TransactionalConnectionException, DAOException{		
-			int deleteNum=0;
-			deleteNum= deleteCompUtil(utilisateur, comp, niveau, getConnection());
-			return deleteNum;
+		int deleteNum=0;
+		deleteNum= deleteCompUtil(utilisateur, comp, niveau, getConnection());
+		return deleteNum;
 	}
-	
+
+	public List<NiveauDTO> readAllNomNiveau(NiveauDTO niveau)
+			throws TransactionalConnectionException, DAOException {
+
+		List<NiveauDTO> listeNomNiveau = null;
+		listeNomNiveau= readAllNomNiveau(niveau,getConnection());
+
+		return listeNomNiveau;
+	}
+
 	// Liste des Niveaux et compétences pour un utilisateur
 	private List<NiveauDTO> readCompetenceNiveauUtilisateur(
 			UtilisateurDTO utilisateur, Connection cn)
@@ -124,16 +139,18 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 
 		try {
 
-			String query = "SELECT utilisateur.nom, niveau.valeur as niveau, competence.nom FROM niveau INNER JOIN competence_util ON niveau.num=competence_util.num_niveau INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util INNER JOIN competence ON competence.num=competence_util.num_competence where competence.num=?;";
+			String query = "SELECT utilisateur.num, niveau.valeur as niveau, competence.nom FROM niveau INNER JOIN competence_util ON niveau.num=competence_util.num_niveau INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util INNER JOIN competence ON competence.num=competence_util.num_competence where competence.num=?;";
 
 			pstm = cn.prepareStatement(query);
 			pstm.setInt(1, competence.getNum());
 			rst = pstm.executeQuery();
 
+			UtilisateurDAO utilDAO = new UtilisateurDAO();
 			while (rst.next()) {
+				UtilisateurDTO utilisateur = new UtilisateurDTO();
 				NiveauDTO niveau = new NiveauDTO();
-
-				niveau.setUtilisateur(rst.getString(1));
+				utilisateur.setNum(rst.getInt(1));
+				niveau.setUtilisateur(DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateur(utilisateur));
 				niveau.setNom(rst.getString(2));
 				niveau.setCompetence(rst.getString(3));
 
@@ -141,6 +158,9 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 			}
 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -161,7 +181,7 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 	}
 	private int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn)
 			throws TransactionalConnectionException, DAOException {
-		
+
 		int addNum=0;
 		PreparedStatement pstm=null;
 
@@ -191,18 +211,18 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 		return addNum;
 	}
 	private int updateCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn)
-		throws TransactionalConnectionException, DAOException {
+			throws TransactionalConnectionException, DAOException {
 
 		PreparedStatement pstm= null;
 		int updateNum = 0;
-		
+
 		try {
-		String query ="update competence_util set num_util='?', num_competence='?', num_niveau='?' where num='?'";
+			String query ="update competence_util set num_util='?', num_competence='?', num_niveau='?' where num='?'";
 			pstm=cn.prepareStatement(query);
 			pstm.setInt(1, utilisateur.getNum());
 			pstm.setInt(2, comp.getNum());
 			pstm.setInt(3, niveau.getNum());
-			
+
 			updateNum=pstm.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -217,20 +237,20 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	}
+		}
 		return updateNum;
-}
+	}
 	private int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn)
 			throws TransactionalConnectionException, DAOException {
 		int deleteNum=0;
 		PreparedStatement pstm=null;
 		try {
-		String query="delete from competence_util where num_util=?, and num_competence=?, and num_niveau=?";
+			String query="delete from competence_util where num_util=?, and num_competence=?, and num_niveau=?";
 			pstm=cn.prepareStatement(query);
 			pstm.setInt(1, utilisateur.getNum());
 			pstm.setInt(2, comp.getNum());
 			pstm.setInt(3, niveau.getNum());
-			
+
 			deleteNum=pstm.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -245,7 +265,56 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	}
+		}
 		return deleteNum;
-}
+	}
+
+	private List<NiveauDTO> readAllNomNiveau(NiveauDTO niveau,Connection cn)
+			throws TransactionalConnectionException, DAOException{
+
+		List<NiveauDTO> listeNomNiveau = new ArrayList<NiveauDTO>();
+
+		Statement stmt= null;
+		ResultSet rst= null;
+
+		try {
+			String query = "select num,valeur from niveau"	;
+
+
+			stmt=cn.createStatement();
+			rst=stmt.executeQuery(query);
+
+			while(rst.next()){
+
+				NiveauDTO nomNiveau = new NiveauDTO();
+				nomNiveau.setNum(rst.getInt(1));
+				nomNiveau.setValeur(rst.getString(2));
+
+				listeNomNiveau.add(nomNiveau);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}finally {
+			try {
+				if (rst != null) {
+					rst.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+
+		return listeNomNiveau;
+
+	}
 }
