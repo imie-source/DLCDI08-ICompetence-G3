@@ -154,6 +154,7 @@ public class Projet extends HttpServlet {
 		if (request.getParameter("envoyerInvite")!=null){
 				
 			ProjetDTO projetForUtil = getProjet(request.getParameter("projetForInvitation"));
+			request.setAttribute("projetDTO", projetForUtil);
 			
 			
 			UtilisateurDTO utilForProjet = new UtilisateurDTO();
