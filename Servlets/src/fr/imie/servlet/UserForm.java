@@ -82,8 +82,8 @@ public class UserForm extends HttpServlet {
 						.readProjetByUtilisateur(utilisateurDTO);
 				request.setAttribute("ListeUtilProjet", listUtilProjet);
 
-				listeProjetForInvit = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
-				request.setAttribute("listeProjetForInvit", listeProjetForInvit);
+				//listeProjetForInvit = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
+				//request.setAttribute("listeProjetForInvit", listeProjetForInvit);
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -147,7 +147,8 @@ public class UserForm extends HttpServlet {
 			request.setAttribute("ListeCompNiv", listCompNiv);
 			request.setAttribute("ListeUtilProjet", listUtilProjet);
 			request.setAttribute("ListePromo", listPromo);
-			request.setAttribute("ListeComp", listComp);			
+			request.setAttribute("ListeComp", listComp);		
+			request.setAttribute("ListeNiveau", listNiveau);
 
 			request.getRequestDispatcher("./UserUpdate.jsp").forward(request,
 					response);
