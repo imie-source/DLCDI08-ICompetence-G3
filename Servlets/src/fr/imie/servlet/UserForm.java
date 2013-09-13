@@ -81,7 +81,7 @@ public class UserForm extends HttpServlet {
 						.readProjetByUtilisateur(utilisateurDTO);
 				request.setAttribute("ListeUtilProjet", listUtilProjet);
 
-				listeProjetForInvit = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
+				 List<ProjetDTO >listeProjetForInvit = DAOFactory1.getInstance().createProjetService(null).readAllProjets();
 				request.setAttribute("listeProjetForInvit", listeProjetForInvit);
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
