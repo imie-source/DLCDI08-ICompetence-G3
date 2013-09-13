@@ -51,4 +51,7 @@ public interface ICompetenceNiveauService extends ITransactional {
 	public int deleteCompetence(CompetenceDTO competenceDto)
 			throws TransactionalConnectionException, ServiceException;
 	
+	public List<NiveauDTO> readAllNomNiveau()
+			throws TransactionalConnectionException, ServiceException;
+	
 }

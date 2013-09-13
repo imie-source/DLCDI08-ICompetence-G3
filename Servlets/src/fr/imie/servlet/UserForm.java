@@ -121,7 +121,7 @@ public class UserForm extends HttpServlet {
 			List<ProjetDTO> listUtilProjet = null;
 			List<PromotionDTO> listPromo = null;
 			List<NiveauDTO> listCompNiv = null;
-			//List<NiveauDTO> // manque liste niveau
+			List<NiveauDTO> listNiveau =null;
 			List<CompetenceDTO> listComp = null;
 			try {
 				listUtilProjet = DAOFactory1
@@ -135,6 +135,7 @@ public class UserForm extends HttpServlet {
 						.createCompetenceNiveauService(null)
 						.readCompetenceNiveauUtilisateur(getUser(request.getParameter("numUtilisateur")));
 				listComp = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllCompetence();
+				listNiveau = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllNomNiveau();
 				
 			} catch (TransactionalConnectionException e1) {
 				// TODO Auto-generated catch block

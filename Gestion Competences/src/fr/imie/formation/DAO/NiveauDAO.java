@@ -73,11 +73,11 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 		return deleteNum;
 	}
 
-	public List<NiveauDTO> readAllNomNiveau(NiveauDTO niveau)
+	public List<NiveauDTO> readAllNomNiveau()
 			throws TransactionalConnectionException, DAOException {
 
 		List<NiveauDTO> listeNomNiveau = null;
-		listeNomNiveau= readAllNomNiveau(niveau,getConnection());
+		listeNomNiveau= readAllNomNiveau(getConnection());
 
 		return listeNomNiveau;
 	}
@@ -145,7 +145,6 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 			pstm.setInt(1, competence.getNum());
 			rst = pstm.executeQuery();
 
-			UtilisateurDAO utilDAO = new UtilisateurDAO();
 			while (rst.next()) {
 				UtilisateurDTO utilisateur = new UtilisateurDTO();
 				NiveauDTO niveau = new NiveauDTO();
@@ -176,9 +175,9 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				e.printStackTrace();
 			}
 		}
-
 		return listNiveau;
 	}
+	
 	private int addCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau,Connection cn)
 			throws TransactionalConnectionException, DAOException {
 
@@ -269,7 +268,7 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 		return deleteNum;
 	}
 
-	private List<NiveauDTO> readAllNomNiveau(NiveauDTO niveau,Connection cn)
+	private List<NiveauDTO> readAllNomNiveau(Connection cn)
 			throws TransactionalConnectionException, DAOException{
 
 		List<NiveauDTO> listeNomNiveau = new ArrayList<NiveauDTO>();
@@ -279,7 +278,6 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 
 		try {
 			String query = "select num,valeur from niveau"	;
-
 
 			stmt=cn.createStatement();
 			rst=stmt.executeQuery(query);
@@ -291,7 +289,6 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				nomNiveau.setValeur(rst.getString(2));
 
 				listeNomNiveau.add(nomNiveau);
-
 			}
 
 		} catch (SQLException e) {
@@ -312,9 +309,6 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 				e.printStackTrace();
 			}
 		}
-
-
 		return listeNomNiveau;
-
 	}
 }

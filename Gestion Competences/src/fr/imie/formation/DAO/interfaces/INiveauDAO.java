@@ -28,7 +28,7 @@ public interface INiveauDAO extends ITransactional{
 	public int deleteCompUtil(UtilisateurDTO utilisateur,CompetenceDTO comp,NiveauDTO niveau)
 			throws TransactionalConnectionException, DAOException;
 	
-	public List<NiveauDTO> readAllNomNiveau(NiveauDTO niveau)
+	public List<NiveauDTO> readAllNomNiveau()
 			throws TransactionalConnectionException, DAOException ;
 	
 	
