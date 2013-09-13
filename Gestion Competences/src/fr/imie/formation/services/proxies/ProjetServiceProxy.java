@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.imie.formation.DTO.InvitationDTO;
 import fr.imie.formation.DTO.ProjetDTO;
 import fr.imie.formation.DTO.StatutProjetDTO;
 import fr.imie.formation.DTO.UtilisateurDTO;
@@ -197,6 +198,7 @@ public class ProjetServiceProxy implements IProjetService{
 	@Override
 	public List<StatutProjetDTO> readAllStatutProjet()
 			throws TransactionalConnectionException, ServiceException {
+		
 		List<StatutProjetDTO> listStatutProjet = new ArrayList<StatutProjetDTO>();
 		if (caller == null) {
 			beginTransactionalConnexion();
@@ -277,6 +279,25 @@ public class ProjetServiceProxy implements IProjetService{
 			
 			return deleteNum;
 		}
+
+	@Override
+	public List<InvitationDTO> readAllInvitation(ProjetDTO projet)
+			throws TransactionalConnectionException, ServiceException {
+	
+		List<InvitationDTO> listAllInvitation = new ArrayList<InvitationDTO>();
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		listAllInvitation = projetService.readAllInvitation(projet);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return listAllInvitation;
+	}
 		
 	}
 

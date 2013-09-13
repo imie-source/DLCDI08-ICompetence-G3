@@ -1,4 +1,4 @@
-package fr.imie.formation.services;
+  package fr.imie.formation.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,16 +195,21 @@ public class ProjetService extends ATransactional implements IProjetService {
 
 // invitation
 
-/*public  List<InvitationDTO> readAllInvitation(ProjetDTO projet)
+public  List<InvitationDTO> readAllInvitation(ProjetDTO projet)
 		throws TransactionalConnectionException, ServiceException {
 	
 	List<InvitationDTO> listAllInvitation = new ArrayList<InvitationDTO>();
 	IDAOFactory iDaoFactory = DAOFactory1.getInstance();
 
-	listAllInvitation=iDaoFactory.createIInvitationDAO(this).readAllInvitation(projet);
+	try {
+		listAllInvitation=iDaoFactory.createIInvitationDAO(this).readAllInvitation(projet);
+	} catch (DAOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		
 		
 	return listAllInvitation;
 	
-}*/
+}
 }
