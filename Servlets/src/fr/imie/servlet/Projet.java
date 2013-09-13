@@ -57,7 +57,7 @@ public class Projet extends HttpServlet {
 					ProjetDTO projetDTO = DAOFactory1.getInstance().createProjetService(null).readProjet(projet);
 					request.setAttribute("projetDTO", projetDTO);
 					List<UtilisateurDTO> listeUtil = DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateurProjet(projetDTO);
-					request.setAttribute("listeUtil", listeUtil);
+					session.setAttribute("listeUtil", listeUtil);
 					
 					
 
@@ -154,6 +154,7 @@ public class Projet extends HttpServlet {
 		if (request.getParameter("envoyerInvite")!=null){
 				
 			ProjetDTO projetForUtil = getProjet(request.getParameter("projetForInvitation"));
+			request.setAttribute("projetDTO", projetForUtil);
 			
 			
 			UtilisateurDTO utilForProjet = new UtilisateurDTO();
@@ -175,7 +176,6 @@ public class Projet extends HttpServlet {
 		}
 		
 	}
-	
 	
 	
 	
