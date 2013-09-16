@@ -63,8 +63,13 @@ jQuery(document)
 </head>
 <body>
 <jsp:include page="HeaderTest.jsp" />
-	<div id="creation_utilisateur">
+<div class="contenu">
+<div class="titre">
+<h1>Utilisateur</h1>
+</div>
+<div class="fiche">
 		<div id="fiche_utilisateur">
+		<div class="ficheGauche">ID Utilisateur 
 			<form method="post" action="./UserForm">
 				<jsp:include page="UserInputOnly.jsp" />
 					<input type="submit" id="envoi" name="createAction" value="ajouter"></input> 
@@ -109,5 +114,8 @@ jQuery(document)
 					Invitations:
 					</div>
 	</div>
+	</div>
+</div>
+</div>
 </body>
 </html>

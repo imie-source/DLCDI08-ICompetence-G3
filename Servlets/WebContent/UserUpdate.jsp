@@ -92,9 +92,15 @@ $(document).ready(function() {
 </head>
 <body>
 <jsp:include page="HeaderTest.jsp" />
-<div id="creation_utilisateur">
-	<c:if test="${! empty utilisateur.num}">
-			<div id="fiche_utilisateur">
+<div class="contenu">
+<div class="titre">
+<h1>Utilisateur</h1>
+</div>
+<div class="fiche">
+		<div id="fiche_utilisateur">
+		<c:if test="${! empty utilisateur.num}">
+			<div class="ficheGauche">ID Utilisateur 
+			
 				<form method="post" action="./UserForm">
 					<jsp:include page="UserInputOnly.jsp" />
 					<input type="hidden" name="numUtilisateur" value=<c:out value="${utilisateurDTO.num}"/>> </input>
@@ -151,7 +157,6 @@ $(document).ready(function() {
 							<button id="ajoutComp">Ajouter une compétence</button>
 					</div>
 				</div>
-			</div>
 			<div class="ficheCentre">	
 			Projets
 				<div>
@@ -165,10 +170,15 @@ $(document).ready(function() {
 			<div class="ficheBas">
 			Invitations:
 			</div>
+			</div>
 	</c:if>
+	
 	<c:if test="${empty utilisateur.num}">
 		<c:redirect url="/ListUserView"/>
 	</c:if>
+
+</div>
+</div>
 </div>
 </body>
 </html>

@@ -2,13 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
-<div class="contenu">
-<div class="titre">
-<h1>Utilisateur</h1>
-</div>
-<div class="fiche">
-			<div class="ficheGauche">ID Utilisateur 
+		
 						<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
 						<div id="nom_util">
 							Nom : <input type="text" name="nom" required="required" value="${utilisateur.nom}"></input>
@@ -46,8 +40,5 @@
 						</div>
 						<div id="password_util">
 							Password : <input type="password" name="password" value="${utilisateur.password}"></input>
-						</div>
-			</div>					
-		</div>
-</div>
+						</div>				
 		
