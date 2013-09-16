@@ -6,10 +6,10 @@ public class CompetenceDTO {
 
 	private int num;
 	private String nom;
-	private String prenom;
 	private List<NiveauDTO> listNiveau;
 	private CompetenceDTO competenceDomaine;
 	private List<CompetenceDTO> listCompetence;
+	private int niveauArbo;
 
 	public int getNum() {
 		return num;
@@ -51,12 +51,13 @@ public class CompetenceDTO {
 		this.listCompetence = listCompetence;
 	}
 
-	public String getPrenom() {
-		return prenom;
+
+	public int getNiveauArbo() {
+		return niveauArbo;
 	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setNiveauArbo(int niveauArbo) {
+		this.niveauArbo = niveauArbo;
 	}
 
 }

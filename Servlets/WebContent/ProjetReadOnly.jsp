@@ -33,10 +33,12 @@
 					<div class="ficheHaut">
 					
 						<h1>PARTICIPANTS</h1>
-						<c:forEach var="util" items="${listeUtil}">
-						<div>
-						<input type="text" readonly="readonly" name="utilProjet"  value="${util.nom} ${util.prenom}" />
-						</div>
+						<c:forEach var="util" items="${listeUtil}" varStatus="utilProjet">
+							<div>
+							<a href="./UserForm?numligneutil=${utilProjet.index}">
+								<input type="text" readonly="readonly" name="utilProjet"  value="${util.nom} ${util.prenom}" />
+							</a>
+							</div>
 						</c:forEach>
 					</div>
 					<div class="ficheCentre">

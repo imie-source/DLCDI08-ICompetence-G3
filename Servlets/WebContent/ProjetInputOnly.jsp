@@ -59,10 +59,10 @@
 					<div class="ficheHaut">
 					
 						<h1>PARTICIPANTS</h1>
-						<c:forEach var="util" items="${listeUtil}">
-						<div>
-						<input type="text"  name="utilProjet"  value="${util.nom} ${util.prenom}" />
-						</div>
+						<c:forEach var="util" items="${listeUtil}" varStatus="numLigne">
+							<div>
+							<input type="text"  name="utilProjet"  value="${util.nom} ${util.prenom}" />
+							</div>
 						</c:forEach>
 					</div>
 					<div class="ficheCentre">Invitations

@@ -210,5 +210,45 @@ ICompetenceNiveauService {
 		return deleteNum;
 
 	}
+
+	@Override
+	public List<NiveauDTO> readAllNomNiveau()
+			throws TransactionalConnectionException, ServiceException {
+		
+		List<NiveauDTO> listNiveau = new ArrayList<NiveauDTO>();
+
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			listNiveau = iDaoFactory.createINiveauDAO(this)
+					.readAllNomNiveau();
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return listNiveau;
+		
+	}
+
+	@Override
+	public NiveauDTO readNiveau(NiveauDTO niveauDTO)
+			throws TransactionalConnectionException, ServiceException {
+		
+		NiveauDTO niveau = new NiveauDTO();
+
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			niveau = iDaoFactory.createINiveauDAO(this)
+					.readNiveau(niveauDTO);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return niveau;
+	}
+	
+	
+	
 	
 }

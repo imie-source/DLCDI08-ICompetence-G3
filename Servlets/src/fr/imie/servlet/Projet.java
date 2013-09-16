@@ -57,7 +57,7 @@ public class Projet extends HttpServlet {
 					ProjetDTO projetDTO = DAOFactory1.getInstance().createProjetService(null).readProjet(projet);
 					request.setAttribute("projetDTO", projetDTO);
 					List<UtilisateurDTO> listeUtil = DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateurProjet(projetDTO);
-					request.setAttribute("listeUtil", listeUtil);
+					session.setAttribute("listeUtil", listeUtil);
 					
 					
 
@@ -147,14 +147,35 @@ public class Projet extends HttpServlet {
 					String chefParam = request.getParameter("chefProjet");
 					UtilisateurDTO chef = new UtilisateurDTO();
 					
-					
-					
+						
 				}
 		*/
-		
+		//ajout d' l'utilisateur au projet
+		if (request.getParameter("envoyerInvite")!=null){
+				
+			ProjetDTO projetForUtil = getProjet(request.getParameter("projetForInvitation"));
+			request.setAttribute("projetDTO", projetForUtil);
+			
+			
+			UtilisateurDTO utilForProjet = new UtilisateurDTO();
+			String numUtil = request.getParameter("numUtilisateur");
+			int numUtilInt = Integer.valueOf(numUtil);
+			utilForProjet.setNum(numUtilInt);
+			
+			try {
+				DAOFactory1.getInstance().createProjetService(null).addProjetUtil(utilForProjet, projetForUtil);
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+			request.getRequestDispatcher("./ProjetConsult.jsp").forward(request, response);
+		}
 		
 	}
-	
 	
 	
 	

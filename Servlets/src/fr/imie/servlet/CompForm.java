@@ -64,10 +64,8 @@ public class CompForm extends HttpServlet {
 				request.setAttribute("competence", competenceDTO);
 				List<NiveauDTO> listUtilNiv = DAOFactory1.getInstance()
 						.createCompetenceNiveauService(null)
-						.readNiveauUtilisateurCompetence(competenceDTO);
-				request.setAttribute("ListeUtilNiv", listUtilNiv);
-				
-				
+				session.setAttribute("ListeNivUtil", listNivUtil);
+
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -77,37 +75,6 @@ public class CompForm extends HttpServlet {
 			}
 			request.getRequestDispatcher("./CompRead.jsp").forward(request,
 					response);
-		}
-
-		// modification competence
-		else if (request.getParameter("update") != null
-				&& request.getParameter("update").equals("modifier")) {
-			request.setAttribute("competence",
-					getCompetence(request.getParameter("numCompetence")));
-			
-			List<CompetenceDTO>listCompDTO=new ArrayList<CompetenceDTO>();
-			try {
-				listCompDTO=DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllCompetence();
-			} catch (TransactionalConnectionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.setAttribute("listComp", listCompDTO);
-			
-
-			request.getRequestDispatcher("./CompUpdate.jsp").forward(request,
-					response);
-		} // suppression competence
-		else if (request.getParameter("delete") != null
-				& request.getParameter("delete").equals("supprimer")) {
-			request.setAttribute("competence",
-					getCompetence(request.getParameter("numCompetence")));
-			request.getRequestDispatcher("./CompDelete.jsp").forward(request,
-					response);
-
 		}
 
 	}

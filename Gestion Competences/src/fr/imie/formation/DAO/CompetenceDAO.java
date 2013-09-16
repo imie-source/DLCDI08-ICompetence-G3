@@ -123,7 +123,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		List<CompetenceDTO> listCompetence = new ArrayList<CompetenceDTO>();
 
-		String query = "select competence.num, competence.nom, competence.competence_domaine from competence competence left join competence pere on pere.num = competence.competence_domaine order by competence_domaine desc";
+		String query = "WITH RECURSIVE parcourt_arbo(id_competence, libelle, niveau, chemin) AS (SELECT competence.num, competence.nom, 0, ARRAY[competence.num] AS \"array\" FROM competence WHERE competence.competence_domaine IS NULL UNION ALL SELECT precedent.num, precedent.nom, debut.niveau + 1, debut.chemin || precedent.num FROM competence precedent JOIN parcourt_arbo debut ON debut.id_competence = precedent.competence_domaine) SELECT parcourt_arbo.id_competence, parcourt_arbo.libelle, parcourt_arbo.niveau, parcourt_arbo.chemin FROM parcourt_arbo ORDER BY parcourt_arbo.chemin, array_dims(parcourt_arbo.chemin), parcourt_arbo.niveau";
 		try {
 			stmt = cn.createStatement();
 			rst = stmt.executeQuery(query);
@@ -132,12 +132,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 				CompetenceDTO comp = new CompetenceDTO();
 				comp.setNum(rst.getInt(1));
 				comp.setNom(rst.getString(2));
-				CompetenceDTO compMere = new CompetenceDTO();
-				compMere.setNum(rst.getInt(3));
-				if (compMere.getNum() != 0) {
-					comp.setCompetenceDomaine(readCompetence(compMere));
-				}
-				comp.setListCompetence(readAllCompetenceFille(comp, cn));
+				comp.setNiveauArbo(rst.getInt(3));
 				listCompetence.add(comp);
 			}
 		} catch (SQLException e) {
@@ -159,10 +154,55 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		return listCompetence;
 	}
+	
+	// Liste de toutes les compétences
+//		private List<CompetenceDTO> readAllCompetence(Connection cn)
+//				throws TransactionalConnectionException, DAOException {
+//
+//			Statement stmt = null;
+//			ResultSet rst = null;
+//
+//			List<CompetenceDTO> listCompetence = new ArrayList<CompetenceDTO>();
+//
+//			String query = "select competence.num, competence.nom, competence.competence_domaine from competence competence left join competence pere on pere.num = competence.competence_domaine order by competence_domaine desc";
+//			try {
+//				stmt = cn.createStatement();
+//				rst = stmt.executeQuery(query);
+//
+//				while (rst.next()) {
+//					CompetenceDTO comp = new CompetenceDTO();
+//					comp.setNum(rst.getInt(1));
+//					comp.setNom(rst.getString(2));
+//					CompetenceDTO compMere = new CompetenceDTO();
+//					compMere.setNum(rst.getInt(3));
+//					if (compMere.getNum() != 0) {
+//						comp.setCompetenceDomaine(readCompetence(compMere));
+//					}	
+//					comp.setListCompetence(readAllCompetenceFille(comp, cn));
+//					listCompetence.add(comp);
+//				}
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} finally {
+//				try {
+//					if (rst != null) {
+//						rst.close();
+//					}
+//					if (stmt != null) {
+//						stmt.close();
+//					}
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//
+//			return listCompetence;
+//		}
 
-	private List<CompetenceDTO> readAllCompetenceFille(CompetenceDTO compMere,
-			Connection cn) throws TransactionalConnectionException,
-			DAOException {
+	private List<CompetenceDTO> readAllCompetenceFille(CompetenceDTO compMere, Connection cn)
+			throws TransactionalConnectionException, DAOException {
 
 		PreparedStatement pstmt = null;
 		ResultSet rst = null;
