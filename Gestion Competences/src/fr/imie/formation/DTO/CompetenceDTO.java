@@ -9,6 +9,7 @@ public class CompetenceDTO {
 	private List<NiveauDTO> listNiveau;
 	private CompetenceDTO competenceDomaine;
 	private List<CompetenceDTO> listCompetence;
+	private int niveauArbo;
 
 	public int getNum() {
 		return num;
@@ -50,5 +51,13 @@ public class CompetenceDTO {
 		this.listCompetence = listCompetence;
 	}
 
+
+	public int getNiveauArbo() {
+		return niveauArbo;
+	}
+
+	public void setNiveauArbo(int niveauArbo) {
+		this.niveauArbo = niveauArbo;
+	}
 
 }
