@@ -32,8 +32,6 @@
 					<c:redirect url="./ListProjetView" />
 				</c:if>
 			</div>
-
-
 		
 </body>
 </html>

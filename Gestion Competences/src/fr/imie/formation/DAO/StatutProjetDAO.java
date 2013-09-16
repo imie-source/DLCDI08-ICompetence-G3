@@ -26,6 +26,13 @@ public class StatutProjetDAO extends ATransactional implements IStatutProjetDAO 
 		listStatutProjet = readAllStatutProjet(getConnection());
 		return listStatutProjet;
 	}
+	
+	public StatutProjetDTO readStatutProjet(StatutProjetDTO statutProjet)
+			throws TransactionalConnectionException, DAOException{
+		StatutProjetDTO statut = null;
+		statut = readStatutProjet(statutProjet, getConnection());
+		return statut;		
+	}
 
 	public int createStatutProjet(StatutProjetDTO statut)
 			throws TransactionalConnectionException, DAOException{
@@ -48,7 +55,47 @@ public class StatutProjetDAO extends ATransactional implements IStatutProjetDAO 
 		deleteNum=deleteStatutProjet(statut,getConnection());
 		return deleteNum;
 	}
+	
+	private StatutProjetDTO readStatutProjet(StatutProjetDTO statutProjet, Connection cn)
+			throws TransactionalConnectionException, DAOException{
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		StatutProjetDTO statut = new StatutProjetDTO();
+		
+		String query = "Select num, valeur FROM statut where num = ?";
+		
+		try {
+			pstmt = cn.prepareStatement(query);
+			pstmt.setInt(1, statutProjet.getNum());
+			rst = pstmt.executeQuery();		
+			
+			while (rst.next()) {
+				statut.setNum(rst.getInt(1));
+				statut.setValeurStatut(rst.getString(2));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rst != null) {
+					rst.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return statut;
+	
+				
+	}
+	
 	private List<StatutProjetDTO> readAllStatutProjet(Connection cn)
 			throws TransactionalConnectionException, DAOException{
 
@@ -170,6 +217,7 @@ public class StatutProjetDAO extends ATransactional implements IStatutProjetDAO 
 		return deleteNum;
 	}
 
+	
 	
 	
 
