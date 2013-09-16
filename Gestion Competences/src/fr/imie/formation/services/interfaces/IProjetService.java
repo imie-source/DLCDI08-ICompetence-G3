@@ -47,6 +47,9 @@ public interface IProjetService extends ITransactional{
 	public List<StatutProjetDTO> readAllStatutProjet()
 		throws TransactionalConnectionException, ServiceException;
 	
+	public StatutProjetDTO readStatutProjet(StatutProjetDTO statutProjet)
+			throws TransactionalConnectionException, ServiceException;
+	
 	// invitattion
 	
 	public  List<InvitationDTO> readAllInvitation(ProjetDTO projet)

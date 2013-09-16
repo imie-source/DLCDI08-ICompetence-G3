@@ -1,6 +1,7 @@
 package fr.imie.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -137,24 +138,90 @@ public class Projet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Modifier un projet
-			/*	if (request.getParameter("updateAction") != null
+			if (request.getParameter("updateAction") != null
 						&& request.getParameter("updateAction").equals("Confirmer")) {
 					
 					ProjetDTO projetUpdate = getProjet(request.getParameter("numProjet"));
 					projetUpdate.setIntitule(request.getParameter("intituleProjet"));
 					projetUpdate.setDescription(request.getParameter("descriptionProjet"));
 					
-					String chefParam = request.getParameter("chefProjet");
-					UtilisateurDTO chef = new UtilisateurDTO();
+					//modif du statut
+					String statutParam = request.getParameter("statutProjet");
+			
+					StatutProjetDTO statut =new StatutProjetDTO();
 					
+					Integer statutNum = null;
+					if (statutParam != null){
+						statutNum = Integer.valueOf(statutParam);
+					}
+					if (statutNum!= null){
+						StatutProjetDTO statutToUpdate = new StatutProjetDTO();
+						statutToUpdate.setNum(statutNum);
+						try {
+							statut = DAOFactory1.getInstance().createProjetService(null).readStatutProjet(statutToUpdate);
+						} catch (TransactionalConnectionException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (ServiceException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					projetUpdate.setStatutProjet(statut);
+				
+					
+					//modif chef de projet => private int ajoutChefDeProjet(ProjetDTO projet, Connection cn)
+					//puis projetUpdate.setChefDeProjet
+					
+					String chefParam = request.getParameter("chefProjet");
+					UtilisateurDTO chefProjet = new UtilisateurDTO();
+					Integer chefNum = null;
+					if (chefParam != null) {
+						chefNum = Integer.valueOf(chefParam);
+					}
+						if(chefNum !=null){
+							UtilisateurDTO chefUpdate = new UtilisateurDTO();
+							chefUpdate.setNum(chefNum);						
 						
+							try {
+								chefProjet = DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateur(chefUpdate);
+							
+							} catch (TransactionalConnectionException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (ServiceException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}					
+						}
+						
+						projetUpdate.setChefDeProjet(chefProjet);
+									
+					try {
+						DAOFactory1.getInstance().createProjetService(null).updateProjet(projetUpdate);
+						DAOFactory1.getInstance().createProjetService(null).ajoutChefDeProjet(projetUpdate);
+						request.setAttribute("action", "updateAction");
+					} catch (TransactionalConnectionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ServiceException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					request.setAttribute("projetDTO",
+							getProjet(request.getParameter("numProjet")));
+					request.getRequestDispatcher("./ProjetConsult.jsp").forward(request,
+							response);
 				}
-		*/
+		
+			
+			
 		//ajout d' l'utilisateur au projet
 		if (request.getParameter("envoyerInvite")!=null){
 				
 			ProjetDTO projetForUtil = getProjet(request.getParameter("projetForInvitation"));
-			request.setAttribute("projetDTO", projetForUtil);
+				//request.setAttribute("projetDTO", projetForUtil);// envoie sur la fiche Projet mais sans les participants
 			
 			
 			UtilisateurDTO utilForProjet = new UtilisateurDTO();
