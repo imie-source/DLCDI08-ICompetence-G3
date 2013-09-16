@@ -228,11 +228,11 @@ public class NiveauDAO extends ATransactional implements INiveauDAO {
 		int updateNum = 0;
 
 		try {
-			String query ="update competence_util set num_util='?', num_competence='?', num_niveau='?' where num='?'";
+			String query ="update competence_util set num_niveau=? where num_util=? and num_competence=?";
 			pstm=cn.prepareStatement(query);
-			pstm.setInt(1, utilisateur.getNum());
-			pstm.setInt(2, comp.getNum());
-			pstm.setInt(3, niveau.getNum());
+			pstm.setInt(2, utilisateur.getNum());
+			pstm.setInt(3, comp.getNum());
+			pstm.setInt(1, niveau.getNum());
 
 			updateNum=pstm.executeUpdate();
 		} catch (SQLException e) {

@@ -69,8 +69,12 @@ $(document).ready(function() {
 			        duration: 1000
 			      }
 			    });
-			  $( "#modifComp" ).click(function() {
+		    $("button").mousedown(function(){
+			    var indice = $(this).attr("id");
+			  $( "p" +indice ).click(function() {
 			   		$( "#modal" ).dialog( "open" );
+			   		
+			  });
 			  });
 
 			  $( "#modal2" ).dialog({
@@ -115,12 +119,29 @@ $(document).ready(function() {
 					<div id="comp_util">
 					Compétences :
 						<div>
-							<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
-								<div id="modifComp">
-									<c:out value="${comp.competence.nom} ${comp.nom }"></c:out>
+							<c:forEach var="compniv" items="${ListeCompNiv}" varStatus="i">
+								<div>
+								<form method="post" action="./UserForm">
+									<p id="${i.index}"><c:out value="${compniv.competence.nom}"></c:out>
+									<select name="niveau">
+									<c:forEach var="niveau" items="${ListeNiveau}">
+													<c:if test="${compniv.num == niveau.num}">
+														<option selected="selected" value="${niveau.num}"> ${niveau.nom}</option>
+									 				</c:if>
+													<c:if test="${compniv.num != niveau.num}">
+														<option value="${niveau.num}"> ${niveau.nom}</option>
+													</c:if>
+												</c:forEach>
+												</select>
+									<input type="hidden" name="numUtil" value="${utilisateur.num}"></input>
+									<input type="hidden" name="comp" value="${compniv.competence.num}"></input>
+									<%-- <input type="hidden" name="numNiveau" value="${compniv.num}"> </input> --%>
+									<input type="submit" name="updateAction" value="Ok"></input>
+									</p>
+									</form>
 								</div>
 							</c:forEach>
-								<div id="modal">
+								<%-- <div id="modal">
 									<div>
 										<c:out value="${comp.competence.nom}"></c:out>
 											<select name="niveau">
@@ -136,7 +157,7 @@ $(document).ready(function() {
 									</div>
 									<input type="hidden" name="numComp" value="${comp.competence.num}"> </input>
 									<input type="submit" name="updateAction" value="Ok"></input>
-								</div>
+								</div> --%>
 						</div>
 						<div id="modal2">
 							<form method="post" action="./UserForm">

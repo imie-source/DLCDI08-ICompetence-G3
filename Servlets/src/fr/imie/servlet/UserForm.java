@@ -105,9 +105,13 @@ public class UserForm extends HttpServlet {
 				&& request.getParameter("create") != null
 				&& request.getParameter("create").equals("creer")) {
 			List<PromotionDTO> listPromo = null;
+			List<NiveauDTO> listNiveau =null;
+			List<CompetenceDTO> listComp = null;
 			try {
 				listPromo = DAOFactory1.getInstance()
 						.createPromotionService(null).readAllPromotion();
+				listComp = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllCompetence();
+				listNiveau = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllNomNiveau();
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -116,6 +120,8 @@ public class UserForm extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.setAttribute("ListePromo", listPromo);
+			request.setAttribute("ListeComp", listComp);		
+			request.setAttribute("ListeNiveau", listNiveau);
 			request.getRequestDispatcher("./UserCreate.jsp").forward(request,
 					response);
 		} // modification utilisateur
@@ -252,7 +258,7 @@ public class UserForm extends HttpServlet {
 			request.getRequestDispatcher("./UserRead.jsp").forward(request,
 					response);
 		}
-		//Modification des compétences d'un utilisateur
+		//Ajout des compétences d'un utilisateur
 		else if (request.getParameter("updateAction") != null
 				&& request.getParameter("updateAction").equals("Enregistrer")){
 			UtilisateurDTO util = getUser(request.getParameter("numUtil"));
@@ -293,7 +299,50 @@ public class UserForm extends HttpServlet {
 			request.setAttribute("utilisateur", getUser(request.getParameter("numUtil")));
 			request.getRequestDispatcher("./UserUpdate.jsp").forward(request,
 					response);
+		} 
+		//Modification des compétences d'un utilisateur
+		else if (request.getParameter("updateAction") != null
+				&& request.getParameter("updateAction").equals("Ok")){
+			UtilisateurDTO util = getUser(request.getParameter("numUtil"));
+			NiveauDTO niveau = getNiveau(request.getParameter("niveau"));
+			CompetenceDTO comp = getComp(request.getParameter("comp"));
+			List<ProjetDTO> listUtilProjet = null;
+			List<PromotionDTO> listPromo = null;
+			List<NiveauDTO> listCompNiv = null;
+			List<NiveauDTO> listNiveau =null;
+			List<CompetenceDTO> listComp = null;
+			
+			try {
+				DAOFactory1.getInstance().createCompetenceNiveauService(null).updateCompUtil(util, comp, niveau);
+				listUtilProjet = DAOFactory1
+						.getInstance()
+						.createProjetService(null)
+						.readProjetByUtilisateur(
+								getUser(request.getParameter("numUtil")));
+				listPromo = DAOFactory1.getInstance()
+						.createPromotionService(null).readAllPromotion();
+				listCompNiv = DAOFactory1.getInstance()
+						.createCompetenceNiveauService(null)
+						.readCompetenceNiveauUtilisateur(getUser(request.getParameter("numUtil")));
+				listComp = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllCompetence();
+				listNiveau = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllNomNiveau();
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("ListeCompNiv", listCompNiv);
+			request.setAttribute("ListeUtilProjet", listUtilProjet);
+			request.setAttribute("ListePromo", listPromo);
+			request.setAttribute("ListeComp", listComp);		
+			request.setAttribute("ListeNiveau", listNiveau);
+			request.setAttribute("utilisateur", getUser(request.getParameter("numUtil")));
+			request.getRequestDispatcher("./UserUpdate.jsp").forward(request,
+					response);
 		}
+		
 
 		// Ajouter un utilisateur
 		else if (request.getParameter("createAction") != null
