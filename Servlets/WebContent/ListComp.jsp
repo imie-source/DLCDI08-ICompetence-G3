@@ -24,8 +24,8 @@
 
 						<div class="ligneTableauLine ligneTableauHeader">
 							<div id=Competence
-								class="celluleTableauInTable celluleTableau celluleTableau200">Competence</div>
-						</div>
+								class="celluleTableauInTable celluleTableau celluleTableau200">Compétence</div>
+					
 
 						<c:forEach var="competenceDTO" items="${listeCompetence}"
 							varStatus="numLigneComp">
@@ -38,16 +38,19 @@
 											value="${competenceDTO.nom}" />
 									</a>
 								</div>
+
 							</div>
 						</c:forEach>
 
 					</div>
+				</div>
 				</div>
 				<form action="./CompForm">
 					<input type="submit" name="create" id="create" value="creer"></input>
 				</form>
 			</div>
 		</div>
-	</div>
+		</div>
+	
 </body>
 </html>

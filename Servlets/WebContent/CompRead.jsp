@@ -27,7 +27,7 @@
 				<input type="submit" name="update" value="modifier"></input>
 			</form>
 			<form action="./CompForm">
-				<input type="hidden" name="numUtilisateur" value="${competence.num}"></input>
+				<input type="hidden" name="numCompetence" value="${competence.num}"></input>
 				<input type="submit" name="delete" value="supprimer" />
 			</form>
 			<form action="./ListCompView">

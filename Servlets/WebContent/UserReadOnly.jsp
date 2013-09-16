@@ -47,7 +47,7 @@
 						<div>
 							<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
 								<div>
-									<c:out value="${comp.competence} ${comp.nom }"></c:out>
+									<c:out value="${competence.nom} ${competence.competenceDomaine }"></c:out>
 								</div>
 							</c:forEach>
 						</div>

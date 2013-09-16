@@ -68,7 +68,7 @@ jQuery(document)
 			<div id="fiche_competence">
 				<form method="post" action="./CompForm">
 					<jsp:include page="CompInputOnly.jsp" />
-						<input type="hidden" name="numCompetence" value=<c:out value="${competenceDTO.num}"/>> </input>
+						<input type="hidden" name="numCompetence" value=<c:out value="${competence.num}"/>> </input>
 						<input type="submit" name="updateAction" value="Confirmer"></input>
 				</form>
 				<form action="./ListCompView">
