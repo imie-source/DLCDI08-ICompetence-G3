@@ -55,7 +55,7 @@
 						</select>					
 					</div>
 			</div>
-
+	<%-- 
 		<div class = "ficheDroite">
 					<div class="ficheHaut">
 					
@@ -65,15 +65,23 @@
 							<input type="text"  name="utilProjet"  value="${util.nom} ${util.prenom}" />
 							</div>
 						</c:forEach>
-						
-						<a href = "./ListCompView">ajouter des participants</a>
+						<div>
+						Ajouter des participants
+						</div>
+						<div>
+							<div><a href = "./ListCompView">par compétence</a></div>
+							<div><a href = "./ListUserView">par membre</a></div>
+						</div>
+						</div>
 					</div>
 					<div class="ficheCentre">Invitations
 					</div>
 					<div class="ficheBas">
 					</div>
 		</div>
+		--%>
 	</div>
+	
 	
 		<div class = "boutons">
 		</div>	
