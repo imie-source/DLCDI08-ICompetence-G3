@@ -101,8 +101,7 @@ public class UserForm extends HttpServlet {
 		}
 
 		// création utilisateur
-		else if (request.getParameter("numligne") == null
-				&& request.getParameter("create") != null
+		else if (request.getParameter("create") != null
 				&& request.getParameter("create").equals("creer")) {
 			List<PromotionDTO> listPromo = null;
 			List<NiveauDTO> listNiveau =null;

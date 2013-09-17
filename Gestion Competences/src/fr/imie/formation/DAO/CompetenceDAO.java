@@ -281,6 +281,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 			pstmt= cn.prepareStatement(query);
 			pstmt.setString(1, competence.getNom());
 			pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
+			pstmt.setInt(3, competence.getNum());
 			updateNum=pstmt.executeUpdate();
 
 		} catch (SQLException e) {
