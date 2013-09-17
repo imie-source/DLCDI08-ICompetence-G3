@@ -75,6 +75,27 @@ public class CompForm extends HttpServlet {
 			}
 			request.getRequestDispatcher("./CompRead.jsp").forward(request,
 					response);
+		}else if (request.getParameter("update") != null
+				&& request.getParameter("update").equals("modifier")) {
+			request.setAttribute("competence", getCompetence(request.getParameter("numComp")));
+			
+			List<CompetenceDTO> listComp = null;
+			
+			try {
+				listComp = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllCompetence();
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			CompetenceDTO compnull = new CompetenceDTO();
+			compnull.setNom("");
+			listComp.add(compnull);
+			request.setAttribute("ListComp", listComp);
+			request.getRequestDispatcher("./CompUpdate.jsp").forward(request, response);
+			
 		}
 
 	}

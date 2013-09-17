@@ -23,11 +23,11 @@
 		<c:if test="${! empty competence.num}">
 			<jsp:include page="CompReadOnly.jsp" />
 			<form action="./CompForm">
-				<input type="hidden" name="numCompetence" value="${competence.num}"></input>
+				<input type="hidden" name="numComp" value="${competence.num}"></input>
 				<input type="submit" name="update" value="modifier"></input>
 			</form>
 			<form action="./CompForm">
-				<input type="hidden" name="numCompetence" value="${competence.num}"></input>
+				<input type="hidden" name="numComp" value="${competence.num}"></input>
 				<input type="submit" name="delete" value="supprimer" />
 			</form>
 			<form action="./ListCompView">
