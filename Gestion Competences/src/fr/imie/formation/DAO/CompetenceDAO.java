@@ -248,8 +248,13 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		try {
 
+<<<<<<< HEAD
+			String query="insert into competence(nom,competence_domaine)values (?,?)";
+			pstmt= cn.prepareStatement(query);
+=======
 			String query = "insert into competence(nom,competence_domaine)values (?,?)";
 			pstmt = cn.prepareStatement(query);
+>>>>>>> 79cfd656367333db90e8ee5a18271e2e8f352238
 			pstmt.setString(1, competence.getNom());
 			pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
 			createNum = pstmt.executeUpdate();
@@ -279,8 +284,13 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 		PreparedStatement pstmt = null;
 
 		try {
+<<<<<<< HEAD
+			String query="update competence set nom=?, competence_domaine=?  where num=?";
+			pstmt= cn.prepareStatement(query);
+=======
 			String query = "update competence set nom=? ,competence_domaine=? where num=?";
 			pstmt = cn.prepareStatement(query);
+>>>>>>> 79cfd656367333db90e8ee5a18271e2e8f352238
 			pstmt.setString(1, competence.getNom());
 			pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
 			pstmt.setInt(3, competence.getNum());
@@ -350,9 +360,15 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		try {
 
+<<<<<<< HEAD
+			String query="SELECT utilisateur.num,utilisateur.nom, utilisateur.prenom, competence.nom as competence FROM competence inner JOIN competence_util ON competence.num=competence_util.num_competence INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util where competence.num=?";
+			psmt=cn.prepareStatement(query);
+			rst=psmt.executeQuery();
+=======
 			String query = "SELECT utilisateur.num,utilisateur.nom, utilisateur.prenom, competence.nom as competence FROM competence inner JOIN competence_util ON competence.num=competence_util.num_competence INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util where competence.num='?'";
 			psmt = cn.prepareStatement(query);
 			rst = psmt.executeQuery();
+>>>>>>> 79cfd656367333db90e8ee5a18271e2e8f352238
 
 			while (rst.next()) {
 
