@@ -14,8 +14,15 @@
 <div id="creation_projet">
 	
 			<div id="fiche_projet">
+				<form method ="post" action = "./Projet">
+					<jsp:include page="ProjetInputOnly.jsp" />
+					<input type="hidden" name="numProjet" value="${utilisateurDTO.num}"> </input>
+					<input type="submit" name="updateAction" value="Confirmer"></input>
+				</form>
 				
-				<jsp:include page="ProjetInputOnly.jsp" />
+				<form action="./ProjetConsult.jsp">
+					<input type="submit" value="retour"></input>
+				</form>
 			</div>
 </div>
 				

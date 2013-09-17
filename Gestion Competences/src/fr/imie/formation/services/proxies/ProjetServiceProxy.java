@@ -298,6 +298,26 @@ public class ProjetServiceProxy implements IProjetService{
 		}
 		return listAllInvitation;
 	}
+
+	@Override
+	public StatutProjetDTO readStatutProjet(StatutProjetDTO statutProjet)
+			throws TransactionalConnectionException, ServiceException {
+		
+		StatutProjetDTO statut = new StatutProjetDTO();
+		if (caller == null) {
+			beginTransactionalConnexion();
+		} else {
+			putInTransaction(caller);
+		}
+		statut = projetService.readStatutProjet(statutProjet);
+		if (caller == null) {
+			endTransactionalConnexion();
+		} else {
+			putOffTransaction();
+		}
+		return statut;
+
+	}
 		
 	}
 

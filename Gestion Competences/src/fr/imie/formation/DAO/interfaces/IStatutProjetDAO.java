@@ -20,5 +20,8 @@ public interface IStatutProjetDAO extends ITransactional{
 	
 	public int deleteStatutProjet(StatutProjetDTO statut)
 			throws TransactionalConnectionException, DAOException;
+	
+	public StatutProjetDTO readStatutProjet(StatutProjetDTO statutProjet)
+			throws TransactionalConnectionException, DAOException;
 
 }

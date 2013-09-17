@@ -146,7 +146,22 @@ public class ProjetService extends ATransactional implements IProjetService {
 		}
 		return listStatusProj;
 	}
+	
+	public StatutProjetDTO readStatutProjet(StatutProjetDTO statutProjet)
+			throws TransactionalConnectionException, ServiceException {
+		StatutProjetDTO statut = new StatutProjetDTO();
+		
+		IDAOFactory iDaoFactory = DAOFactory1.getInstance();
+		try {
+			statut = iDaoFactory.createIStatutProjetDAO(this).readStatutProjet(statutProjet);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return statut;
+	}
 
+	
 	public int addProjetUtil(UtilisateurDTO utilisateur,ProjetDTO projet)
 			throws TransactionalConnectionException, ServiceException {
          int addNum = 0;
