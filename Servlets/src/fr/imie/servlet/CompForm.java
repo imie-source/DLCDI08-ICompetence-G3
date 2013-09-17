@@ -111,7 +111,14 @@ public class CompForm extends HttpServlet {
 					response);
 			
 		}
-
+		//suppression d'un compétence
+		else if (request.getParameter("delete") != null
+				& request.getParameter("delete").equals("supprimer")) {
+			request.setAttribute("competence",
+					getCompetence(request.getParameter("numComp")));
+			request.getRequestDispatcher("./CompDelete.jsp").forward(request,
+					response);
+		}
 	}
 
 	/**
@@ -173,15 +180,16 @@ public class CompForm extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.setAttribute("competence", competenceCreate);
-			request.getRequestDispatcher("./CompRead.jsp").forward(request,
-					response);
+			//request.getRequestDispatcher("./CompRead.jsp").forward(request,
+				//	response);
+			response.sendRedirect("./ListCompView");
 		}
 		// Supprimer une compétence
 		else if (request.getParameter("deleteAction") != null
 				&& request.getParameter("deleteAction").equals("supprimer")) {
 
 			CompetenceDTO competenceDelete = getCompetence(request
-					.getParameter("numCompetence"));
+					.getParameter("numComp"));
 
 			try {
 				DAOFactory1.getInstance().createCompetenceNiveauService(null)
