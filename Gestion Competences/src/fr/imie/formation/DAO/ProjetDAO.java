@@ -452,7 +452,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		int updateNum = 0;
 
 		try {
-			String query ="update projet_util set num_util='?', num_projet='?' where num='?'";
+			String query ="update projet_util set num_util=?, num_projet=? where num=?";
 			pstm=cn.prepareStatement(query);
 			pstm.setInt(1, utilisateur.getNum());
 			pstm.setInt(2, projet.getNum());

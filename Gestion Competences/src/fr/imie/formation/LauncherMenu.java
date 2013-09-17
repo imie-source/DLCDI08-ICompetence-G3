@@ -511,7 +511,7 @@ public class LauncherMenu {
 			if (!listNiveau.isEmpty()) {
 				for (NiveauDTO niveau : listNiveau) {
 					String niv = niveau.getNom();
-					String competence = niveau.getCompetence();
+					CompetenceDTO competence = niveau.getCompetence();
 
 					System.out.println("-NOM :" + nom + "  -PRENOM :" + prenom
 							+ "  -AGE :" + age + "  -COMPETENCE :" + competence

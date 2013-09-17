@@ -247,7 +247,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		try {
 
-			String query="insert into competence(nom,competence_domaine)values ('?','?')";
+			String query="insert into competence(nom,competence_domaine)values (?,?)";
 			pstmt= cn.prepareStatement(query);
 			pstmt.setString(1, competence.getNom());
 			pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
@@ -277,7 +277,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 		PreparedStatement pstmt=null;
 
 		try {
-			String query="update competence set nom='?',competence_domaine='?' where num='?'";
+			String query="update competence set nom=?, competence_domaine=?  where num=?";
 			pstmt= cn.prepareStatement(query);
 			pstmt.setString(1, competence.getNom());
 			pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
@@ -346,7 +346,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 
 		try {
 
-			String query="SELECT utilisateur.num,utilisateur.nom, utilisateur.prenom, competence.nom as competence FROM competence inner JOIN competence_util ON competence.num=competence_util.num_competence INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util where competence.num='?'";
+			String query="SELECT utilisateur.num,utilisateur.nom, utilisateur.prenom, competence.nom as competence FROM competence inner JOIN competence_util ON competence.num=competence_util.num_competence INNER JOIN utilisateur ON utilisateur.num=competence_util.num_util where competence.num=?";
 			psmt=cn.prepareStatement(query);
 			rst=psmt.executeQuery();
 
