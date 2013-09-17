@@ -1,10 +1,6 @@
 package fr.imie.servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,9 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.DTO.NiveauDTO;
-import fr.imie.formation.DTO.ProjetDTO;
-import fr.imie.formation.DTO.PromotionDTO;
-import fr.imie.formation.DTO.UtilisateurDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.services.exceptions.ServiceException;
 import fr.imie.formation.transactionalFramework.exception.TransactionalConnectionException;
@@ -46,7 +39,8 @@ public class CompForm extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
+		
+		//affichage d'une compétence
 		if (request.getParameter("numLigneComp") != null) {
 
 			int ligne = Integer.valueOf(request.getParameter("numLigneComp"));
@@ -64,7 +58,7 @@ public class CompForm extends HttpServlet {
 				request.setAttribute("competence", competenceDTO);
 				List<NiveauDTO> listNivUtil = DAOFactory1.getInstance()
 						.createCompetenceNiveauService(null).readNiveauUtilisateurCompetence(competenceDTO);
-				request.setAttribute("ListeNivUtil", listNivUtil);
+				session.setAttribute("ListeNivUtil", listNivUtil);
 
 			} catch (TransactionalConnectionException e) {
 				// TODO Auto-generated catch block
@@ -75,7 +69,9 @@ public class CompForm extends HttpServlet {
 			}
 			request.getRequestDispatcher("./CompRead.jsp").forward(request,
 					response);
-		}else if (request.getParameter("update") != null
+		}
+		//modification d'une compétence
+		else if (request.getParameter("update") != null
 				&& request.getParameter("update").equals("modifier")) {
 			request.setAttribute("competence", getCompetence(request.getParameter("numComp")));
 			
@@ -90,11 +86,29 @@ public class CompForm extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			CompetenceDTO compnull = new CompetenceDTO();
-			compnull.setNom("");
-			listComp.add(compnull);
+			
 			request.setAttribute("ListComp", listComp);
 			request.getRequestDispatcher("./CompUpdate.jsp").forward(request, response);
+			
+		}
+		//création d'une compétence
+		else if (request.getParameter("create") != null
+				&& request.getParameter("create").equals("creer")){
+			List<CompetenceDTO> listComp = null;
+			
+			try {
+				listComp = DAOFactory1.getInstance().createCompetenceNiveauService(null).readAllCompetence();
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			request.setAttribute("ListComp", listComp);
+			request.getRequestDispatcher("./CompCreate.jsp").forward(request,
+					response);
 			
 		}
 
@@ -112,12 +126,14 @@ public class CompForm extends HttpServlet {
 				&& request.getParameter("updateAction").equals("Confirmer")) {
 
 			CompetenceDTO competenceUpdate = getCompetence(request
-					.getParameter("numCompetence"));
+					.getParameter("numComp"));
 
 			competenceUpdate.setNom(request.getParameter("nom"));
 			
+			if (request.getParameter("competenceDomaine") != ""){
 			competenceUpdate.setCompetenceDomaine(getCompetence(request.getParameter("competenceDomaine")));
-
+			}
+			
 			try {
 				DAOFactory1.getInstance().createCompetenceNiveauService(null)
 						.updateCompetence(competenceUpdate);
@@ -131,7 +147,7 @@ public class CompForm extends HttpServlet {
 			}
 
 			request.setAttribute("competence",
-					getCompetence(request.getParameter("numCompetence")));
+					getCompetence(request.getParameter("numComp")));
 			request.getRequestDispatcher("./CompRead.jsp").forward(request,
 					response);
 		}
