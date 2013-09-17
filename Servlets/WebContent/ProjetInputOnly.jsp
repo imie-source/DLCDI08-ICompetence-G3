@@ -39,6 +39,7 @@
 																		
 					Avancement
 					<div>
+					
 						<select name = "statutProjet">
 							<c:forEach var="statutProjet" items="${listeStatut}">
 
@@ -51,7 +52,7 @@
 								</c:if>
 								
 							</c:forEach>
-						</select>
+						</select>					
 					</div>
 			</div>
 

@@ -85,14 +85,30 @@ public class Projet extends HttpServlet {
 		.forward(request, response);
 		}
 		
-		//La suppression, la modification et la création ne sont pas faites
+		
 		//création projet
 		else if (request.getParameter("numligne") == null
 				&& request.getParameter("create") != null
 				&& request.getParameter("create").equals("creer")) {
-
-			request.getRequestDispatcher("./ProjetCreate.jsp").forward(request,
-					response);
+			
+			List<StatutProjetDTO>listeStatut = null;
+			List<UtilisateurDTO> listeForChef =null;
+			
+			try {
+				//listeStatut=DAOFactory1.getInstance().createProjetService(null).readAllStatutProjet();
+				listeForChef= DAOFactory1.getInstance().createUtilisateurService(null).readAllUtilisateur();
+				
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//request.setAttribute("listeStatut", listeStatut);
+			request.setAttribute("listeForChef", listeForChef);		
+			
+			request.getRequestDispatcher("./ProjetCreate.jsp").forward(request,response);
 		}
 		
 		
@@ -169,10 +185,7 @@ public class Projet extends HttpServlet {
 					}
 					projetUpdate.setStatutProjet(statut);
 				
-					
-					//modif chef de projet => private int ajoutChefDeProjet(ProjetDTO projet, Connection cn)
-					//puis projetUpdate.setChefDeProjet
-					
+					//modif chef de projet
 					String chefParam = request.getParameter("chefProjet");
 					UtilisateurDTO chefProjet = new UtilisateurDTO();
 					Integer chefNum = null;
@@ -242,6 +255,35 @@ public class Projet extends HttpServlet {
 			request.getRequestDispatcher("./ProjetConsult.jsp").forward(request, response);
 		}
 		
+		
+		//creation d'un projet
+		else if (request.getParameter("createAction") != null
+				&& request.getParameter("createAction").equals("ajouter")) {
+		
+			
+			ProjetDTO projetCreate = new ProjetDTO();
+			projetCreate.setIntitule(request.getParameter("intituleProjet"));
+			projetCreate.setDescription(request.getParameter("descriptionProjet"));
+			//affectation du statut 1 =  ouvert
+			StatutProjetDTO statutProjet = new StatutProjetDTO();
+			statutProjet.setNum(1);
+			projetCreate.setStatutProjet(statutProjet);
+			
+			try {
+				DAOFactory1.getInstance().createProjetService(null).createProjet(projetCreate);
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("createAction", "ajouter");
+			request.setAttribute("projet", projetCreate);
+			request.getRequestDispatcher("./ProjetConsult.jsp").forward(request,
+					response);
+		}
+			
 	}
 	
 	
