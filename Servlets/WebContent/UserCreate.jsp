@@ -12,7 +12,7 @@
 <link rel="stylesheet" href=JQuery/jquery-ui.css></link>
 <script type="text/javascript" src=JQuery/jquery-1.9.1.js></script>
 <script type="text/javascript" src=JQuery/ui-1.10.3-jquery-ui.js></script>
-<title>Insert title here</title>
+<title>Membre</title>
 <script>
 jQuery(document)
 .ready(
@@ -87,7 +87,7 @@ jQuery(document)
 </div>
 <div class="fiche">
 		<div id="fiche_utilisateur">
-		<div class="ficheGauche">ID Utilisateur 
+		<div class="ficheGauche">
 			<form method="post" action="./UserForm">
 				<jsp:include page="UserInputOnly.jsp" />
 					<input type="submit" id="envoi" name="createAction" value="ajouter"></input> 

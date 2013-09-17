@@ -117,7 +117,7 @@ $(document).ready(function() {
 			<div class = "ficheDroite">
 				<div class="ficheHaut">
 					<div id="comp_util">
-					Compétences :
+					<h1>Compétences : </h1>
 						<div>
 							<c:forEach var="compniv" items="${ListeCompNiv}" varStatus="i">
 								<div>
@@ -179,7 +179,7 @@ $(document).ready(function() {
 					</div>
 				</div>
 			<div class="ficheCentre">	
-			Projets
+			<h1>Projets</h1>
 				<div>
 					<c:forEach var="projet" items="${ListeUtilProjet}">
 						<div>
@@ -189,7 +189,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<div class="ficheBas">
-			Invitations:
+			<h1>Invitations:</h1>
 			</div>
 			</div>
 	</c:if>

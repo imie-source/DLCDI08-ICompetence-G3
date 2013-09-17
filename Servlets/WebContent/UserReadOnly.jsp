@@ -6,35 +6,36 @@
 </div>
 <div class="liste">
 <div class="fiche">
-			<div class="ficheGauche">ID Utilisateur 
+			<div class="ficheGauche">
+			<h1>ID Utilisateur </h1>
 					<div id="fiche_utilisateur">	
 						<input type="hidden" name="numUtilisateur" value="${utilisateur.num }"></input>
 					<div id="nom_util">
-						Nom : <input type="text" readonly="readonly" name="nom" value="${utilisateur.nom}"></input>
+						<h2>Nom :</h2> <input type="text" readonly="readonly" name="nom" value="${utilisateur.nom}"></input>
 					</div>
 					<div id="prenom_util">
-						Prénom : <input type="text" readonly="readonly" name="prenom" value="${utilisateur.prenom}"></input>
+						<h2>Prénom : </h2><input type="text" readonly="readonly" name="prenom" value="${utilisateur.prenom}"></input>
 					</div>
 					<div id="date_nais_util">
-						Date de naissance :<input type="text" readonly="readonly" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
+						<h2>Date de naissance :</h2><input type="text" readonly="readonly" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
 					</div>
 					<div id="adresse_util">
-						Adresse : <input type="text" readonly="readonly" name="adresse" value="${utilisateur.adresse}"></input>
+						<h2>Adresse : </h2><input type="text" readonly="readonly" name="adresse" value="${utilisateur.adresse}"></input>
 					</div>
 					<div id="tel_util">
-						Téléphone :<input type="text" readonly="readonly" name="tel" value="${utilisateur.tel}"></input>
+						<h2>Téléphone : </h2><input type="text" readonly="readonly" name="tel" value="${utilisateur.tel}"></input>
 					</div>
 					<div id="mail_util">
-						Adresse mail : <input type="text" readonly="readonly" name="mail" value="${utilisateur.mail}"></input>
+						<h2>Adresse mail : </h2><input type="text" readonly="readonly" name="mail" value="${utilisateur.mail}"></input>
 					</div>
 					<div id="promotion_util">
-						Promotion : <input type="text" readonly="readonly" name="promotion" value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></input>
+						<h2>Promotion : </h2><input type="text" readonly="readonly" name="promotion" value="${utilisateur.promotion.intitule} ${utilisateur.promotion.annee}"></input>
 					</div>
 					<div id="login_util">
-						Login : <input type="text" readonly="readonly" name="login" value="${utilisateur.login}"></input>
+						<h2>Login : </h2><input type="text" readonly="readonly" name="login" value="${utilisateur.login}"></input>
 					</div>
 					<div id="password_util">
-						Password : <input type="text" readonly="readonly" name="password" value="${utilisateur.password}"></input>
+						<h2>Password : </h2><input type="text" readonly="readonly" name="password" value="${utilisateur.password}"></input>
 					</div>
 					</div>
 			</div>
@@ -43,7 +44,7 @@
 					<div class="ficheHaut">
 					
 						<div id="comp_util">
-						Compétences :
+						<h1>Compétences :</h1>
 						<div>
 							<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
 								<div>
@@ -55,7 +56,7 @@
 					</div>
 					
 					<div class="ficheCentre">				
-					Projet :
+					<h1>Projet :</h1>
 						<div>
 							<c:forEach var="projet" items="${ListeUtilProjet}">
 								<div>
