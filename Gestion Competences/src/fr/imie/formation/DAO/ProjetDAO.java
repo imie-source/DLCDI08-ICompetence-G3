@@ -125,7 +125,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		List<ProjetDTO> listProjet = new ArrayList<ProjetDTO>();
 
 		try {
-			String query = "SELECT projet.num, projet.intitule, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom FROM projet Inner join statut on statut.num=projet.num_statut Inner Join utilisateur ON utilisateur.num=projet.num_util";
+			String query = "SELECT projet.num, projet.intitule, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom FROM projet Inner join statut on statut.num=projet.num_statut Left Join utilisateur ON utilisateur.num=projet.num_util";
 
 			stmt = cn.createStatement();
 			rst = stmt.executeQuery(query);
@@ -452,7 +452,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		int updateNum = 0;
 
 		try {
-			String query ="update projet_util set num_util='?', num_projet='?' where num='?'";
+			String query ="update projet_util set num_util=?, num_projet=? where num=?";
 			pstm=cn.prepareStatement(query);
 			pstm.setInt(1, utilisateur.getNum());
 			pstm.setInt(2, projet.getNum());

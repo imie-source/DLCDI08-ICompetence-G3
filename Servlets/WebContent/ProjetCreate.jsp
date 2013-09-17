@@ -13,11 +13,15 @@
 </head>
 <body>
 <jsp:include page="HeaderTest.jsp" />
-<form method="post" action="./Projet">
+			<form method="post" action="./Projet">
 				<jsp:include page="ProjetInputOnly.jsp" />
 					<input type="submit" id="envoi" name="createAction" value="ajouter"></input> 
 					<input type="reset" id="rafraichir" value="rafraichir"/>
 			</form>
+			
+			<form action="./ProjetConsult.jsp">
+					<input type="submit" value="retour"></input>
+				</form>
 
 </body>
 </html>
