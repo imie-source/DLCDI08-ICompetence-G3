@@ -227,7 +227,7 @@ public class ProjetDAO extends ATransactional implements IProjetDAO{
 		UtilisateurDTO chefDeProjet = new UtilisateurDTO();
 
 		try {
-			String query = "SELECT projet.num, projet.intitule as projet, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom, utilisateur.num, statut.num FROM projet Inner join statut on statut.num=projet.num_statut inner join utilisateur on projet.num_util=utilisateur.num where projet.num =?";
+			String query = "SELECT projet.num, projet.intitule as projet, projet.description, statut.valeur as statut, utilisateur.nom, utilisateur.prenom, utilisateur.num, statut.num FROM projet LEFT join statut on statut.num=projet.num_statut LEFT join utilisateur on projet.num_util=utilisateur.num where projet.num =?";
 
 			pstmt = cn.prepareStatement(query);
 
