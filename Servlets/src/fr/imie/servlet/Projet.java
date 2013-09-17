@@ -52,7 +52,7 @@ public class Projet extends HttpServlet {
 					List<ProjetDTO> listeProjet = (List<ProjetDTO>) listObj;
 					ProjetDTO projet = listeProjet.get(ligne);
 	
-					session.removeAttribute("listeProjet");
+					//session.removeAttribute("listeProjet");
 					
 				try {
 					ProjetDTO projetDTO = DAOFactory1.getInstance().createProjetService(null).readProjet(projet);
@@ -143,8 +143,11 @@ public class Projet extends HttpServlet {
 		// suppression projet
 		else if (request.getParameter("delete") != null
 				& request.getParameter("delete").equals("supprimer")) {
-			request.setAttribute("projet",getProjet(request.getParameter("numligne")));
-			request.getRequestDispatcher("./ProjetDelete.jsp").forward(request,
+			request.setAttribute("projetDTO",getProjet(request.getParameter("numProjet")));
+			
+			
+			
+			request.getRequestDispatcher("./ListProjet.jsp").forward(request,
 					response);
 		}
 	}
@@ -282,6 +285,23 @@ public class Projet extends HttpServlet {
 			request.setAttribute("projet", projetCreate);
 			request.getRequestDispatcher("./ProjetConsult.jsp").forward(request,
 					response);
+		}
+		
+		//suppression de projet
+		else if (request.getParameter("delete") != null
+				& request.getParameter("delete").equals("supprimer")) {
+			ProjetDTO projetDelete = getProjet(request.getParameter("numProjet"));
+			try {
+				DAOFactory1.getInstance().createProjetService(null).deleteProjet(projetDelete);
+			} catch (TransactionalConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+			response.sendRedirect("./ListProjetView");
 		}
 			
 	}

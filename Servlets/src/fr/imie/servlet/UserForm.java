@@ -124,7 +124,9 @@ public class UserForm extends HttpServlet {
 			request.setAttribute("ListeNiveau", listNiveau);
 			request.getRequestDispatcher("./UserCreate.jsp").forward(request,
 					response);
-		} // modification utilisateur
+		} 
+		
+		// modification utilisateur
 		else if (request.getParameter("update") != null
 				&& request.getParameter("update").equals("modifier")) {
 			request.setAttribute("utilisateur",
