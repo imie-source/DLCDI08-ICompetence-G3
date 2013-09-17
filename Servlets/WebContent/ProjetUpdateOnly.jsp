@@ -20,7 +20,6 @@
 					<input type="text" name="descriptionProjet"  value="${projetDTO.description}"></input>
 					</div>
 					
-					<%-- 
 					Chef de projet
 					<div>
 						<select name="chefProjet">
@@ -37,11 +36,10 @@
 							</c:forEach>		
 						</select>
 					</div>
-					--%>
 																		
-					<%-- 
 					Avancement
 					<div>
+					
 						<select name = "statutProjet">
 							<c:forEach var="statutProjet" items="${listeStatut}">
 
@@ -56,9 +54,8 @@
 							</c:forEach>
 						</select>					
 					</div>
-					--%>
-					</div>
-<%-- 
+			</div>
+
 		<div class = "ficheDroite">
 					<div class="ficheHaut">
 					
@@ -68,18 +65,18 @@
 							<input type="text"  name="utilProjet"  value="${util.nom} ${util.prenom}" />
 							</div>
 						</c:forEach>
+						
+						<a href = "./ListCompView">ajouter des participants</a>
 					</div>
 					<div class="ficheCentre">Invitations
 					</div>
 					<div class="ficheBas">
 					</div>
 		</div>
-		--%>
 	</div>
 	
 		<div class = "boutons">
 		</div>	
-</div>
 </div>
 </div>
 

@@ -15,7 +15,7 @@
 	
 			<div id="fiche_projet">
 				<form method ="post" action = "./Projet">
-					<jsp:include page="ProjetInputOnly.jsp" />
+					<jsp:include page="ProjetUpdateOnly.jsp" />
 					<input type="hidden" name="numProjet" value="${utilisateurDTO.num}"> </input>
 					<input type="submit" name="updateAction" value="Confirmer"></input>
 				</form>
