@@ -56,12 +56,18 @@
 													value="${competenceDTO.nom}" /></a></li>
 									</ul>
 								</div>
+
 							</div>
 						</c:forEach>
 
 					</ul>
 			</ul>
 		</div>
-	</div>
+				<form action="./CompForm">
+					<input type="submit" name="create" id="create" value="creer"></input>
+				</form>
+		</div>
+		</div>
+	
 </body>
 </html>

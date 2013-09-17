@@ -13,7 +13,7 @@
 						Nom : <input type="text" readonly="readonly" name="nom" value="${utilisateur.nom}"></input>
 					</div>
 					<div id="prenom_util">
-						Prénom : <input type="text" readonly="readonly" name="prenom" value="${utilisateur.prenom}"></input>
+						Prï¿½nom : <input type="text" readonly="readonly" name="prenom" value="${utilisateur.prenom}"></input>
 					</div>
 					<div id="date_nais_util">
 						Date de naissance :<input type="text" readonly="readonly" name="dateNaissance" value="<fmt:formatDate value="${utilisateur.dateNaissance}" pattern="dd/MM/yyyy"/>"></input>
@@ -22,7 +22,7 @@
 						Adresse : <input type="text" readonly="readonly" name="adresse" value="${utilisateur.adresse}"></input>
 					</div>
 					<div id="tel_util">
-						Téléphone :<input type="text" readonly="readonly" name="tel" value="${utilisateur.tel}"></input>
+						Tï¿½lï¿½phone :<input type="text" readonly="readonly" name="tel" value="${utilisateur.tel}"></input>
 					</div>
 					<div id="mail_util">
 						Adresse mail : <input type="text" readonly="readonly" name="mail" value="${utilisateur.mail}"></input>
@@ -43,7 +43,7 @@
 					<div class="ficheHaut">
 					
 						<div id="comp_util">
-						Compétences :
+						Compï¿½tences :
 						<div>
 							<c:forEach var="comp" items="${ListeCompNiv}" varStatus="numLigne">
 								<div>
