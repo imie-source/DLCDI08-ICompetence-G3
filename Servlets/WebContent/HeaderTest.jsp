@@ -2,7 +2,7 @@
 <div class="chapeau">
 <a href="Accueil.jsp"/>
 	<div class="logo">
-		<img src="images/imie.jpg" />
+		<img src="images/imieLogo.png" />
 	</div>
 	<div class="titreMenu">
 		<div class="titreChapeau">
@@ -11,8 +11,9 @@
 			</h1>
 		</div>
 		<div class="menu">
-			<a href="./ListProjetView">projets</a> <a href="./ListUserView">
-				membres</a> <a href="./ListCompView"> competences</a>
+			<a href="./ListProjetView" class = "onglet">projets</a> 
+			<a href="./ListUserView" class = "onglet">membres</a> 
+			<a href="./ListCompView" class = "onglet"> competences</a>
 		</div>
 	</div>
 	

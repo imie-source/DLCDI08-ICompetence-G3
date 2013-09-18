@@ -11,19 +11,19 @@
 			<div class="ficheGauche">
 			<input type="hidden" name="numProjet" value="${projetDTO.num }"></input>
 					<h1>ID PROJET</h1>
-					Intitulé
+					<h2>Intitulé<h2>
 					<div>
 					<input type="text" readonly="readonly" name="intituleProjet" value="${projetDTO.intitule}"></input>
 					</div>
-					Contenu
+					<h2>Contenu</h2>
 					<div>
 					<input type="text" readonly="readonly" name="descriptionProjet"  value="${projetDTO.description}"></input>
 					</div>
-					Chef de projet
+					<h2>Chef de projet</h2>
 					<div>
 					<input type="text" readonly="readonly" name="chefProjet"  value="${projetDTO.chefDeProjet.nom} ${projetDTO.chefDeProjet.prenom}" ></input>
 					</div>
-					Avancement
+					<h2>Avancement</h2>
 					<div>
 					<input type="text" readonly="readonly" name="statutProjet"  value="${projetDTO.statutProjet.valeurStatut}"></input>
 					</div>

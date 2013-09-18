@@ -11,16 +11,16 @@
 			<div class="ficheGauche">
 			<input type="hidden" name="numProjet" value="${projetDTO.num }"></input>
 					<h1>ID PROJET</h1>
-					Intitulé
+					<h2>Intitulé</h2>
 					<div>
 					<input type="text" name="intituleProjet" value="${projetDTO.intitule}"></input>
 					</div>
-					Contenu
+					<h2>Contenu</h2>
 					<div>
 					<input type="text" name="descriptionProjet"  value="${projetDTO.description}"></input>
 					</div>
 					
-					Chef de projet
+					<h2>Chef de projet</h2>
 					<div>
 						<select name="chefProjet">
 							<c:forEach var="chefProjet" items="${listeForChef}">
@@ -37,7 +37,7 @@
 						</select>
 					</div>
 																		
-					Avancement
+					<h2>Avancement</h2>
 					<div>
 					
 						<select name = "statutProjet">
