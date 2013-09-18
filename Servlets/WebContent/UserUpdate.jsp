@@ -12,7 +12,7 @@
 <link rel="stylesheet" href=JQuery/jquery-ui.css></link>
 <script type="text/javascript" src=JQuery/jquery-1.9.1.js></script>
 <script type="text/javascript" src=JQuery/ui-1.10.3-jquery-ui.js></script>
-<title>Insert title here</title>
+<title>Membre</title>
 <script>
 $(document).ready(function() {
 			// Du code en jQuery va pouvoir être tapé ici !

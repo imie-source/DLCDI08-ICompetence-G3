@@ -68,7 +68,7 @@ font-size : medium;
 		display : inline-block;
 		margin-left:95px;
 		vertical-align: bottom;
-		background-color : white;
+		background-color : #48b9c7;
 		width: 25%;
 		height : 85%;
 		border-radius : 20px;
@@ -200,5 +200,45 @@ font-size : medium;
 				border-radius : 70px;
 				margin-bottom:25px;
 				}
-				
+	
+.info_site{
+	display:inline-block;		
+	margin-top: 20px;
+	vertical-align: top;
+	width: 60%;
+}
+
+	.orange{
+	margin-top : 20px;
+	color : #fdb515;
+	font-size: 20px;
+	margin-left : 20px;
+	}
+	
+	.bleu{
+	margin-top : 20px;
+	margin-left : 50px;
+	color : #48b9c7;
+	font-size: 30px;
+	}
+	.rouge{
+	margin-top : 20px;
+	color :#ef3125;
+	font-size: 26px;
+	margin-left : 20px;
+	}
+	
+	
+	.image2{
+		display:inline-block;
+		margin-top: 40px;
+		vertical-align : bottom;
+		margin-left: 80px;
+	}
+
+
+.lienListe{
+	text-decoration : none;
+	color: black;
+}
 			

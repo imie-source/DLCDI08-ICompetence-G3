@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
 <link rel=stylesheet type=text/css href=css/style.css />
-<title>Insert title here</title>
+<title>Compétences</title>
 <script>
 jQuery(document)
 .ready(
