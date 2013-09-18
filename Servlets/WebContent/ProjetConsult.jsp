@@ -20,9 +20,9 @@
 						<input type="hidden" name="numProjet" value="${projetDTO.num}"></input> 
 						<input type="submit" name="update" value="modifier"></input>
 					</form>
-					<form action="./Projet">
+					<form method="post" action="./Projet">
 						<input type="hidden" name="numProjet" value="${projetDTO.num}"></input>
-						<input type="submit" name="delete" value="supprimer"/>
+						<input type="submit" name="deleteAction" value="supprimer"/>
 					</form>
 					<form action="./ListProjetView">
 						<input type="submit" value="retour"></input>

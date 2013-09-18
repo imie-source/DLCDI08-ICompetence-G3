@@ -61,7 +61,6 @@ $(document).ready(function(){
 	</div>
 			<div class="liste">
 				<div class="global">
-
 				<div class="tableauContainer">
 					<div class="tableau">
 					<ul id="tree">
@@ -86,12 +85,11 @@ $(document).ready(function(){
 						</ul>
 					</ul>
 		</div>
-		</div>
 				<form action="./CompForm">
 					<input type="submit" name="create" id="create" value="creer"></input>
 				</form>
 		</div>
-		</div>
+
 	
 	
 	

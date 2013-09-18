@@ -15,12 +15,12 @@
 	<c:if test="${! empty competence.num}">
 		Etes-vous sûr de vouloir supprimer cette compétence?
 		<jsp:include page="CompReadOnly.jsp"/>
-		<form action="./CompForm">
-			<input type="hidden" name="numCompetence" value="${competence.num}"></input> 
+		<form method="post" action="./CompForm">
+			<input type="hidden" name="numComp" value="${competence.num}"></input> 
 			<input type="submit" name="deleteAction" value="supprimer"></input>		
 		</form>
 		<form action="./ListCompView">
-			<input type="hidden" name="numCompetence" value="${competence.num}"></input>
+			<input type="hidden" name="numComp" value="${competence.num}"></input>
 			<input type="submit" value="retour"></input>
 		</form>
 	</c:if>

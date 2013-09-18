@@ -4,18 +4,20 @@ import java.util.List;
 
 public class CompetenceDTO {
 
-	private int num;
+	private Integer num;
 	private String nom;
 	private List<NiveauDTO> listNiveau;
 	private CompetenceDTO competenceDomaine;
 	private List<CompetenceDTO> listCompetence;
 	private int niveauArbo;
 
-	public int getNum() {
+	
+
+	public Integer getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(Integer num) {
 		this.num = num;
 	}
 
