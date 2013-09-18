@@ -139,6 +139,8 @@ public class CompForm extends HttpServlet {
 			
 			if (request.getParameter("competenceDomaine") != ""){
 			competenceUpdate.setCompetenceDomaine(getCompetence(request.getParameter("competenceDomaine")));
+			} else {
+				competenceUpdate.setCompetenceDomaine(null);
 			}
 			
 			try {
@@ -166,7 +168,12 @@ public class CompForm extends HttpServlet {
 			CompetenceDTO competenceCreate = new CompetenceDTO();
 
 			competenceCreate.setNom(request.getParameter("nom"));
+			if (request.getParameter("competenceDomaine") != ""){
 			competenceCreate.setCompetenceDomaine(getCompetence(request.getParameter("competenceDomaine")));
+			} else {
+				competenceCreate.setCompetenceDomaine(null);
+			}
+			
 
 			try {
 				DAOFactory1.getInstance().createCompetenceNiveauService(null)

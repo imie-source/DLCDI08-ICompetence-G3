@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -253,8 +254,8 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 			String query = "insert into competence(nom,competence_domaine)values (?,?)";
 			pstmt = cn.prepareStatement(query);
 			pstmt.setString(1, competence.getNom());
-			if (competence.getCompetenceDomaine().getNum() == null) {
-				pstmt.setInt(2, (Integer) null);
+			if (competence.getCompetenceDomaine() == null) {
+				pstmt.setNull(2, Types.INTEGER);
 			} else {
 				pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
 			};
@@ -288,12 +289,11 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 			String query = "update competence set nom=?, competence_domaine=?  where num=?";
 			pstmt = cn.prepareStatement(query);
 			pstmt.setString(1, competence.getNom());
-			if (competence.getCompetenceDomaine().getNum() == null) {
-				pstmt.setInt(2, (Integer) null);
+			if (competence.getCompetenceDomaine() == null) {
+				pstmt.setNull(2,Types.INTEGER);
 			} else {
 				pstmt.setInt(2, competence.getCompetenceDomaine().getNum());
 			}
-			;
 			pstmt.setInt(3, competence.getNum());
 			updateNum = pstmt.executeUpdate();
 
