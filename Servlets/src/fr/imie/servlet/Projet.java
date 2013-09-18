@@ -59,17 +59,6 @@ public class Projet extends HttpServlet {
 					request.setAttribute("projetDTO", projetDTO);
 					List<UtilisateurDTO> listeUtil = DAOFactory1.getInstance().createUtilisateurService(null).readUtilisateurProjet(projetDTO);
 					session.setAttribute("listeUtil", listeUtil);
-					
-					
-
-					// Dans le cas de la suppression
-					/*if ((request.getParameter("delete") != null) 
-							&& (request.getParameter("delete").equals("supprimer"))) {
-						request.setAttribute("action", "delete");
-					} else {
-						request.setAttribute("action", "read");
-					}
-					*/
 
 				} catch (TransactionalConnectionException e) {
 					// TODO Auto-generated catch block

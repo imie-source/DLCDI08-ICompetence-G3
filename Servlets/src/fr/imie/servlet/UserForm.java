@@ -67,8 +67,8 @@ public class UserForm extends HttpServlet {
 				session.removeAttribute("listeUtil");
 			}
 			else {
-				List<UtilisateurDTO> listUtil = (List<UtilisateurDTO>) listObj;
-				utilisateur = listUtil.get(ligne);
+				List<UtilisateurDTO> listUtilisateur = (List<UtilisateurDTO>) listObj;
+				utilisateur = listUtilisateur.get(ligne);
 				session.removeAttribute("listeUtilisateur");
 			}
 			
