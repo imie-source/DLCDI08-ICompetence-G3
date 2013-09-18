@@ -39,7 +39,7 @@
 	<div class="contenu">
 		<div class="titre">
 			<h1>Liste des compétences</h1>
-
+</div>
 
 			<ul id="tree">
 					<ul id="navigation">
@@ -61,13 +61,12 @@
 						</c:forEach>
 
 					</ul>
-			</ul>
-		</div>
+		</ul>
 				<form action="./CompForm">
 					<input type="submit" name="create" id="create" value="creer"></input>
 				</form>
 		</div>
-		</div>
+
 	
 </body>
 </html>

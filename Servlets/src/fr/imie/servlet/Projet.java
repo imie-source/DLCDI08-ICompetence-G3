@@ -139,17 +139,7 @@ public class Projet extends HttpServlet {
 		
 		} 
 		
-		
-		// suppression projet
-		else if (request.getParameter("delete") != null
-				& request.getParameter("delete").equals("supprimer")) {
-			request.setAttribute("projetDTO",getProjet(request.getParameter("numProjet")));
-			
-			
-			
-			request.getRequestDispatcher("./ListProjet.jsp").forward(request,
-					response);
-		}
+
 	}
 
 	/**
@@ -288,8 +278,8 @@ public class Projet extends HttpServlet {
 		}
 		
 		//suppression de projet
-		else if (request.getParameter("delete") != null
-				& request.getParameter("delete").equals("supprimer")) {
+		else if (request.getParameter("deleteAction") != null
+				& request.getParameter("deleteAction").equals("supprimer")) {
 			ProjetDTO projetDelete = getProjet(request.getParameter("numProjet"));
 			try {
 				DAOFactory1.getInstance().createProjetService(null).deleteProjet(projetDelete);
