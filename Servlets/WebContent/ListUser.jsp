@@ -10,13 +10,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel=stylesheet type="text/css" href="css/style.css" />
 <link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
-<%-- 
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
---%>
+<link rel="stylesheet" href="JQuery/jquery-ui.css"></link>
+<script type="text/javascript" src=JQuery/jquery-1.9.1.js></script>
+<script type="text/javascript" src=JQuery/ui-1.10.3-jquery-ui.js></script>
 <title>Liste des Utilisateurs</title>
+<script>
+$(document).ready(function(){
+	$('.ligneTableauAlternativLine').mouseover(function(){
+		$(this).css("background-color", "#fdb515");
+		$(this).css("color", "white");})
+		.mouseleave(function(){
+			$(this).css("background-color", "#e2e2e2");
+			$(this).css("color", "black");});
+	$('.ligneTableauNormalLine').mouseover(function(){
+		$(this).css("background-color", "#fdb515");
+		$(this).css("color", "white");})
+			.mouseleave(function(){
+		$(this).css("background-color", "white");
+		$(this).css("color", "black");});
+
+	});
+</script>
 </head>
 <body>
 <jsp:include page="HeaderTest.jsp" />
@@ -84,13 +98,16 @@
 						<c:forEach var="utilisateurDTO" items="${listeUtilisateur}"
 							varStatus="numLigne">
 							<c:set var="isAlternativeLigne" value="${numLigne.index%2>0}" />
+							
+						<a href="./UserForm?numligneutil=${numLigne.index}" class = "lienListe">
 							<div
+							
 								class="ligneTableauLine <c:if test="${isAlternativeLigne}">ligneTableauAlternativLine</c:if><c:if test="${!isAlternativeLigne}">ligneTableauNormalLine</c:if>">
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau200">
-									<a href="./UserForm?numligneutil=${numLigne.index}"> <c:out
-											value="${utilisateurDTO.nom}" />
-									</a>
+								
+									<c:out value="${utilisateurDTO.nom}" />
+									
 								</div>
 								<div
 									class="celluleTableauInTable celluleTableau celluleTableau100">
@@ -104,7 +121,7 @@
 									class="celluleTableauInTable celluleTableau celluleTableau100">
 									<c:out value="${utilisateurDTO.promotion.annee}" />
 								</div>
-
+						</a>
 
 								<%--
 					<div class="celluleTableauInTable celluleTableau celluleTableau100">

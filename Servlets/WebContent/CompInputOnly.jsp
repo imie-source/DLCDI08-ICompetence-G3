@@ -6,7 +6,7 @@
 <h1>Compétences</h1>
 </div>
 <div class="fiche">
-			<div class="ficheDroite">ID Compétence
+			<div class="ficheDroite">
 						<div id="nom_comp">
 							Nom : <input type="text" name="nom" value="${competence.nom}"></input>
 						</div>

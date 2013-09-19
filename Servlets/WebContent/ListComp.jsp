@@ -10,6 +10,7 @@
 <head>
 <link rel=stylesheet type=text/css href=css/style.css />
 <link rel="stylesheet" type="text/css" href="css/styleTestFiche.css" />
+
 <link rel="stylesheet" href="../css/jquery.treeview.css" />
 <link rel="stylesheet" href="../css/red-treeview.css" />
 
@@ -17,7 +18,9 @@
 <script src="../lib/jquery.cookie.js" type="text/javascript"></script>
 <script src="../jquery.treeview.js" type="text/javascript"></script>
 
-
+<link rel="stylesheet" href="JQuery/jquery-ui.css"></link>
+<script type="text/javascript" src=JQuery/jquery-1.9.1.js></script>
+<script type="text/javascript" src=JQuery/ui-1.10.3-jquery-ui.js></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Compétences</title>
@@ -30,6 +33,22 @@
 			unique : true
 		});
 	});
+
+$(document).ready(function(){
+	$('.ligneTableauAlternativLine').mouseover(function(){
+		$(this).css("background-color", "#fdb515");
+		$(this).css("color", "white");})
+		.mouseleave(function(){
+			$(this).css("background-color", "#e2e2e2");
+			$(this).css("color", "black");});
+	$('.ligneTableauNormalLine').mouseover(function(){
+		$(this).css("background-color", "#fdb515");
+		$(this).css("color", "white");})
+			.mouseleave(function(){
+		$(this).css("background-color", "white");
+		$(this).css("color", "black");});
+
+	});
 </script>
 
 </head>
@@ -37,12 +56,15 @@
 
 	<jsp:include page="HeaderTest.jsp" />
 	<div class="contenu">
-		<div class="titre">
-			<h1>Liste des compétences</h1>
-</div>
-
-			<ul id="tree">
-					<ul id="navigation">
+	<div class="titre">
+		<h1>Liste des compétences</h1>
+	</div>
+			<div class="liste">
+				<div class="global">
+				<div class="tableauContainer">
+					<div class="tableau">
+					<ul id="tree">
+						<ul id="navigation">
 						<c:forEach var="competenceDTO" items="${listeCompetence}"
 							varStatus="numLigneComp">
 							<c:set var="isAlternativeLigne" value="${numLigneComp.index%2>0}" />
@@ -60,13 +82,16 @@
 							</div>
 						</c:forEach>
 
+						</ul>
 					</ul>
-		</ul>
+		</div>
 				<form action="./CompForm">
 					<input type="submit" name="create" id="create" value="creer"></input>
 				</form>
 		</div>
 
+	
+	
 	
 </body>
 </html>

@@ -25,7 +25,7 @@
 					Pseudo <input id="userLogin" name="userLogin" type="text"></input>
 					<br /> Mot de passe <input id="userPassword" name="userPassword"
 						type="text"></input> <br /> <input type="submit"
-						name="loginButton" value="loginValue"></input>
+						name="loginButton" value="connexion"></input>
 				</form>
 				<br /> <span>${errorMessage}</span>
 			</div>

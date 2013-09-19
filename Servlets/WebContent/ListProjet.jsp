@@ -11,6 +11,26 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Projets</title>
+<link rel="stylesheet" href="JQuery/jquery-ui.css"></link>
+<script type="text/javascript" src=JQuery/jquery-1.9.1.js></script>
+<script type="text/javascript" src=JQuery/ui-1.10.3-jquery-ui.js></script>
+<script>
+$(document).ready(function(){
+	$('.ligneTableauAlternativLine').mouseover(function(){
+		$(this).css("background-color", "#fdb515");
+		$(this).css("color", "white");})
+		.mouseleave(function(){
+			$(this).css("background-color", "#e2e2e2");
+			$(this).css("color", "black");});
+	$('.ligneTableauNormalLine').mouseover(function(){
+		$(this).css("background-color", "#fdb515");
+		$(this).css("color", "white");})
+			.mouseleave(function(){
+		$(this).css("background-color", "white");
+		$(this).css("color", "black");});
+
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="HeaderTest.jsp" />
@@ -46,13 +66,12 @@
 											: "ligneTableauNormalLine";
 									ligne++;
 							%>
+						<a href="./Projet?numligne=${numLigne.index}"class = "lienListe">
 							<div class="ligneTableauLine <%=ligneAlternative%>">
 								<div class="ligneTableauLine <%=ligneAlternative%>">
 									<div
 										class="celluleTableauInTable celluleTableau celluleTableau200">
-										<a href="./Projet?numligne=${numLigne.index}"> <c:out
-												value="${projetDTO.intitule}" />
-										</a>
+										 <c:out value="${projetDTO.intitule}" />
 									</div>
 									<div
 										class="celluleTableauInTable celluleTableau celluleTableau100">
@@ -63,6 +82,7 @@
 										class="celluleTableauInTable celluleTableau celluleTableau100">
 										<c:out value="${projetDTO.statutProjet.valeurStatut}" />
 									</div>
+						</a>
 					
 								</div>
 							</div>

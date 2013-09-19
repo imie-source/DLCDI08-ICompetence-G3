@@ -59,12 +59,13 @@
 }
 
 .ligneTableauAlternativLine {
-	background-color: silver;
+	background-color: #e2e2e2;
 }
 
 .tableau {
 	margin-top: 20px;
 	width: 100%;
+
 }
 
 .ligneTableauHeader {
@@ -82,5 +83,5 @@
 	overflow: -moz-scrollbars-vertical;
 	width: auto;
 	margin: auto;
-	height:500px;
+	height:90%;
 }
