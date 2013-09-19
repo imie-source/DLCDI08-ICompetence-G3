@@ -268,7 +268,7 @@ public class Projet extends HttpServlet {
 		
 		//suppression de projet
 		else if (request.getParameter("deleteAction") != null
-				& request.getParameter("deleteAction").equals("supprimer")) {
+				&& request.getParameter("deleteAction").equals("supprimer")) {
 			ProjetDTO projetDelete = getProjet(request.getParameter("numProjet"));
 			try {
 				DAOFactory1.getInstance().createProjetService(null).deleteProjet(projetDelete);
