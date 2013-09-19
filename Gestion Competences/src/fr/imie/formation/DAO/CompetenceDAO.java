@@ -1,5 +1,6 @@
 package fr.imie.formation.DAO;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import fr.imie.formation.DAO.exceptions.DAOException;
@@ -90,8 +92,8 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 				comp.setNum(rst.getInt(1));
 				comp.setNom(rst.getString(2));
 				CompetenceDTO compMere = new CompetenceDTO();
-				compMere.setNum(rst.getInt(3));
-				if (compMere.getNum() != 0) {
+				if (rst.getInt(3) != 0)  {
+					compMere.setNum(rst.getInt(3));
 					comp.setCompetenceDomaine(readCompetence(compMere));
 				}
 			}
@@ -134,6 +136,7 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 				comp.setNum(rst.getInt(1));
 				comp.setNom(rst.getString(2));
 				comp.setNiveauArbo(rst.getInt(3));
+				comp.setTabchemin(rst.getArray(4));
 				listCompetence.add(comp);
 			}
 		} catch (SQLException e) {
@@ -203,43 +206,24 @@ public class CompetenceDAO extends ATransactional implements ICompetenceDAO {
 	// return listCompetence;
 	// }
 
-	private List<CompetenceDTO> readAllCompetenceFille(CompetenceDTO compMere,
+	public List<CompetenceDTO> readAllCompetenceFille(CompetenceDTO compMere,
 			Connection cn) throws TransactionalConnectionException,
 			DAOException {
 
-		PreparedStatement pstmt = null;
-		ResultSet rst = null;
-
 		List<CompetenceDTO> listCompetenceFille = new ArrayList<CompetenceDTO>();
+		List<CompetenceDTO> listCompetence = readAllCompetence(cn);
+		
 
-		String query = "select num, nom from competence where competence_domaine=?";
-		try {
-			pstmt = cn.prepareStatement(query);
-			pstmt.setInt(1, compMere.getNum());
-			rst = pstmt.executeQuery();
-
-			while (rst.next()) {
-				CompetenceDTO comp = new CompetenceDTO();
-				comp.setNum(rst.getInt(1));
-				comp.setNom(rst.getString(2));
-				listCompetenceFille.add(comp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rst != null) {
-					rst.close();
+		for (int i = 0; i < listCompetence.size(); i++) {
+			List<Array> list = Arrays.asList(listCompetence.get(i).getTabchemin());
+			for (int j = 0; j < list.size(); j++) {
+				if (compMere.getNum().equals(list.get(j))) {
+					listCompetenceFille.add(listCompetence.get(i));
 				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
+
+		
 
 		return listCompetenceFille;
 	}

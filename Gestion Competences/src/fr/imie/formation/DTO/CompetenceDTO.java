@@ -1,5 +1,7 @@
 package fr.imie.formation.DTO;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompetenceDTO {
@@ -10,8 +12,17 @@ public class CompetenceDTO {
 	private CompetenceDTO competenceDomaine;
 	private List<CompetenceDTO> listCompetence;
 	private int niveauArbo;
+	private Array tabchemin;
 
 	
+
+	public Array getTabchemin() {
+		return tabchemin;
+	}
+
+	public void setTabchemin(Array tabchemin) {
+		this.tabchemin = tabchemin;
+	}
 
 	public Integer getNum() {
 		return num;

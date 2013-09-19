@@ -1,8 +1,12 @@
 package fr.imie.formation;
 
+import java.sql.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import fr.imie.formation.DAO.CompetenceDAO;
 import fr.imie.formation.DTO.CompetenceDTO;
 import fr.imie.formation.factory.DAOFactory1;
 import fr.imie.formation.factory.interfaces.IDAOFactory;
@@ -45,8 +49,25 @@ public class LauncherCompetence {
 		List<CompetenceDTO> listComp = new ArrayList<CompetenceDTO>();
 		IDAOFactory idaoFactory = DAOFactory1.getInstance();
 		
+		List<CompetenceDTO> listCompetenceFille = new ArrayList<CompetenceDTO>();
+		
 		try {
 			listComp = idaoFactory.createCompetenceNiveauService(null).readAllCompetence();
+			
+			
+			CompetenceDTO compMere = new CompetenceDTO();
+			compMere.setNum(1);
+			
+
+			for (int i = 0; i < listComp.size(); i++) {
+				List<Array> list = Arrays.asList(listComp.get(i).getTabchemin());
+				for (int j = 0; j < list.size(); j++) {
+					if (list.contains(compMere.getNum())) {
+						listCompetenceFille.add(listComp.get(i));
+					}
+				}
+			}
+			
 		} catch (TransactionalConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,9 +76,8 @@ public class LauncherCompetence {
 			e.printStackTrace();
 		}
 		
-		for (int i = 0; i < listComp.size(); i++) {
-			System.out.println(listComp.get(i).getNum());
-			System.out.println(listComp.get(i).getNom());
+		for (int i = 0; i < listCompetenceFille.size(); i++) {
+			System.out.println(listCompetenceFille.get(i).getNum());
 		}
 		
 	}
